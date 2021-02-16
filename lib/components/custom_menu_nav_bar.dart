@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
+import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
+import 'package:shop_app/pantallas/M_Clientes/pantalla_clientes.dart';
+import 'package:shop_app/pantallas/M_Cuentas/pantalla_cuentas.dart';
+import 'package:shop_app/pantallas/M_Usuario/pantalla_usuario.dart';
+
+import '../constants.dart';
+import '../enums.dart';
+
+class CustomButtomNavBar extends StatelessWidget {
+  const CustomButtomNavBar({
+    Key key,
+    @required this.selectedMenu,
+  }) : super(key: key);
+
+  final MenuState selectedMenu;
+
+  @override
+  Widget build(BuildContext context) {
+    final Color inActiveIconColor = Color(0xFFB6B6B6);
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 14),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset(0, -15),
+            blurRadius: 20,
+            color: Color(0xFFDADADA).withOpacity(0.15),
+          ),
+        ],
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
+      ),
+      child: SafeArea(
+          top: false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              IconButton(
+                icon: SvgPicture.asset(
+                  "assets/icons/Icono Menu Inicio.svg",
+                  color: MenuState.inicio == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, PantallaInicio.routeName),
+              ),
+              IconButton(
+                icon: SvgPicture.asset("assets/icons/Icono Menu Cuentas.svg",
+                  color: MenuState.cuentas == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, PantallaCuentas.routeName),
+              ),
+
+              IconButton(
+                icon: SvgPicture.asset("assets/icons/Icono Menu Clientes.svg",
+                  color: MenuState.clientes == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+
+                onPressed: () =>
+                    Navigator.pushNamed(context, PantallaClientes.routeName),
+              ),
+              IconButton(
+                icon: SvgPicture.asset(
+                  "assets/icons/Icono Menu Informacion.svg",
+                  color: MenuState.usuario == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, PantallaUsuario.routeName),
+              ),
+            ],
+          )),
+    );
+  }
+}

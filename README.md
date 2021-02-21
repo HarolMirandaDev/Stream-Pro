@@ -1,4 +1,4 @@
-# Stream Pro - Sprint 1 - 16 de Febrero#
+# Stream Pro - Sprint 1 - 20 de Febrero#
     *Harol Miranda* 
     *Cesar Mendoza*
 

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../../size_config.dart';
 
-import 'campo_buscar.dart';
+import 'cuentas_campo_buscar.dart';
 
-class HomeHeader extends StatelessWidget {
-  const HomeHeader({
+class EncabezadoCuentas extends StatelessWidget {
+  const EncabezadoCuentas({
     Key key,
   }) : super(key: key);
 
@@ -17,7 +17,7 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SearchField(),
+          CampoBuscarCuentas(),
         ],
       ),
     );

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'components/cuerpo_usuario_registro.dart';
+import 'components/usuario_registro_cuerpo.dart';
 
 class PantallaUsuarioRegistro extends StatelessWidget {
-  static String routeName = "/sign_up";
+  static String routeName = "/registro";
   @override
   Widget build(BuildContext context) {
     return Scaffold(

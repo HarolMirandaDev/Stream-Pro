@@ -10,7 +10,9 @@ class PantallaInicio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(),
-      bottomNavigationBar: CustomButtomNavBar(selectedMenu: MenuState.inicio),
+      bottomNavigationBar: CustomButtomNavBar(
+          selectedMenu: MenuState.inicio
+      ),
     );
   }
 }

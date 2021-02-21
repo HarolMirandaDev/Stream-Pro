@@ -10,10 +10,10 @@ class PantallaUsuario extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(""),
+        title: Text("Usuario"),
       ),
       body: Body(),
-      bottomNavigationBar: CustomButtomNavBar(selectedMenu: MenuState.usuario),
+
     );
   }
 }

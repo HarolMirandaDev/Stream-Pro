@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_sufijo_texto.dart';
 import 'package:shop_app/components/custom_boton_predeterminado.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
-import 'package:shop_app/pantallas/usuario_perfil_completado/pantalla_usuario_perfil_completado.dart';
+import 'package:shop_app/pantallas/Usuario_Perfil_Completado/pantalla_usuario_perfil_completado.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
 
-class SignUpForm extends StatefulWidget {
+class FormularioRegistroUsuario extends StatefulWidget {
   @override
-  _SignUpFormState createState() => _SignUpFormState();
+  _FormularioRegistroUsuarioState createState() => _FormularioRegistroUsuarioState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class _FormularioRegistroUsuarioState extends State<FormularioRegistroUsuario> {
   final _formKey = GlobalKey<FormState>();
   String email;
   String password;

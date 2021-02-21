@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/size_config.dart';
 
-import 'formulario_usuario_registro.dart';
+import 'nueva_cuenta_formulario.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -17,13 +17,13 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                Text("Registrarse", style: headingStyle),
+                Text("Nueva Cuenta", style: headingStyle),
                 Text(
                   "A continuación se le muestra un formulario; porfavor  \n ingrese la información correcta.",
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
-                SignUpForm(),
+                FormularioRegistroUsuario(),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 SizedBox(height: getProportionateScreenHeight(20)),
                 Text(

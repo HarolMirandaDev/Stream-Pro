@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
 import 'package:shop_app/pantallas/M_Clientes/pantalla_clientes.dart';
+import 'package:shop_app/pantallas/M_Proveedores/pantalla_proveedores.dart';
 import 'package:shop_app/pantallas/M_Cuentas/pantalla_cuentas.dart';
 import 'package:shop_app/pantallas/M_Usuario/pantalla_usuario.dart';
 
@@ -47,10 +48,12 @@ class CustomButtomNavBar extends StatelessWidget {
                   color: MenuState.inicio == selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor,
+
                 ),
                 onPressed: () =>
-                    Navigator.pushNamed(context, PantallaInicio.routeName),
-              ),
+                    null,
+                ),
+
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Icono Menu Cuentas.svg",
                   color: MenuState.cuentas == selectedMenu
@@ -67,13 +70,23 @@ class CustomButtomNavBar extends StatelessWidget {
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-
                 onPressed: () =>
                     Navigator.pushNamed(context, PantallaClientes.routeName),
               ),
+
+              IconButton(
+                icon: SvgPicture.asset("assets/icons/Icono Menu Proveedores.svg",
+                  color: MenuState.proveedores == selectedMenu
+                      ? kPrimaryColor
+                      : inActiveIconColor,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, PantallaProveedores.routeName),
+              ),
+
               IconButton(
                 icon: SvgPicture.asset(
-                  "assets/icons/Icono Menu Informacion.svg",
+                  "assets/icons/Icono Menu Usuario.svg",
                   color: MenuState.usuario == selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor,
@@ -82,7 +95,8 @@ class CustomButtomNavBar extends StatelessWidget {
                     Navigator.pushNamed(context, PantallaUsuario.routeName),
               ),
             ],
-          )),
+          )
+      ),
     );
   }
 }

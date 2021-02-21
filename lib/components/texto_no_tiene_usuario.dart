@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/pantallas/usuario_registro/pantalla_usuario_registro.dart';
+import 'package:shop_app/pantallas/Nueva_Cuenta/pantalla_nueva_cuenta.dart';
 
 import '../constants.dart';
 import '../size_config.dart';
@@ -19,7 +20,7 @@ class TextoNoTieneUsuario extends StatelessWidget {
           style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, PantallaUsuarioRegistro.routeName),
+          onTap: () => Navigator.pushNamed(context, PantallaNuevaCuenta.routeName),
           child: Text(
             "Registrarse",
             style: TextStyle(

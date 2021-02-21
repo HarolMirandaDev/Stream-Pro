@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'components/proveedores_cuerpo.dart';
 
-import 'components/clientes_cuerpo.dart';
-
-class PantallaClientes extends StatelessWidget {
-  static String routeName = "/clientes";
+class PantallaProveedores extends StatelessWidget {
+  static String routeName = "/proveedores";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Clientes"),
+        title: Text("Proveedores"),
       ),
       body: Body(),
-
     );
   }
 }

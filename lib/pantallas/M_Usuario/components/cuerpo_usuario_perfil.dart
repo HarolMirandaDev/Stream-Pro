@@ -11,10 +11,10 @@ class Body extends StatelessWidget {
       child: Column(
         children: [
           UsuarioImagen(),
-          SizedBox(height: 20),
+          SizedBox(height: 30),
           UsuarioMenu(
             text: "Mi Cuenta",
-            icon: "assets/icons/Icono Menu Informacion.svg",
+            icon: "assets/icons/Icono Menu Usuario.svg",
             press: () => {},
           ),
 

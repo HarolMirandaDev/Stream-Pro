@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class CampoBuscar extends StatelessWidget {
-  const CampoBuscar({
+class CampoBuscarProveedores extends StatelessWidget {
+  const CampoBuscarProveedores({
     Key key,
   }) : super(key: key);
 
@@ -25,7 +25,7 @@ class CampoBuscar extends StatelessWidget {
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
-            hintText: "Busqueda",
+            hintText: "Ingrese el nombre",
             suffixIcon: Icon(Icons.search)),
       ),
     );

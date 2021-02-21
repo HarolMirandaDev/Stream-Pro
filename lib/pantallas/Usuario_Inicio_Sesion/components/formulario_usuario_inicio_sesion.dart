@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_sufijo_texto.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
 import 'package:shop_app/helper/teclado.dart';
-import 'package:shop_app/pantallas/usuario_olvido_contrasena/pantalla_usuario_olvido_contrasena.dart';
-import 'package:shop_app/pantallas/usuario_inicio_sesion_exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
+import 'package:shop_app/pantallas/Usuario_Recuperar_Contrasena/pantalla_usuario_olvido_contrasena.dart';
+import 'package:shop_app/pantallas/Usuario_Inicio_Sesion_Exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
 
 import '../../../components/custom_boton_predeterminado.dart';
 import '../../../constants.dart';

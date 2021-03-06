@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
+import 'package:shop_app/pantallas/N_Cliente/pantalla_nuevo_cliente_inicio.dart';
+import 'package:shop_app/pantallas/N_Cliente_2/pantalla_nuevo_cliente_inicio_2.dart';
+import 'package:shop_app/pantallas/N_Cuenta/pantalla_nueva_cuenta_inicio.dart';
 import '../../../size_config.dart';
 
 class NuevosRegistros extends StatelessWidget {
@@ -16,16 +18,30 @@ class NuevosRegistros extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          categories.length,
-          (index) => CategoryCard(
-            icon: categories[index]["icon"],
-            text: categories[index]["text"],
+        children: [
+          CategoryCard(
+            icon: categories[0]["icon"],
+            text: categories[0]["text"],
             press: () {
-
+              Navigator.pushNamed(context, PantallaNuevoClienteInicio.routeName);
             },
           ),
-        ),
+          CategoryCard(
+            icon: categories[1]["icon"],
+            text: categories[1]["text"],
+            press: () {
+              Navigator.pushNamed(context, PantallaNuevoClienteInicio2.routeName);
+            },
+          ),
+          CategoryCard(
+            icon: categories[2]["icon"],
+            text: categories[2]["text"],
+            press: () {
+              Navigator.pushNamed(context, PantallaNuevaCuentaInicio.routeName);
+            },
+          ),
+        ],
+
       ),
     );
   }

@@ -21,7 +21,7 @@ class Body extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
                 Text(

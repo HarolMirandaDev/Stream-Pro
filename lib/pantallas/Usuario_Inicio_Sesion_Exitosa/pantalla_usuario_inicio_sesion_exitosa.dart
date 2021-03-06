@@ -11,7 +11,8 @@ class PantallaUsuarioInicioSesionExitosa extends StatelessWidget {
         leading: SizedBox(),
         title: Text(""),
       ),
-      body: Body(),
+      body: Center(
+          child: Body()) ,
     );
   }
 }

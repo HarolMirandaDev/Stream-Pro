@@ -31,6 +31,9 @@ const String kPassNullError = "Por favor, introduzca su contraseña";
 const String kShortPassError = "La contraseña es demasiado corta";
 const String kMatchPassError = "Las contraseñas no coinciden";
 const String kNamelNullError = "Por favor, escriba su nombre";
+const String kApodoNullError = "Por favor, escriba su apodo";
+
+const String kLastNameNullError = "Por favor, escriba su apellido";
 const String kPhoneNumberNullError = "Por favor, introduzca su número de teléfono";
 const String kAddressNullError = "Ingrese su dirección";
 

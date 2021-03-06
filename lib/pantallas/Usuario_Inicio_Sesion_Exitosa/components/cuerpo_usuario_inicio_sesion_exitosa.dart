@@ -6,7 +6,7 @@ import 'package:shop_app/size_config.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    Column col = new Column(
       children: [
         SizedBox(height: SizeConfig.screenHeight * 0.04),
         Image.asset(
@@ -35,5 +35,8 @@ class Body extends StatelessWidget {
         Spacer(),
       ],
     );
+
+
+    return col;
   }
 }

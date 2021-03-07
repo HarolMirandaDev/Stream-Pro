@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/pantallas/M_Usuario_Ayuda/pantalla_ayuda.dart';
+import 'package:shop_app/pantallas/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
 
 import 'menu_usuario_perfil.dart';
 import 'imagen_usuario_perfil.dart';
@@ -15,23 +17,31 @@ class Body extends StatelessWidget {
           UsuarioMenu(
             text: "Mi Cuenta",
             icon: "assets/icons/Icono Menu Usuario.svg",
-            press: () => {},
+            press: () => {
+              Navigator.pushNamed(context, PantallaMiCuenta.routeName),
+            },
           ),
 
           UsuarioMenu(
             text: "Ajustes",
             icon: "assets/icons/Icono Ajustes.svg",
-            press: () {},
+            press: () {
+
+            },
           ),
           UsuarioMenu(
             text: "Ayuda",
             icon: "assets/icons/Icono Interrogacion.svg",
-            press: () {},
+            press: () {
+              Navigator.pushNamed(context, PantallaAyuda.routeName);
+            },
           ),
           UsuarioMenu(
             text: "Cerrar Sesión",
             icon: "assets/icons/Icono Cerrar Sesion.svg",
-            press: () {},
+            press: () {
+
+            },
           ),
         ],
       ),

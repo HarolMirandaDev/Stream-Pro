@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:shop_app/pantallas/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
 import 'package:shop_app/pantallas/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:shop_app/pantallas/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 import 'package:shop_app/pantallas/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
@@ -16,6 +17,9 @@ import 'pantallas/M_Clientes/pantalla_clientes.dart';
 import 'pantallas/M_Cuentas/pantalla_cuentas.dart';
 import 'pantallas/M_Proveedores/pantalla_proveedores.dart';
 import 'pantallas/M_Usuario/pantalla_usuario.dart';
+
+import 'pantallas/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
+import 'pantallas/M_Usuario_Ayuda/pantalla_ayuda.dart';
 
 // Uso de ruta
 // Todas nuestras rutas estarán disponibles aquí
@@ -39,4 +43,6 @@ final Map<String, WidgetBuilder> routes = {
   PantallaProveedores.routeName: (context) => PantallaProveedores(),
   PantallaUsuario.routeName: (context) => PantallaUsuario(),
 
+  PantallaMiCuenta.routeName: (context) => PantallaMiCuenta(),
+  PantallaAyuda.routeName: (context) => PantallaAyuda(),
 };

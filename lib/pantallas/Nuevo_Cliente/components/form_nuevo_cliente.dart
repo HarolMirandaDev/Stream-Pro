@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/components/custom_boton_nuevos_registros.dart';
 import 'package:shop_app/components/custom_boton_predeterminado.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
 
@@ -76,7 +77,6 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
       key: _formKey,
       child: Column(
         children: [
-
           buildNombreClienteFormField(),
           SizedBox(height: getProportionateScreenHeight(10)),
 
@@ -91,8 +91,6 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
           buildSelecionarPlataformaStreamingFormDrop(),
           SizedBox(height: getProportionateScreenHeight(10)),
-
-
 
           Visibility(
               child: buildSeleccionarMembresiaFormDrop(),
@@ -117,18 +115,18 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(15)),
 
-          BotonPredeterminado(
+          BotomNuevosRegistros(
             text: "Registrar",
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 Fluttertoast.showToast(
-                    msg: "Registro de cliente exitoso",
+                    msg: "El cliente "+ nombre +", ha sido registrado",
                     toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Color(0xFF004D40),
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 2,
+                    backgroundColor: Color(0xff01579b),
                     textColor: Colors.white,
                     fontSize: 16.0
                 );
@@ -145,7 +143,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   TextFormField buildIdClienteFormField() {
     return TextFormField(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       onSaved: (newValue) => apellido = newValue,
@@ -175,7 +173,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   TextFormField buildNombreClienteFormField() {
     return TextFormField(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       onSaved: (newValue) => nombre = newValue,
@@ -215,7 +213,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
       value: dropdownValue2,
       elevation: 16,
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       onChanged: (String newValue) {
@@ -243,7 +241,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   TextFormField buildTelefonoFormField() {
     return TextFormField(
         style: TextStyle(
-          color: Color(0xFF004D40),
+          color: Color(0xff01579b),
           fontSize: 18,
         ),
       onSaved: (newValue) => telefono = newValue,
@@ -284,7 +282,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
       value: dropdownValueCorreo,
       elevation: 16,
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       onChanged: (String newValue) {
@@ -308,12 +306,78 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
     );
   }
 
+  DropdownButtonFormField buildSelecionarPlataformaStreamingFormDrop() {
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      value: seleccion_plataforma_streaming[0],
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          seleccion_plataforma_streaming_valor = newValue;
+
+          if(newValue == "Netflix"){
+            seleccion_membresia = ["Básico","Estándar","Premium"];
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "Amazon Prime Video"){
+            seleccion_membresia = ["Completa","Pantalla"];
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "Disney Plus"){
+            seleccion_membresia = ["Completa","Pantalla"];
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "HBO GO"){
+            seleccion_membresia = ["Completa","Pantalla"];
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "Spotify"){
+            seleccion_membresia = ["Duo","Premium","Familiar","Estudiante"];
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "YouTube"){
+            seleccion_membresia = ["Premium","Familiar","Estudiante"];
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          } else
+
+          {
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          }
+
+        });
+      },
+      items: seleccion_plataforma_streaming
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Plataforma",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+  }
+
   String dropdownMembresia = 'Premium';
 
   DropdownButtonFormField buildSeleccionarMembresiaFormDrop() {
     return DropdownButtonFormField<String>(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       value: seleccion_membresia[0],
@@ -371,78 +435,14 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   }
 
 
-  DropdownButtonFormField buildSelecionarPlataformaStreamingFormDrop() {
-    return DropdownButtonFormField<String>(
-      style: TextStyle(
-        color: Color(0xFF004D40),
-        fontSize: 18,
-      ),
-      value: seleccion_plataforma_streaming[0],
-      elevation: 16,
-      onChanged: (String newValue) {
-        setState(() {
-          seleccion_plataforma_streaming_valor = newValue;
 
-          if(newValue == "Netflix"){
-            seleccion_membresia = ["Básico","Estándar","Premium"];
-            _visibleCantidadPantallas(false);
-            _visibleMembresia(true);
-          } else
-
-          if(newValue == "Amazon Prime Video"){
-            seleccion_membresia = ["Completa","Pantalla"];
-            _visibleMembresia(true);
-          } else
-
-          if(newValue == "Disney Plus"){
-            seleccion_membresia = ["Completa","Pantalla"];
-            _visibleMembresia(true);
-          } else
-
-          if(newValue == "HBO GO"){
-            seleccion_membresia = ["Completa","Pantalla"];
-            _visibleMembresia(true);
-          } else
-
-          if(newValue == "Spotify"){
-            seleccion_membresia = ["Duo","Premium","Familiar","Estudiante"];
-            _visibleCantidadPantallas(false);
-            _visibleMembresia(true);
-          } else
-
-          if(newValue == "Youtube"){
-            seleccion_membresia = ["Premium","Familiar","Estudiante"];
-            _visibleCantidadPantallas(false);
-            _visibleMembresia(true);
-          } else
-
-          {
-            _visibleCantidadPantallas(false);
-            _visibleMembresia(true);
-          }
-
-        });
-      },
-      items: seleccion_plataforma_streaming
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      decoration: InputDecoration(
-          labelText: "Plataforma",
-          floatingLabelBehavior: FloatingLabelBehavior.always
-      ),
-    );
-  }
 
   DropdownButtonFormField buildSeleccionarCantidadPantallasFormDrop() {
     DropdownButtonFormField cmbo = DropdownButtonFormField<String>(
       value: seleccion_cantidad_perfiles[0],
       elevation: 16,
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       onChanged: (String newValue) {

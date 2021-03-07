@@ -71,7 +71,7 @@ class CategoryCard extends StatelessWidget {
               height: getProportionateScreenWidth(50),
               width: getProportionateScreenWidth(100),
               decoration: BoxDecoration(
-                color: Color(0xFF004D40),
+                color: Color(0xff01579b),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: SvgPicture.asset(icon),

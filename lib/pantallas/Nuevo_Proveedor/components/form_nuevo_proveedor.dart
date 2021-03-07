@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/components/custom_boton_predeterminado.dart';
+import 'package:shop_app/components/custom_boton_nuevos_registros.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
 import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -47,26 +47,30 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       Column(
         children: [
           buildApodoFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
+
           buildTelefonoFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
+
           buildPaisFormDrop(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
+
           buildRedSocialFormDrop(),
           FormularioErroneo(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(40)),
-          BotonPredeterminado(
+          SizedBox(height: getProportionateScreenHeight(30)),
+
+          BotomNuevosRegistros(
             text: "Registrar",
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 Fluttertoast.showToast(
-                    msg: "Proveedor Registrado Exitosamente",
+                    msg: "El proveedor "+ apodo +", ha sido registrado",
                     toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Color(0xFF004D40),
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 2,
+                    backgroundColor: Color(0xff01579b),
                     textColor: Colors.white,
                     fontSize: 16.0
                 );
@@ -83,7 +87,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   TextFormField buildApodoFormField() {
     return TextFormField(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       onSaved: (newValue) => apodo = newValue,
@@ -113,7 +117,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   TextFormField buildTelefonoFormField() {
     return TextFormField(
         style: TextStyle(
-          color: Color(0xFF004D40),
+          color: Color(0xff01579b),
           fontSize: 18,
         ),
       onSaved: (newValue) => telefono = newValue,
@@ -145,7 +149,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   DropdownButtonFormField buildPaisFormDrop() {
     return DropdownButtonFormField<String>(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       value: dropdownValue2,
@@ -176,7 +180,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   DropdownButtonFormField buildRedSocialFormDrop() {
     return DropdownButtonFormField<String>(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       value: dropdownValue,
@@ -195,7 +199,6 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       }).toList(),
           decoration: InputDecoration(
           labelText: "Red Social",
-
           floatingLabelBehavior: FloatingLabelBehavior.always
         ),
     );

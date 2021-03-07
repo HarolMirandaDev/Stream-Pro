@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
+import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
+import 'package:shop_app/pantallas/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:shop_app/pantallas/usuario_inicio_sesion/pantalla_usuario_inicio_sesion.dart';
 import 'package:shop_app/size_config.dart';
 
@@ -69,9 +71,10 @@ class _BodyState extends State<Body> {
                     Spacer(flex: 3),
                     BotonPredeterminado(
                       text: "Continuar",
-                      press: () {
-                        //Navigator.pushNamed(context, PantallaInicio.routeName);
-                        Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
+                      press: (){
+                        Navigator.pushNamed(context, PantallaInicio.routeName );
+                        //Navigator.pushNamed(context, PantallaNuevoClienteInicio.routeName);
+                        //Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
                       },
                     ),
                     Spacer(),

@@ -1,10 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
-import 'package:shop_app/components/custom_boton_predeterminado.dart';
+import 'package:shop_app/components/custom_boton_nuevos_registros.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
-import 'package:shop_app/components/custom_sufijo_texto.dart';
-
 import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -58,29 +56,29 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
       child: Column(
         children: [
           buildEmailFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
 
           buildPasswordFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
 
           buildFechaCompraSelectForm(),
-          SizedBox(height: getProportionateScreenHeight(30)),
+          SizedBox(height: getProportionateScreenHeight(20)),
 
           FormularioErroneo(errors: errors),
-          SizedBox(height: getProportionateScreenHeight(40)),
+          SizedBox(height: getProportionateScreenHeight(30)),
 
-          BotonPredeterminado(
+          BotomNuevosRegistros(
             text: "Registrar",
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 Fluttertoast.showToast(
-                    msg: "Cuenta Registrada Exitosamente",
+                    msg: "La cuenta ha sido registrada",
                     toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.teal,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 2,
+                    backgroundColor: Color(0xff01579b),
                     textColor: Colors.white,
                     fontSize: 16.0
                 );
@@ -96,7 +94,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   TextFormField buildEmailFormField() {
     return TextFormField(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       keyboardType: TextInputType.emailAddress,
@@ -133,7 +131,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       style: TextStyle(
-        color: Color(0xFF004D40),
+        color: Color(0xff01579b),
         fontSize: 18,
       ),
       obscureText: true,

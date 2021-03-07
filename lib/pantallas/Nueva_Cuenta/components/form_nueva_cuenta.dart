@@ -1,8 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 import 'package:shop_app/components/custom_boton_predeterminado.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
-
-import 'package:shop_app/components/custom_formulario_prueba.dart';
+import 'package:shop_app/components/custom_sufijo_texto.dart';
 
 import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -10,21 +11,30 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class FormularioNuevoClienteInicio2 extends StatefulWidget {
+class FormularioNuevaCuentaInicio extends StatefulWidget {
   @override
-  _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
+  _FormularioNuevaCuenta createState() => _FormularioNuevaCuenta();
+
 }
 
-class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoClienteInicio2> {
+class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   final _formKey = GlobalKey<FormState>();
-  String apodo;
+  String email;
+  String password;
+  String conform_password;
+
+  String fecha_compra;
+
+  final List<String> clientes = ["Juan","Pedro","Ulises","Daniela","Paola"];
+  final List<String> proveedores = ["Crack","BinPro","Death"];
+
   String telefono;
   bool remember = false;
-  final List<String> pais = ["Honduras","Mexico","Colombia"];
-  final List<String> red_social = ["Whatsapp","Telegram","Ambos"];
+
   int valor = 0;
   final List<String> errors = [];
 
+  
   void addError({String error}) {
     if (!errors.contains(error))
       setState(() {
@@ -45,27 +55,28 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoClienteInicio2
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child:
-
-      Column(
+      child: Column(
         children: [
-          buildApodoFormField(),
+          buildEmailFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildTelefonoFormField(),
+
+          buildPasswordFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildPaisFormDrop(),
+
+          buildFechaCompraSelectForm(),
           SizedBox(height: getProportionateScreenHeight(30)),
-          buildRedSocialFormDrop(),
+
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(40)),
+
           BotonPredeterminado(
-            text: "Guardar",
+            text: "Registrar",
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 Fluttertoast.showToast(
-                    msg: "Registrado con exito.",
+                    msg: "Cuenta Registrada Exitosamente",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.CENTER,
                     timeInSecForIosWeb: 1,
@@ -77,137 +88,96 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoClienteInicio2
               }
             },
           ),
-
         ],
       ),
     );
   }
 
-  TextFormField buildApodoFormField() {
+  TextFormField buildEmailFormField() {
     return TextFormField(
-      onSaved: (newValue) => apodo = newValue,
+      style: TextStyle(
+        color: Color(0xFF004D40),
+        fontSize: 18,
+      ),
+      keyboardType: TextInputType.emailAddress,
+      onSaved: (newValue) => email = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kApodoNullError);
+          removeError(error: kEmailNullError);
+        } else if (emailValidatorRegExp.hasMatch(value)) {
+          removeError(error: kInvalidEmailError);
         }
-        apodo = value;
+        return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kApodoNullError);
+          addError(error: kEmailNullError);
+          return "";
+        } else if (!emailValidatorRegExp.hasMatch(value)) {
+          addError(error: kInvalidEmailError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Apodo",
-        hintText: "Escriba su apodo",
+        labelText: "Correo Electronico",
+        hintText: "Escriba el correo electronico",
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-          Icon(
-            Icons.account_circle,
-            color: Colors.teal,
-            size: 36.0,
-          )
+        //suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Correo Electronico.svg"),
       ),
     );
   }
 
-  TextFormField buildTelefonoFormField() {
+  TextFormField buildPasswordFormField() {
     return TextFormField(
-      onSaved: (newValue) => telefono = newValue,
+      style: TextStyle(
+        color: Color(0xFF004D40),
+        fontSize: 18,
+      ),
+      obscureText: true,
+      onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+          removeError(error: kPassNullError);
+        } else if (value.length >= 8) {
+          removeError(error: kShortPassError);
         }
-        telefono = value;
+        password = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPhoneNumberNullError);
+          addError(error: kPassNullError);
+          return "";
+        } else if (value.length < 8) {
+          addError(error: kShortPassError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Teléfono",
-        hintText: "Escriba su teléfono",
+        labelText: "Contraseña",
+        hintText: "Escriba la contraseña",
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-        Icon(
-          Icons.phone,
-          color: Colors.teal,
-          size: 36.0,
-        )
-      )
+        //suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
+      ),
     );
   }
 
-  String dropdownValue2 = 'Honduras';
-
-  DropdownButtonFormField buildPaisFormDrop() {
-
-    return DropdownButtonFormField<String>(
-      value: dropdownValue2,
-      elevation: 16,
-      style: TextStyle(
-          color: Colors.teal
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue2 = newValue;
-        });
+  DateTimeFormField buildFechaCompraSelectForm() {
+    return DateTimeFormField(
+      initialValue: DateTime.now(),
+      label: "Fecha de Compra",
+      validator: (DateTime dateTime) {
+        if (dateTime == null) {
+          return "Date Time Required";
+        }
+        return null;
       },
-      items: pais
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      decoration: InputDecoration(
-          labelText: "País",
-
-          floatingLabelBehavior: FloatingLabelBehavior.always
-      ),
     );
-
-  }
-
-  String dropdownValue = 'Whatsapp';
-
-  DropdownButtonFormField buildRedSocialFormDrop() {
-
-    return DropdownButtonFormField<String>(
-      value: dropdownValue,
-      elevation: 16,
-      style: TextStyle(
-          color: Colors.teal
-      ),
-
-      onChanged: (String newValue) {
-        setState(() {
-          dropdownValue = newValue;
-        });
-      },
-      items: red_social
-          .map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-          decoration: InputDecoration(
-          labelText: "Red Social",
-
-          floatingLabelBehavior: FloatingLabelBehavior.always
-        ),
-    );
-
   }
 
 }

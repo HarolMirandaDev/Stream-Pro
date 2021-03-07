@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/pantallas/N_Cliente/pantalla_nuevo_cliente_inicio.dart';
-import 'package:shop_app/pantallas/N_Cliente_2/pantalla_nuevo_cliente_inicio_2.dart';
-import 'package:shop_app/pantallas/N_Cuenta/pantalla_nueva_cuenta_inicio.dart';
+import 'package:shop_app/pantallas/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
+import 'package:shop_app/pantallas/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
+import 'package:shop_app/pantallas/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
 import '../../../size_config.dart';
 
 class NuevosRegistros extends StatelessWidget {
@@ -10,8 +10,8 @@ class NuevosRegistros extends StatelessWidget {
   Widget build(BuildContext context) {
     List<Map<String, dynamic>> categories = [
       {"icon": "assets/icons/Icono Nuevo Cliente.svg", "text": "Nuevo Cliente"},
-      {"icon": "assets/icons/Icono Nueva Cuenta.svg", "text": "Nueva Cuenta"},
       {"icon": "assets/icons/Icono Nuevo Proveedor.svg", "text": "Nuevo Proveedor"},
+      {"icon": "assets/icons/Icono Nueva Cuenta.svg", "text": "Nueva Cuenta"},
     ];
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
@@ -30,7 +30,7 @@ class NuevosRegistros extends StatelessWidget {
             icon: categories[1]["icon"],
             text: categories[1]["text"],
             press: () {
-              Navigator.pushNamed(context, PantallaNuevoClienteInicio2.routeName);
+              Navigator.pushNamed(context, PantallaNuevoProveedorInicio.routeName);
             },
           ),
           CategoryCard(

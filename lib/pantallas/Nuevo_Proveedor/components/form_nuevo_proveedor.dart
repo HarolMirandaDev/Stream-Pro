@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/components/custom_boton_predeterminado.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
-
-import 'package:shop_app/components/custom_formulario_prueba.dart';
-
 import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
-class FormularioNuevoClienteInicio extends StatefulWidget {
+class FormularioNuevoProveedor extends StatefulWidget {
   @override
-  _FormularioNuevoClienteInicio createState() => _FormularioNuevoClienteInicio();
+  _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
 }
 
-class _FormularioNuevoClienteInicio extends State<FormularioNuevoClienteInicio> {
+class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   final _formKey = GlobalKey<FormState>();
-  String nombre;
-  String apellido;
+  String apodo;
   String telefono;
   bool remember = false;
-  final List<String> red_social = ["Whatsapp","Telegran","Ambas"];
+  final List<String> pais = ["Honduras","Mexico","Colombia"];
+  final List<String> red_social = ["Whatsapp","Telegram","Ambos"];
   int valor = 0;
   final List<String> errors = [];
 
@@ -45,29 +42,31 @@ class _FormularioNuevoClienteInicio extends State<FormularioNuevoClienteInicio> 
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
+      child:
+
+      Column(
         children: [
-          buildNombreFormField(),
-          SizedBox(height: getProportionateScreenHeight(30)),
-          buildApellidoFormField(),
+          buildApodoFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildTelefonoFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildPaisFormDrop(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildRedSocialFormDrop(),
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(40)),
           BotonPredeterminado(
-            text: "Guardar",
+            text: "Registrar",
             press: () {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 Fluttertoast.showToast(
-                    msg: "Registrado con exito.",
+                    msg: "Proveedor Registrado Exitosamente",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.CENTER,
                     timeInSecForIosWeb: 1,
-                    backgroundColor: Colors.teal,
+                    backgroundColor: Color(0xFF004D40),
                     textColor: Colors.white,
                     fontSize: 16.0
                 );
@@ -75,77 +74,48 @@ class _FormularioNuevoClienteInicio extends State<FormularioNuevoClienteInicio> 
               }
             },
           ),
+
         ],
       ),
     );
   }
 
-  TextFormField buildNombreFormField() {
+  TextFormField buildApodoFormField() {
     return TextFormField(
-      onSaved: (newValue) => nombre = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kNamelNullError);
-        }
-        nombre = value;
-      },
-      validator: (value) {
-        if (value.isEmpty) {
-          addError(error: kNamelNullError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "Nombre",
-        hintText: "Escriba su nombre",
-        // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
-        // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-          Icon(
-            Icons.assignment_ind,
-            color: Colors.teal,
-            size: 36.0,
-          )
+      style: TextStyle(
+        color: Color(0xFF004D40),
+        fontSize: 18,
       ),
-    );
-  }
-
-  TextFormField buildApellidoFormField() {
-    return TextFormField(
-      onSaved: (newValue) => apellido = newValue,
+      onSaved: (newValue) => apodo = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kLastNameNullError);
+          removeError(error: kApodoNullError);
         }
-        apellido = value;
+        apodo = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kLastNameNullError);
+          addError(error: kApodoNullError);
           return "";
         }
         return null;
       },
       decoration: InputDecoration(
-        labelText: "Apellido",
-        hintText: "Escriba su apellido",
+        labelText: "Apodo",
+        hintText: "Escriba su apodo",
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-          Icon(
-            Icons.assignment_ind_outlined,
-            color: Colors.teal,
-            size: 36.0,
-          )
       ),
     );
   }
 
   TextFormField buildTelefonoFormField() {
     return TextFormField(
+        style: TextStyle(
+          color: Color(0xFF004D40),
+          fontSize: 18,
+        ),
       onSaved: (newValue) => telefono = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -166,27 +136,51 @@ class _FormularioNuevoClienteInicio extends State<FormularioNuevoClienteInicio> 
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-        Icon(
-          Icons.phone,
-          color: Colors.teal,
-          size: 36.0,
-        )
       )
     );
+  }
+
+  String dropdownValue2 = 'Honduras';
+
+  DropdownButtonFormField buildPaisFormDrop() {
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xFF004D40),
+        fontSize: 18,
+      ),
+      value: dropdownValue2,
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          dropdownValue2 = newValue;
+        });
+      },
+      items: pais
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "País",
+
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+
   }
 
   String dropdownValue = 'Whatsapp';
 
   DropdownButtonFormField buildRedSocialFormDrop() {
-
     return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xFF004D40),
+        fontSize: 18,
+      ),
       value: dropdownValue,
       elevation: 16,
-      style: TextStyle(
-          color: Colors.teal
-      ),
-
       onChanged: (String newValue) {
         setState(() {
           dropdownValue = newValue;

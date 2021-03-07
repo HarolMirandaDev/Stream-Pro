@@ -70,6 +70,7 @@ class _BodyState extends State<Body> {
                     BotonPredeterminado(
                       text: "Continuar",
                       press: () {
+                        //Navigator.pushNamed(context, PantallaInicio.routeName);
                         Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
                       },
                     ),

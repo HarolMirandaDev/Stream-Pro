@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shop_app/constants.dart';
 import 'package:shop_app/size_config.dart';
 
-import 'form_nueva_cuenta_inicio.dart';
+import 'form_nuevo_cliente.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -13,19 +13,18 @@ class Body extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(10)),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                Text("Nueva Cuenta", style: headingStyle),
-                Text(
-                  "A continuación se le muestra un formulario; porfavor  \n ingrese la información correcta.",
-                  textAlign: TextAlign.center,
-                ),
+                Text("Nuevo Cliente", style: headingStyle),
+
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
-                FormularioNuevaCuentaInicio(),
+                FormularioNuevoCliente(),
+
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
+
                 SizedBox(height: getProportionateScreenHeight(20))
               ],
             ),

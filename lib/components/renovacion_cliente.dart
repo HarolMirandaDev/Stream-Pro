@@ -10,11 +10,11 @@ class RenovacionCliente extends StatelessWidget {
     Key key,
     this.width = 100,
     this.aspectRetio = 1.02,
-    @required this.product,
+    @required this.cliente,
   }) : super(key: key);
 
   final double width, aspectRetio;
-  final Cliente product;
+  final Cliente cliente;
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,14 @@ class RenovacionCliente extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Hero(
-                    tag: product.idCliente.toString(),
-                    child: Image.asset(product.images[0]),
+                    tag: cliente.idCliente.toString(),
+                    child: Image.asset(cliente.images[0]),
                   ),
                 ),
               ),
               const SizedBox(height: 10),
               Text(
-                product.cliente,
+                cliente.cliente,
                 style: TextStyle(color: Colors.black),
                 maxLines: 2,
               ),
@@ -49,7 +49,7 @@ class RenovacionCliente extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "\L. ${product.precio}",
+                    "\L. ${cliente.precio}",
                     style: TextStyle(
                       fontSize: getProportionateScreenWidth(18),
                       fontWeight: FontWeight.w600,
@@ -64,14 +64,14 @@ class RenovacionCliente extends StatelessWidget {
                       height: getProportionateScreenWidth(28),
                       width: getProportionateScreenWidth(28),
                       decoration: BoxDecoration(
-                        color: product.pagado
+                        color: cliente.pagado
                             ? kPrimaryColor.withOpacity(0.15)
                             : kSecondaryColor.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: SvgPicture.asset(
                         "assets/icons/Icono Corazon 2.svg",
-                        color: product.pagado
+                        color: cliente.pagado
                             ? Color(0xFFAD1457)
                             : Color(0xFFFCE4EC),
                       ),

@@ -14,17 +14,24 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: getProportionateScreenHeight(10)),
+            SizedBox(height: getProportionateScreenHeight(20)),
             EncabezadoInicio(),
 
-            SizedBox(height: getProportionateScreenWidth(10)),
             FechaRenovacion(),
 
             NuevosRegistros(),
-            RenovacionesProveedores(),
-            SizedBox(height: getProportionateScreenWidth(30)),
+
+            SizedBox(height: getProportionateScreenHeight(20)),
             RenovacionesClientes(),
-            SizedBox(height: getProportionateScreenWidth(30)),
+
+            SizedBox(height: getProportionateScreenHeight(20)),
+            RenovacionesProveedores(),
+
+
+
+
+
+
           ],
         ),
       ),

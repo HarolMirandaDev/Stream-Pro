@@ -14,7 +14,8 @@ class NuevosRegistros extends StatelessWidget {
       {"icon": "assets/icons/Icono Nueva Cuenta.svg", "text": "Nueva Cuenta"},
     ];
     return Padding(
-      padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+      padding:
+      EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,10 +70,10 @@ class CategoryCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(getProportionateScreenWidth(15)),
               height: getProportionateScreenWidth(50),
-              width: getProportionateScreenWidth(100),
+              width: getProportionateScreenWidth(110),
               decoration: BoxDecoration(
                 color: Color(0xff01579b),
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(5),
               ),
               child: SvgPicture.asset(icon),
             ),

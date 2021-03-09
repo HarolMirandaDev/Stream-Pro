@@ -24,7 +24,7 @@ class RenovacionesClientes extends StatelessWidget {
                 demoClientes.length,
                 (index) {
                   if (demoClientes[index].vigente)
-                    return RenovacionCliente(product: demoClientes[index]);
+                    return RenovacionCliente(cliente: demoClientes[index]);
 
                   return SizedBox
                       .shrink(); // here by default width and height is 0

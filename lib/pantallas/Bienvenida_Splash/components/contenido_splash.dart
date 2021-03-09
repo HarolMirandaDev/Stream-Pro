@@ -19,7 +19,7 @@ class ContenidoSplash extends StatelessWidget {
         Text(
           "Stream Pro",
           style: TextStyle(
-            fontSize: getProportionateScreenWidth(36),
+            fontSize: getProportionateScreenWidth(30),
             color: kPrimaryColor,
             fontWeight: FontWeight.bold,
           ),
@@ -31,8 +31,8 @@ class ContenidoSplash extends StatelessWidget {
         Spacer(flex: 2),
         Image.asset(
           image,
-          height: getProportionateScreenHeight(265),
-          width: getProportionateScreenWidth(235),
+          height: getProportionateScreenHeight(235),
+          width: getProportionateScreenWidth(205),
         ),
       ],
     );

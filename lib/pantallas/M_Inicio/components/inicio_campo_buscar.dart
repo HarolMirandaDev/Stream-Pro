@@ -25,7 +25,7 @@ class CampoBuscar extends StatelessWidget {
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
-            hintText: "Busqueda",
+            hintText: "Búsqueda",
             suffixIcon: Icon(Icons.search)),
       ),
     );

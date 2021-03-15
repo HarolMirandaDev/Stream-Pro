@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'size_config.dart';
 
 const kPrimaryColor = Color(0xFF006064);
@@ -37,6 +38,15 @@ const String kLastNameNullError = "Por favor, escriba el apellido";
 const String kPhoneNumberNullError = "Por favor, introduzca el número de teléfono";
 const String kAddressNullError = "Ingrese la dirección";
 
+//TODO fomatos de telefonos
+
+MaskTextInputFormatter formatter_hnd = MaskTextInputFormatter(mask:  "+504 ####-####");
+MaskTextInputFormatter formatter_esp = MaskTextInputFormatter(mask:  "+34 ###-###-###");
+MaskTextInputFormatter formatter_ing = MaskTextInputFormatter(mask:  "+44 ####-####-###");
+MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-###-####");
+MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
+
+/**final formatos*/
 final otpInputDecoration = InputDecoration(
   contentPadding:
       EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),

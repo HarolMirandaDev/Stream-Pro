@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shop_app/components/custom_boton_nuevos_registros.dart';
 import 'package:shop_app/components/custom_boton_predeterminado.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
@@ -21,10 +22,29 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   String nombre;
   String apellido;
-  String telefono;
-  String fecha_compra;
 
+  //TODO componente de telefono
+  String telefono;
+  //Controllador del campo de texto para poder limpiarlo
+  final textControllerTelefono = TextEditingController();
+  bool visible_format_honduras = true;
+  bool visible_format_inglaterra = false;
+  bool visible_format_espania = false;
+
+  void _visible_format_honduras(bool visible_format_honduras){
+    this.visible_format_honduras = visible_format_honduras;
+  }
+  void _visible_format_inglaterra(bool visible_format_inglaterra){
+    this.visible_format_inglaterra = visible_format_inglaterra;
+  }
+  void _visible_format_espania(bool visible_format_espania){
+    this.visible_format_espania = visible_format_espania;
+  }
+
+
+  //TODO otros componentes
   bool remember = false;
+  String fecha_compra;
 
   final List<String> correo_cuenta = ["alone@yopmail.com","pascual@yopmail.com","mordaza@yopmail.com"];
 
@@ -83,7 +103,10 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
           buildPaisClienteFormDrop(),
           SizedBox(height: getProportionateScreenHeight(10)),
 
-          buildTelefonoFormField(),
+          Visibility(child: buildTelefonoFormHNDField(), visible: visible_format_honduras,),
+          Visibility(child: buildTelefonoFormINGField(), visible: visible_format_inglaterra,),
+          Visibility(child: buildTelefonoFormSPAField(), visible: visible_format_espania,),
+
           SizedBox(height: getProportionateScreenHeight(10)),
 
           buildCorreoCuentaFormDrop(),
@@ -219,6 +242,22 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
       onChanged: (String newValue) {
         setState(() {
           dropdownValue2 = newValue;
+          if(newValue == "Honduras"){
+            _visible_format_honduras(true);
+            _visible_format_inglaterra(false);
+            _visible_format_espania(false);
+            textControllerTelefono.clear();
+          }else if(newValue == "Inglaterra"){
+            _visible_format_honduras(false);
+            _visible_format_inglaterra(true);
+            _visible_format_espania(false);
+            textControllerTelefono.clear();
+          }else{
+            _visible_format_honduras(false);
+            _visible_format_inglaterra(false);
+            _visible_format_espania(true);
+            textControllerTelefono.clear();
+          }
         });
       },
       items: pais
@@ -237,9 +276,10 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   }
 
-
-  TextFormField buildTelefonoFormField() {
+  /********************------------------------Telefono--------------------------**************************/
+  TextFormField buildTelefonoFormHNDField() {
     return TextFormField(
+      controller: textControllerTelefono,
         style: TextStyle(
           color: Color(0xff01579b),
           fontSize: 18,
@@ -258,21 +298,123 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
         }
         return null;
       },
+      inputFormatters: [formatter_hnd]
+       ,
       decoration: InputDecoration(
         labelText: "Teléfono",
-        hintText: "+504     -    ",
-        // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
-        // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
+        hintText: "+504 ____-____",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        /*suffixIcon:
-        Icon(
-          Icons.phone,
-          color: Colors.teal,
-          size: 36.0,
-        )*/
-      )
+        suffixIcon:
+          SizedBox(
+              width: 48,
+              height: 48,
+              child: Material(
+                type: MaterialType.transparency,
+                child: InkWell(
+
+                    borderRadius: const BorderRadius.all(Radius.circular(24)),
+                    child: const Icon(Icons.clear, color: Colors.grey, size: 24),
+                    onTap: () => textControllerTelefono.clear()
+                ),
+              )
+          ),
+      ),
     );
   }
+
+  TextFormField buildTelefonoFormINGField() {
+    return TextFormField(
+      controller: textControllerTelefono,
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      onSaved: (newValue) => telefono = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kPhoneNumberNullError);
+        }
+        telefono = value;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kPhoneNumberNullError);
+          return "";
+        }
+        return null;
+      },
+      inputFormatters: [formatter_ing]
+      ,
+      decoration: InputDecoration(
+        labelText: "Teléfono",
+        hintText: "+44 ____-____-___",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon:
+        SizedBox(
+            width: 48,
+            height: 48,
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
+                  child: const Icon(Icons.clear, color: Colors.grey, size: 24),
+                  onTap: () => textControllerTelefono.clear()
+              ),
+            )
+        ),
+      ),
+    );
+  }
+
+  TextFormField buildTelefonoFormSPAField() {
+    return TextFormField(
+      controller: textControllerTelefono,
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      onSaved: (newValue) => telefono = newValue,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kPhoneNumberNullError);
+        }
+        telefono = value;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kPhoneNumberNullError);
+          return "";
+        }
+        return null;
+      },
+      inputFormatters: [formatter_esp]
+      ,
+      decoration: InputDecoration(
+        labelText: "Teléfono",
+        hintText: "+34 ___-___-___",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon:
+        SizedBox(
+            width: 48,
+            height: 48,
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
+                  child: const Icon(Icons.clear, color: Colors.grey, size: 24),
+                  onTap: () => textControllerTelefono.clear()
+              ),
+            )
+        ),
+      ),
+    );
+  }
+
+
+
+  /********************------------------------Telefono--------------------------**************************/
 
 
   String dropdownValueCorreo = 'alone@yopmail.com';

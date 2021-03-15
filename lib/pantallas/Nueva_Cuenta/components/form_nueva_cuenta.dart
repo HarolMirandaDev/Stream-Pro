@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
+import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:shop_app/components/custom_boton_nuevos_registros.dart';
 import 'package:shop_app/components/custom_formulario_erroneo.dart';
 import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
@@ -21,10 +23,12 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   String password;
   String conform_password;
 
-  String fecha_compra;
+  String proveedor = "Selecciona un Proveedor --->";
+  String cliente = "Selecciona un Cliente --->";
+  final List<String> proveedores = ["Selecciona-->","Crack","BinPro","Death"];
+  final List<String> clientes= ["Selecciona-->","Juan","Pedro","Ulises","Daniela","Paola"];
 
-  final List<String> clientes = ["Juan","Pedro","Ulises","Daniela","Paola"];
-  final List<String> proveedores = ["Crack","BinPro","Death"];
+  String fecha_compra;
 
   String telefono;
   bool remember = false;
@@ -64,6 +68,12 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
           buildFechaCompraSelectForm(),
           SizedBox(height: getProportionateScreenHeight(20)),
 
+          buildProveedorFormDrop(),
+          SizedBox(height: getProportionateScreenHeight(20)),
+
+          buildClienterFormDrop(),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
 
@@ -169,6 +179,8 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
     return DateTimeFormField(
       initialValue: DateTime.now(),
       label: "Fecha de Compra",
+      formatter: new DateFormat("yyyy-MMM-dd"),
+      onlyDate: true,
       validator: (DateTime dateTime) {
         if (dateTime == null) {
           return "Date Time Required";
@@ -177,5 +189,67 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
       },
     );
   }
+  /*********************************---------------------Cliente - Proveedor----------------------***************************************/
+
+
+  DropdownButtonFormField buildProveedorFormDrop() {
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      value: proveedores[0],
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          proveedor = newValue;
+        });
+      },
+      items: proveedores
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Proveedor",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+
+  }
+
+
+  DropdownButtonFormField buildClienterFormDrop() {
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      value: clientes[0],
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          cliente = newValue;
+        });
+      },
+      items: clientes
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Cliente",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+
+  }
+
+
+/**************************************************************-**********************************************************************/
 
 }

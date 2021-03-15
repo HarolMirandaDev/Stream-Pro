@@ -100,6 +100,25 @@ List<Cliente> demoClientes = [
     vigente: true,
   ),
 
+  Cliente(
+    idCliente: 5,
+    images: [
+      "assets/images/item_youtube.png",
+    ],
+    colors: [
+      Color(0xFFF6625E),
+      Color(0xFF836DB8),
+      Color(0xFFDECB9C),
+      Colors.white,
+    ],
+    cliente: "Harol Miranda",
+    precio: 180.00,
+    descripcion: descripcion,
+    rating: 0.0,
+    pagado: true,
+    vigente: true,
+  ),
+
 
 ];
 

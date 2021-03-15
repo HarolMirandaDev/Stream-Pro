@@ -3,6 +3,7 @@ import 'package:stream_pro/screens/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
 import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
+import 'package:stream_pro/screens/Usuario_Cerro_Sesion_Exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
 
 import '../screens/Bienvenida_Splash/pantalla_splash.dart';
 import '../screens/usuario_registro/pantalla_usuario_registro.dart';
@@ -45,4 +46,5 @@ final Map<String, WidgetBuilder> routes = {
 
   PantallaMiCuenta.routeName: (context) => PantallaMiCuenta(),
   PantallaAyuda.routeName: (context) => PantallaAyuda(),
+  PantallaUsuarioCerroSesionExitosa.routeName: (context) => PantallaUsuarioCerroSesionExitosa(),
 };

@@ -68,7 +68,7 @@ class CategoryCard extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-              height: getProportionateScreenWidth(50),
+              height: getProportionateScreenWidth(65),
               width: getProportionateScreenWidth(110),
               decoration: BoxDecoration(
                 color: Color(0xff01579b),

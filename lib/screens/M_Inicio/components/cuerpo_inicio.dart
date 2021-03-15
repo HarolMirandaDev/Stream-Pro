@@ -26,11 +26,6 @@ class Body extends StatelessWidget {
             SizedBox(height: getProportionateScreenHeight(20)),
             RenovacionesProveedores(),
 
-
-
-
-
-
           ],
         ),
       ),

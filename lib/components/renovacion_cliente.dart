@@ -50,7 +50,7 @@ class RenovacionCliente extends StatelessWidget {
                   Text(
                     "\L. ${cliente.precio}",
                     style: TextStyle(
-                      fontSize: getProportionateScreenWidth(18),
+                      fontSize: getProportionateScreenWidth(17),
                       fontWeight: FontWeight.w600,
                       color: kPrimaryColor,
                     ),

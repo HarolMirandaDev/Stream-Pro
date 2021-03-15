@@ -20,30 +20,35 @@ class RenovacionesProveedores extends StatelessWidget {
             press: () {},
           ),
         ),
-        SizedBox(height: getProportionateScreenWidth(20)),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
 
-          child: Column (
-            children: [
+        SizedBox(height: getProportionateScreenWidth(20)),
+
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal ,
+
+          child: Row (
+            children: <Widget>[
               SpecialOfferCard(
                 image: "assets/images/Ejemplo.png",
                 category: "Crack",
                 numOfBrands: 10,
                 press: () {},
               ),
+
               SpecialOfferCard(
                 image: "assets/images/Ejemplo.png",
                 category: "Death",
                 numOfBrands: 12,
                 press: () {},
               ),
+
               SpecialOfferCard(
                 image: "assets/images/Ejemplo.png",
                 category: "Jack",
                 numOfBrands: 04,
                 press: () {},
               ),
+
               SpecialOfferCard(
                 image: "assets/images/Ejemplo.png",
                 category: "ColombiNet",
@@ -51,6 +56,7 @@ class RenovacionesProveedores extends StatelessWidget {
                 press: () {},
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
+
             ],
           ),
         ),
@@ -80,11 +86,12 @@ class SpecialOfferCard extends StatelessWidget {
         right: getProportionateScreenWidth(20),
         bottom: getProportionateScreenWidth(5),
       ),
+
       child: GestureDetector(
         onTap: press,
         child: SizedBox(
           width: getProportionateScreenWidth(340),
-          height: getProportionateScreenWidth(66),
+          height: getProportionateScreenWidth(75),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(5),
             child: Stack(
@@ -111,16 +118,25 @@ class SpecialOfferCard extends StatelessWidget {
                     vertical: getProportionateScreenWidth(10),
                   ),
                   child: Text.rich(
+
                     TextSpan(
                       style: TextStyle(color: Colors.white),
                       children: [
-                    TextSpan(
-                    text: "$category\t" + "-\t$numOfBrands Cuentas",
-                    style: TextStyle(
-                        fontSize: getProportionateScreenWidth(22),
-                        fontWeight: FontWeight.bold,
+                        TextSpan(
+                          text: "$category\n",
+                          style: TextStyle(
+                            fontSize: getProportionateScreenWidth(15),
+                          ),
                         ),
-                      ),
+
+                        TextSpan(
+                          text: "$numOfBrands Cuentas",
+                          style: TextStyle(
+                            fontSize: getProportionateScreenWidth(22),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
                       ],
                     ),
                   ),

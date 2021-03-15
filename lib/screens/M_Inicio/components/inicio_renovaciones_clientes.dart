@@ -14,7 +14,9 @@ class RenovacionesClientes extends StatelessWidget {
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: TituloSeccion(title: "Renovación de Clientes", press: () {}),
         ),
+
         SizedBox(height: getProportionateScreenWidth(20)),
+
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(

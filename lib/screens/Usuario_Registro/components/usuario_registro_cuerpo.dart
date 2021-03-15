@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:stream_pro/components/social_cards.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/screens/Usuario_Inicio_Sesion_Exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
 
 import 'usuario_registro_formulario.dart';
 
@@ -25,6 +27,25 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 FormularioNuevaCuenta(),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
+                SizedBox(height: getProportionateScreenHeight(20)),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Puedes iniciar sesión con GOOGLE',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.caption,
+                    ),
+                    SocialCards(
+                      icon: "assets/icons/google-icon.svg",
+                      press: () {
+                        Navigator.pushNamed(context, PantallaUsuarioInicioSesionExitosa.routeName );
+                      },
+                    ),
+                    //SocialCards(icon: "assets/icons/facebook-2.svg", press: () {},),
+                    //SocialCards(icon: "assets/icons/twitter.svg", press: () {},),
+                  ],
+                ),
                 SizedBox(height: getProportionateScreenHeight(20)),
                 Text(
                   'Al continuar, confirma que está de acuerdo \n con nuestros Términos y Condiciones.',

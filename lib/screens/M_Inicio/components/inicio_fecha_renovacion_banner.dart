@@ -64,6 +64,14 @@ class FechaRenovacion extends StatelessWidget {
         TextSpan(
           style: TextStyle(color: Colors.white),
           children: [
+
+            TextSpan(
+              text: 'Bienvenido' + " Harol Miranda\n",
+              style: TextStyle(
+                fontSize: getProportionateScreenWidth(15),
+              ),
+            ),
+
             TextSpan(
               text: "Renovaciones al " + formattedDate1 + " de " + mes, //debera obtener la fecha
               style: TextStyle(
@@ -71,6 +79,7 @@ class FechaRenovacion extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+
           ],
         ),
       ),

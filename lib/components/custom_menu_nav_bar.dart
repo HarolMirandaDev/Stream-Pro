@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stream_pro/screens/M_Clientes/pantalla_clientes.dart';
+import 'package:stream_pro/screens/M_Proveedores/pantalla_proveedores.dart';
+import 'package:stream_pro/screens/M_Cuentas/pantalla_cuentas.dart';
+import 'package:stream_pro/screens/M_Usuario/pantalla_usuario.dart';
 
-import 'package:shop_app/pantallas/M_Inicio/pantalla_inicio.dart';
-import 'package:shop_app/pantallas/M_Clientes/pantalla_clientes.dart';
-import 'package:shop_app/pantallas/M_Proveedores/pantalla_proveedores.dart';
-import 'package:shop_app/pantallas/M_Cuentas/pantalla_cuentas.dart';
-import 'package:shop_app/pantallas/M_Usuario/pantalla_usuario.dart';
-
-import '../constants.dart';
-import '../enums.dart';
+import '../config/constants.dart';
+import '../config/enums.dart';
 
 class CustomButtomNavBar extends StatelessWidget {
   const CustomButtomNavBar({

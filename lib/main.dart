@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'routes.dart';
-import 'pantallas/Bienvenida_Splash/pantalla_splash.dart';
-import 'theme.dart';
+import 'config/routes.dart';
+import 'screens/Bienvenida_Splash/pantalla_splash.dart';
+import 'config/theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Stream Pro',
       theme: theme(),
-      // inicio: SplashScreen (),
       // Usamos routeName para que no necesitemos recordar el nombre
       initialRoute: PantallaSplash.routeName,
       routes: routes,

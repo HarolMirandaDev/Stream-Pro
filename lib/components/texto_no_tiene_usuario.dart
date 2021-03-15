@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/pantallas/Usuario_Registro/pantalla_usuario_registro.dart';
-
-import '../constants.dart';
-import '../size_config.dart';
+import 'package:stream_pro/screens/Usuario_Registro/pantalla_usuario_registro.dart';
+import 'package:stream_pro/config/constants.dart';
+import 'package:stream_pro/config/size_config.dart';
 
 class TextoNoTieneUsuario extends StatelessWidget {
   const TextoNoTieneUsuario({

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../size_config.dart';
+import 'package:stream_pro/config/size_config.dart';
 
 class BtnIconoRedondeado extends StatelessWidget {
   const BtnIconoRedondeado({

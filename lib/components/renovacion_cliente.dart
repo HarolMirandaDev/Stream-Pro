@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:shop_app/models/Cliente.dart';
-
-import '../constants.dart';
-import '../size_config.dart';
+import 'package:stream_pro/models/Cliente.dart';
+import 'package:stream_pro/config/constants.dart';
+import 'package:stream_pro/config/size_config.dart';
 
 class RenovacionCliente extends StatelessWidget {
   const RenovacionCliente({

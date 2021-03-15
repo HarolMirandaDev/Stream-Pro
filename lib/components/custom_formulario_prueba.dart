@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../size_config.dart';
+import 'package:stream_pro/config/size_config.dart';
 
 class FormularioErroneo_Prueba extends StatelessWidget {
   const FormularioErroneo_Prueba({

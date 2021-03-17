@@ -1,24 +1,32 @@
 
 #Stream Pro
 
-## Sprint 1
-
+## - Sprint 1
 ## Harol Miranda
-- `Diseño` Menú Navegación Principal        - `Diseño` Pantalla de Registro de Cuentas
-- `Diseño` Pantalla Principal               - `Diseño` Pantalla de Inicio de Sesión
-- `Diseño` Pantalla Registro de Usuario     - `Diseño` Pantalla Inicio de Sesión o Registro Exitoso
-- `Diseño` Pantalla Control de Clientes     - `Diseño` Pantalla Verificación OTP
-- `Diseño` Pantalla Ítem Proveedores        - `Diseño` Icono de Aplicación
+- `Diseño` Menú Navegación Principal        
+- `Diseño` Pantalla de Registro de Cuentas
+- `Diseño` Pantalla Principal               
+- `Diseño` Pantalla de Inicio de Sesión
+- `Diseño` Pantalla Registro de Usuario     
+- `Diseño` Pantalla Inicio de Sesión o Registro Exitoso
+- `Diseño` Pantalla Control de Clientes     
+- `Diseño` Pantalla Verificación OTP
+- `Diseño` Pantalla Ítem Proveedores        
+- `Diseño` Icono de Aplicación
 
 ## Cesar Mendoza
-- `Diseño` Pantalla de Registro de Clientes     - `Diseño` Pantalla de Registro de Proveedores
-- `Diseño` Pantalla de Bienvenida               - `Diseño` Pantalla Recuperar Contraseña
-- `Diseño` Pantalla Completar Perfil            - `Diseño` Pantalla Control de Cuentas
-- `Diseño` Pantalla Control de Proveedores      - `Diseño` Pantalla Ítem Cuenta
-- `Diseño` Pantalla Ítem Cliente                - `Definición` de colores y tipografía
+- `Diseño` Pantalla de Registro de Clientes     
+- `Diseño` Pantalla de Registro de Proveedores
+- `Diseño` Pantalla de Bienvenida               
+- `Diseño` Pantalla Recuperar Contraseña
+- `Diseño` Pantalla Completar Perfil            
+- `Diseño` Pantalla Control de Cuentas
+- `Diseño` Pantalla Control de Proveedores      
+- `Diseño` Pantalla Ítem Cuenta
+- `Diseño` Pantalla Ítem Cliente                
+- `Definición` de colores y tipografía
 
-## Sprint 2
-
+## - Sprint 2
 ## Harol Miranda
 - `Funcionalidad` Menú Navegación Principal
 - `Funcionalidad` Pantalla de Registro de Cuentas
@@ -43,7 +51,11 @@
 - `Funcionalidad` Pantalla Ítem Cliente
 - `Aplicación` de colores y tipografía
 
-## Sprint 3
+## - Sprint 3
+- `Diseño` Pantalla de Ajustes
+- `Diseño` Pantalla Mi Cuenta
+- `Diseño` Pantalla de Ayuda
+
 
 Laravel es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:
 

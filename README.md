@@ -3,27 +3,27 @@
 
 ## - Sprint 1
 ## Harol Miranda
-- `Diseño` Menú Navegación Principal        
+- `Diseño` Menú Navegación Principal
 - `Diseño` Pantalla de Registro de Cuentas
-- `Diseño` Pantalla Principal               
+- `Diseño` Pantalla Principal
 - `Diseño` Pantalla de Inicio de Sesión
-- `Diseño` Pantalla Registro de Usuario     
+- `Diseño` Pantalla Registro de Usuario
 - `Diseño` Pantalla Inicio de Sesión o Registro Exitoso
-- `Diseño` Pantalla Control de Clientes     
+- `Diseño` Pantalla Control de Clientes
 - `Diseño` Pantalla Verificación OTP
-- `Diseño` Pantalla Ítem Proveedores        
+- `Diseño` Pantalla Ítem Proveedores
 - `Diseño` Icono de Aplicación
 
 ## Cesar Mendoza
-- `Diseño` Pantalla de Registro de Clientes     
+- `Diseño` Pantalla de Registro de Clientes
 - `Diseño` Pantalla de Registro de Proveedores
-- `Diseño` Pantalla de Bienvenida               
+- `Diseño` Pantalla de Bienvenida
 - `Diseño` Pantalla Recuperar Contraseña
-- `Diseño` Pantalla Completar Perfil            
+- `Diseño` Pantalla Completar Perfil
 - `Diseño` Pantalla Control de Cuentas
-- `Diseño` Pantalla Control de Proveedores      
+- `Diseño` Pantalla Control de Proveedores
 - `Diseño` Pantalla Ítem Cuenta
-- `Diseño` Pantalla Ítem Cliente                
+- `Diseño` Pantalla Ítem Cliente
 - `Definición` de colores y tipografía
 
 ## - Sprint 2
@@ -74,7 +74,9 @@ Nos gustaría extender nuestro agradecimiento al docente Lester Bogran, por fome
 
 - **[github](https://github.com/)**
 - **[dart](https://dart.dev/)**
-- **[flutter.dev/](https://flutter.dev/)**
+- **[flutter](https://flutter.dev/)**
+- **[Android Studio](https://redirector.gvt1.com/edgedl/android/studio/install/4.1.2.0/android-studio-ide-201.7042882-windows.exe)**
+- **[Visual Studio Code](https://code.visualstudio.com/docs/?dv=win)**
 
 ## Contribución
 

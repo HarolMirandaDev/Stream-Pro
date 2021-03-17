@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
-import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:stream_pro/screens/usuario_inicio_sesion/pantalla_usuario_inicio_sesion.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
-// This is the best practice
 import '../components/contenido_splash.dart';
 import '../../../components/custom_boton_predeterminado.dart';
 

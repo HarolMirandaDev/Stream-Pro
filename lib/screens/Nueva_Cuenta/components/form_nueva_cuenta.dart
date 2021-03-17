@@ -22,10 +22,30 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   String password;
   String conform_password;
 
-  String proveedor = "Selecciona un Proveedor --->";
-  String cliente = "Selecciona un Cliente --->";
-  final List<String> proveedores = ["Selecciona-->","Crack","BinPro","Death"];
-  final List<String> clientes= ["Selecciona-->","Juan","Pedro","Ulises","Daniela","Paola"];
+  String proveedor = "Selecciona un Proveedor";
+  String cliente = "Selecciona un Cliente";
+  final List<String> proveedores = ["Selecciona","Crack","BinPro","Death"];
+  final List<String> clientes= ["Selecciona","Juan","Pedro","Ulises","Daniela","Paola"];
+
+  final List<String> seleccion_plataforma_streaming = ["Netflix","Spotify","Amazon Prime Video","Disney Plus","HBO GO","YouTube"];
+  String seleccion_plataforma_streaming_valor;
+
+  List<String> seleccion_membresia = ["Estándar","Básico","Premium","Completa","Pantalla","Duo","Familiar","Estudiante"];
+  String seleccion_membresia_valor;
+
+  List<String> seleccion_cantidad_perfiles = ["1 Pantalla","2 Pantallas","3 Pantallas", "4 Pantallas", "5 Pantallas","6 Pantallas"];
+  String seleccion_cantidad_perfiles_valor;
+
+  bool visibleMembresia = false;
+  bool visibleCantidadPantallas = false;
+
+  void _visibleMembresia(bool vMembresia){
+    visibleMembresia = vMembresia;
+  }
+
+  void _visibleCantidadPantallas(bool vCantidadPantallas){
+    visibleCantidadPantallas = vCantidadPantallas;
+  }
 
   String fecha_compra;
 
@@ -72,6 +92,29 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
 
           buildClienterFormDrop(),
           SizedBox(height: getProportionateScreenHeight(20)),
+
+          buildSelecionarPlataformaStreamingFormDrop(),
+          SizedBox(height: getProportionateScreenHeight(10)),
+
+          Visibility(
+              child: buildSeleccionarMembresiaFormDrop(),
+              visible: visibleMembresia
+          ),
+
+          Visibility(
+              child: SizedBox(height: getProportionateScreenHeight(10)),
+              visible: visibleMembresia
+          ),
+
+          Visibility(
+              child: buildSeleccionarCantidadPantallasFormDrop(),
+              visible: visibleCantidadPantallas
+          ),
+
+          Visibility(
+              child: SizedBox(height: getProportionateScreenHeight(10)),
+              visible: visibleCantidadPantallas
+          ),
           
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
@@ -112,7 +155,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: kInvalidoEmailError);
         }
         return null;
       },
@@ -121,7 +164,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
           addError(error: kEmailNullError);
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
+          addError(error: kInvalidoEmailError);
           return "";
         }
         return null;
@@ -147,18 +190,18 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: kContrasenaNullError);
         } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
+          removeError(error: kContrasenaCortaError);
         }
         password = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: kContrasenaNullError);
           return "";
         } else if (value.length < 8) {
-          addError(error: kShortPassError);
+          addError(error: kContrasenaCortaError);
           return "";
         }
         return null;
@@ -250,5 +293,161 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
 
 
 /**************************************************************-**********************************************************************/
+  DropdownButtonFormField buildSelecionarPlataformaStreamingFormDrop() {
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      value: seleccion_plataforma_streaming[0],
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          seleccion_plataforma_streaming_valor = newValue;
 
+          if(newValue == "Netflix"){
+            seleccion_membresia = ["Básico","Estándar","Premium"];
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "Amazon Prime Video"){
+            seleccion_membresia = ["Completa","Pantalla"];
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "Disney Plus"){
+            seleccion_membresia = ["Completa","Pantalla"];
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "HBO GO"){
+            seleccion_membresia = ["Completa","Pantalla"];
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "Spotify"){
+            seleccion_membresia = ["Duo","Premium","Familiar","Estudiante"];
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          } else
+
+          if(newValue == "YouTube"){
+            seleccion_membresia = ["Premium","Familiar","Estudiante"];
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          } else
+
+          {
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          }
+
+        });
+      },
+      items: seleccion_plataforma_streaming
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Plataforma",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+  }
+
+  String dropdownMembresia = 'Premium';
+
+  DropdownButtonFormField buildSeleccionarMembresiaFormDrop() {
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      value: seleccion_membresia[0],
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          seleccion_membresia_valor = newValue;
+
+          if(newValue == "Pantalla" && seleccion_plataforma_streaming_valor=="Amazon Prime Video"){
+            seleccion_cantidad_perfiles = ["1 Pantalla","2 Pantallas","3 Pantallas", "4 Pantallas", "5 Pantallas"];
+            _visibleCantidadPantallas(true);
+          } else
+
+          if(newValue == "Pantalla" && seleccion_plataforma_streaming_valor=="Disney Plus"){
+            seleccion_cantidad_perfiles = ["1 Pantalla","2 Pantallas","3 Pantallas", "4 Pantallas", "5 Pantallas", "6 Pantallas"];
+            _visibleCantidadPantallas(true);
+          } else
+
+          if(newValue == "Pantalla" && seleccion_plataforma_streaming_valor=="HBO GO"){
+            seleccion_cantidad_perfiles = ["1 Pantalla"];
+            _visibleCantidadPantallas(true);
+          } else
+
+          if( seleccion_plataforma_streaming_valor=="HBO GO" && newValue == "Pantalla"){
+            _visibleCantidadPantallas(false);
+          } else
+
+          if( seleccion_plataforma_streaming_valor=="Amazon Prime Video" && newValue == "Pantalla"){
+            _visibleCantidadPantallas(false);
+          } else
+
+          if( seleccion_plataforma_streaming_valor=="Disney Plus" && newValue == "Completa"){
+            _visibleCantidadPantallas(false);
+          } else
+
+          {
+            _visibleCantidadPantallas(false);
+            _visibleMembresia(true);
+          }
+
+        });
+      },
+      items: seleccion_membresia
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Membresia",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+  }
+
+
+
+
+  DropdownButtonFormField buildSeleccionarCantidadPantallasFormDrop() {
+    DropdownButtonFormField cmbo = DropdownButtonFormField<String>(
+      value: seleccion_cantidad_perfiles[0],
+      elevation: 16,
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      onChanged: (String newValue) {
+        setState(() {
+
+        });
+      },
+      items: seleccion_cantidad_perfiles.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Cantidad",
+          floatingLabelBehavior: FloatingLabelBehavior.always
+      ),
+    );
+    return cmbo;
+  }
 }

@@ -154,13 +154,13 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       onSaved: (newValue) => telefono = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+          removeError(error: kTelefonoNullError);
         }
         telefono = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPhoneNumberNullError);
+          addError(error: kTelefonoNullError);
           return "";
         }
         return null;
@@ -199,13 +199,13 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       onSaved: (newValue) => telefono = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+          removeError(error: kTelefonoNullError);
         }
         telefono = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPhoneNumberNullError);
+          addError(error: kTelefonoNullError);
           return "";
         }
         return null;
@@ -244,13 +244,13 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       onSaved: (newValue) => telefono = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+          removeError(error: kTelefonoNullError);
         }
         telefono = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPhoneNumberNullError);
+          addError(error: kTelefonoNullError);
           return "";
         }
         return null;

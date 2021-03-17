@@ -11,5 +11,7 @@ class PantallaSplash extends StatelessWidget {
     return Scaffold(
       body: Body(),
     );
+
+
   }
 }

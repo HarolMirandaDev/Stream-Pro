@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stream_pro/components/custom_menu_nav_bar.dart';
-import 'file:///C:/Users/Alone/AndroidStudioProjects/Stream-Pro/lib/config/enums.dart';
-
 import 'components/cuerpo_usuario_perfil.dart';
 
 class PantallaUsuario extends StatelessWidget {
@@ -12,6 +9,7 @@ class PantallaUsuario extends StatelessWidget {
       appBar: AppBar(
         title: Text("Usuario"),
       ),
+
       body: Body(),
 
     );

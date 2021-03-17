@@ -67,18 +67,18 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
       onSaved: (newValue) => conform_password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: kContrasenaNullError);
         } else if (value.isNotEmpty && password == conform_password) {
-          removeError(error: kMatchPassError);
+          removeError(error: kContrasenaNoCoincideError);
         }
         conform_password = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: kContrasenaNullError);
           return "";
         } else if ((password != value)) {
-          addError(error: kMatchPassError);
+          addError(error: kContrasenaNoCoincideError);
           return "";
         }
         return null;
@@ -100,18 +100,18 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPassNullError);
+          removeError(error: kContrasenaNullError);
         } else if (value.length >= 8) {
-          removeError(error: kShortPassError);
+          removeError(error: kContrasenaCortaError);
         }
         password = value;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPassNullError);
+          addError(error: kContrasenaNullError);
           return "";
         } else if (value.length < 8) {
-          addError(error: kShortPassError);
+          addError(error: kContrasenaCortaError);
           return "";
         }
         return null;
@@ -135,7 +135,7 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);
         } else if (emailValidatorRegExp.hasMatch(value)) {
-          removeError(error: kInvalidEmailError);
+          removeError(error: kInvalidoEmailError);
         }
         return null;
       },
@@ -144,7 +144,7 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
           addError(error: kEmailNullError);
           return "";
         } else if (!emailValidatorRegExp.hasMatch(value)) {
-          addError(error: kInvalidEmailError);
+          addError(error: kInvalidoEmailError);
           return "";
         }
         return null;

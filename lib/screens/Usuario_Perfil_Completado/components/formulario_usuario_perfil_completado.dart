@@ -67,13 +67,13 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       onSaved: (newValue) => address = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kAddressNullError);
+          removeError(error: kDireccionNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kAddressNullError);
+          addError(error: kDireccionNullError);
           return "";
         }
         return null;
@@ -96,13 +96,13 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       onSaved: (newValue) => phoneNumber = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kPhoneNumberNullError);
+          removeError(error: kTelefonoNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kPhoneNumberNullError);
+          addError(error: kTelefonoNullError);
           return "";
         }
         return null;
@@ -137,13 +137,13 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       onSaved: (newValue) => firstName = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNamelNullError);
+          removeError(error: kNombreNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNamelNullError);
+          addError(error: kNombreNullError);
           return "";
         }
         return null;

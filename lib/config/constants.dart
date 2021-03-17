@@ -10,9 +10,11 @@ const kPrimaryGradientColor = LinearGradient(
   colors: [Color(0xFF00ACC1), Color(0xFF006064)],
 );
 const kSecondaryColor = Color(0xFF979797);
+
 const kTextColor = Color(0xFF757575);
 const kRosaMaterial = Color(0xFFAD1457);
 const kAzulMaterial = Color(0xff01579b);
+const kTextLigntColor = Color(0xFF7286A5);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
@@ -29,16 +31,24 @@ const defaultDuration = Duration(milliseconds: 250);
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Por favor introduzca el correo electrónico";
-const String kInvalidEmailError = "Por favor introduzca un correo electrónico válido";
-const String kPassNullError = "Por favor, introduzca la contraseña";
-const String kShortPassError = "La contraseña es demasiado corta";
-const String kMatchPassError = "Las contraseñas no coinciden";
-const String kNamelNullError = "Por favor, escriba el nombre";
+const String kInvalidoEmailError = "Por favor introduzca un correo electrónico válido";
+const String kContrasenaNullError = "Por favor, introduzca la contraseña";
+const String kContrasenaCortaError = "La contraseña es demasiado corta";
+const String kContrasenaNoCoincideError = "Las contraseñas no coinciden";
+const String kNombreNullError = "Por favor, escriba el nombre";
 const String kApodoNullError = "Por favor, escriba el apodo";
 
-const String kLastNameNullError = "Por favor, escriba el apellido";
-const String kPhoneNumberNullError = "Por favor, introduzca el número de teléfono";
-const String kAddressNullError = "Ingrese la dirección";
+const String kApellidoNullError = "Por favor, escriba el apellido";
+const String kTelefonoNullError = "Por favor, introduzca el número de teléfono";
+const String kDireccionNullError = "Ingrese la dirección";
+const String kFechaDeCompraNullError = "Seleccione la fecha de compra";
+const String kFechaDeVentaNullError = "Seleccione la fecha de venta";
+const String kProvedorNullError = "Seleccione el propietario de la cuenta";
+
+const String kPlataformaNullError = "Seleccione la plataforma";
+const String kMembresiaNullError = "Seleccione la membresia";
+const String kPantallasNullError = "Seleccione la cantidad de pantallas";
+
 
 //TODO fomatos de telefonos
 

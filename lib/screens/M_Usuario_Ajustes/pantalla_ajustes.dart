@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:stream_pro/screens/M_Usuario_Ayuda/components/cuerpo_ayuda.dart';
+import 'package:stream_pro/screens/M_Usuario_Ajustes/components/cuerpo_ajustes.dart';
 
-class PantallaAyuda extends StatelessWidget{
-  static String routeName = "/ayuda";
+class PantallaAjustes extends StatelessWidget{
+  static String routeName = "/ajustes";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ayuda"),
+        title: Text("Ajustes"),
         backgroundColor: Color(0xFF37474F),
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
@@ -16,7 +16,7 @@ class PantallaAyuda extends StatelessWidget{
         ),
       ),
 
-        body: BodyAyuda(),
+        body: BodyAjustes(),
     );
   }
 

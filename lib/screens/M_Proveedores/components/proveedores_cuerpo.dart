@@ -11,6 +11,7 @@ class Body extends StatelessWidget {
           children: [
             SizedBox(height: getProportionateScreenHeight(20)),
             EncabezadoProveedores(),
+            Divider(height: 20, thickness: 3, indent: 25, endIndent: 25, color: Color(0xFF006064)),
             SizedBox(height: getProportionateScreenWidth(10)),
             SizedBox(height: getProportionateScreenWidth(30)),
             SizedBox(height: getProportionateScreenWidth(30)),

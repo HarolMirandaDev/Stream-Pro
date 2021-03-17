@@ -3,7 +3,7 @@ import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
 
-class BodyAyuda extends StatelessWidget {
+class BodyAjustes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
@@ -17,7 +17,7 @@ class BodyAyuda extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                Text("Stream Pro", style: headingStyle),
+                Text("Ajustes", style: headingStyle),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
               ],
             ),

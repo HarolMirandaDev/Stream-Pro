@@ -9,6 +9,7 @@ class PantallaInicio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       body: Body(),
       bottomNavigationBar: CustomButtomNavBar(
           selectedMenu: MenuState.inicio

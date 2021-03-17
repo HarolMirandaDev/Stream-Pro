@@ -8,18 +8,21 @@ class UsuarioImagenMiCuenta extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
-      height: 140,
-      width: 140,
+      height: 180,
+      width: 180,
       child: Stack(
         fit: StackFit.expand,
         overflow: Overflow.visible,
         children: [
           CircleAvatar(
             backgroundImage: AssetImage("assets/images/imagen_perfil.jpg"),
+            backgroundColor: Colors.white,
+
           ),
           Positioned(
-            right: -16,
+            right: -12,
             bottom: 0,
             child: SizedBox(
               height: 46,
@@ -29,11 +32,11 @@ class UsuarioImagenMiCuenta extends StatelessWidget {
                   borderRadius: BorderRadius.circular(50),
                   side: BorderSide(color: Colors.white),
                 ),
-                color: Color(0xFFF5F6F9),
+                color: Color(0xFF37474F),
                 onPressed: () {
 
                 },
-                child: SvgPicture.asset("assets/icons/Icono Camara.svg"),
+                child: SvgPicture.asset("assets/icons/Icono Camara 2.svg"),
               ),
             ),
           )

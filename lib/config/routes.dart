@@ -20,6 +20,7 @@ import '../screens/M_Usuario/pantalla_usuario.dart';
 
 import '../screens/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
 import '../screens/M_Usuario_Ayuda/pantalla_ayuda.dart';
+import '../screens/M_Usuario_Ajustes/pantalla_ajustes.dart';
 
 // Uso de ruta
 // Todas nuestras rutas estarán disponibles aquí
@@ -45,5 +46,7 @@ final Map<String, WidgetBuilder> routes = {
 
   PantallaMiCuenta.routeName: (context) => PantallaMiCuenta(),
   PantallaAyuda.routeName: (context) => PantallaAyuda(),
+  PantallaAjustes.routeName: (context) => PantallaAjustes(),
+
   PantallaUsuarioCerroSesionExitosa.routeName: (context) => PantallaUsuarioCerroSesionExitosa(),
 };

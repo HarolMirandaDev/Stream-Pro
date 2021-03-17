@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/screens/M_Usuario_Ayuda/pantalla_ayuda.dart';
 import 'package:stream_pro/screens/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
+import 'package:stream_pro/screens/M_Usuario_Ajustes/pantalla_ajustes.dart';
 import 'package:stream_pro/screens/Usuario_Cerro_Sesion_Exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
 
 import 'menu_usuario_perfil.dart';
@@ -27,7 +28,7 @@ class Body extends StatelessWidget {
             text: "Ajustes",
             icon: "assets/icons/Icono Ajustes.svg",
             press: () {
-
+              Navigator.pushNamed(context, PantallaAjustes.routeName);
             },
           ),
           UsuarioMenu(

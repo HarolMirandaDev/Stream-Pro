@@ -22,11 +22,12 @@ class CustomButtomNavBar extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
+
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, -15),
-            blurRadius: 20,
+            offset: Offset(0, -5),
+            blurRadius: 10,
             color: Color(0xFFDADADA).withOpacity(0.15),
           ),
         ],
@@ -44,7 +45,7 @@ class CustomButtomNavBar extends StatelessWidget {
                 icon: SvgPicture.asset(
                   "assets/icons/Icono Menu Inicio.svg",
                   color: MenuState.inicio == selectedMenu
-                      ? kPrimaryColor
+                      ? kRosaMaterial
                       : inActiveIconColor,
 
                 ),
@@ -55,7 +56,7 @@ class CustomButtomNavBar extends StatelessWidget {
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Icono Menu Cuentas.svg",
                   color: MenuState.cuentas == selectedMenu
-                      ? kPrimaryColor
+                      ? kAzulMaterial
                       : inActiveIconColor,
                 ),
                 onPressed: () =>
@@ -65,7 +66,7 @@ class CustomButtomNavBar extends StatelessWidget {
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Icono Menu Clientes.svg",
                   color: MenuState.clientes == selectedMenu
-                      ? kPrimaryColor
+                      ? kAzulMaterial
                       : inActiveIconColor,
                 ),
                 onPressed: () =>
@@ -75,7 +76,7 @@ class CustomButtomNavBar extends StatelessWidget {
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Icono Menu Proveedores.svg",
                   color: MenuState.proveedores == selectedMenu
-                      ? kPrimaryColor
+                      ? kAzulMaterial
                       : inActiveIconColor,
                 ),
                 onPressed: () =>
@@ -86,7 +87,7 @@ class CustomButtomNavBar extends StatelessWidget {
                 icon: SvgPicture.asset(
                   "assets/icons/Icono Menu Usuario.svg",
                   color: MenuState.usuario == selectedMenu
-                      ? kPrimaryColor
+                      ? kAzulMaterial
                       : inActiveIconColor,
                 ),
                 onPressed: () =>

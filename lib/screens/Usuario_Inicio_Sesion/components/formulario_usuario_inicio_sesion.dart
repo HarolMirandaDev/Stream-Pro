@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/components/custom_sufijo_texto.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
@@ -72,6 +73,7 @@ class _SignFormState extends State<SignForm> {
           BotonPredeterminado(
             text: "Continuar",
             press: () {
+
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen

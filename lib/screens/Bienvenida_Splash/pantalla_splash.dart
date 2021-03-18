@@ -10,6 +10,7 @@ class PantallaSplash extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       body: Body(),
+
     );
 
 

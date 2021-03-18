@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1064993862088-4i9kpfl9himrb5j83f42bi5mnaj2voll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.devplusteam.stream_pro",
+            "certificate_hash": "8b4a67c49cb8933572e4dbceee8baa06d226e456"
+          }
+        },
+        {
           "client_id": "1064993862088-bqvs04bf9bvrfkfc3mg389nkavv2sef6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -110,7 +110,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
                     timeInSecForIosWeb: 2,
                     backgroundColor: Color(0xff01579b),
                     textColor: Colors.white,
-                    fontSize: 16.0
+                    fontSize: 22.0
                 );
                 Navigator.pushNamed(context, PantallaInicio.routeName);
               }

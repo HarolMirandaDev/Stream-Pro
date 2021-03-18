@@ -117,7 +117,6 @@ class BodyMiCuenta extends StatelessWidget {
                 text: 'Danlí, El Paraíso',
                 style: TextStyle(
                   fontSize: 22,
-                  fontWeight: FontWeight.bold,
                   color: Color(0xFF263238),
                 ),
               )
@@ -131,6 +130,17 @@ class BodyMiCuenta extends StatelessWidget {
             endIndent: 30,
             color: Color(0xFF37474F),
           ),
+
+          RichText(
+            text: TextSpan(
+              text: 'Gracias por utilizar ',
+              style: DefaultTextStyle.of(context).style,
+              children: <TextSpan>[
+                TextSpan(text: 'Stream Pro', style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(text: ', querido usuario!'),
+              ],
+            ),
+          )
         ],
       ),
     );

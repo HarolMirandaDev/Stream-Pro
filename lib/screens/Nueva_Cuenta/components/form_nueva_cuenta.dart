@@ -125,6 +125,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
+
                 Fluttertoast.showToast(
                     msg: "La cuenta ha sido registrada",
                     toastLength: Toast.LENGTH_SHORT,
@@ -132,7 +133,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
                     timeInSecForIosWeb: 2,
                     backgroundColor: Color(0xff01579b),
                     textColor: Colors.white,
-                    fontSize: 16.0
+                    fontSize: 22.0
                 );
                 Navigator.pushNamed(context, PantallaInicio.routeName);
               }

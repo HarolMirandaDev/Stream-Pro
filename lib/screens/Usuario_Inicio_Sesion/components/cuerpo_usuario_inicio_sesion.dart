@@ -13,9 +13,14 @@ class Body extends StatelessWidget {
 
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void login(BuildContext context) async {
+  static FirebaseAuth auth(){
+    return _auth;
+  }
+
+  void login_google(BuildContext context) async {
+
     GoogleSignInAccount gUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await gUser.authentication;
 
@@ -25,8 +30,17 @@ class Body extends StatelessWidget {
     );
 
     UserCredential fUser = (await _auth.signInWithCredential(credential));
+
     if (fUser != null) {
       Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesionExitosa()));
+      Fluttertoast.showToast(
+          msg: fUser.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color(0xff01579b),
+          textColor: Colors.white,
+          fontSize: 16.0);
     } else {
       Fluttertoast.showToast(
           msg: "El usario no existe",
@@ -80,7 +94,7 @@ class Body extends StatelessWidget {
                     SocialCards(
                       icon: "assets/icons/google-icon.svg",
                       press: () {
-                        login(context);
+                        login_google(context);
                       },
                     ),
                     //SocialCards(icon: "assets/icons/facebook-2.svg", press: () {},),

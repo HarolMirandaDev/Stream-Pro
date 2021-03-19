@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/components/custom_sufijo_texto.dart';
@@ -9,6 +10,7 @@ import 'package:stream_pro/screens/Usuario_Inicio_Sesion_Exitosa/pantalla_usuari
 
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/screens/Usuario_Inicio_Sesion/components/cuerpo_usuario_inicio_sesion.dart';
 
 class SignForm extends StatefulWidget {
   @override
@@ -34,6 +36,80 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.remove(error);
       });
+  }
+
+  void login_normal(BuildContext context) async {
+
+
+    try{
+      if ( await Body.auth().signInWithEmailAndPassword(email: email, password: password) != null) {
+        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesionExitosa()));
+        Fluttertoast.showToast(
+            msg: "Bienvenido",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color(0xff01579b),
+            textColor: Colors.white,
+            fontSize: 16.0);
+      } else {
+        Fluttertoast.showToast(
+            msg: "El usario no se puede registrar",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color(0xff01579b),
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+      }
+    }catch(e){
+      String mensae = "";
+      switch (e.code) {
+        case "ERROR_EMAIL_ALREADY_IN_USE":
+        case "account-exists-with-different-credential":
+        case "email-already-in-use":
+        mensae = "Correo electronico ya fue usado. Vaya a la página de inicio de sesión.";
+          break;
+        case "ERROR_WRONG_PASSWORD":
+        case "wrong-password":
+        mensae =  "Correo electrónico / contraseña incorrectas.";
+          break;
+        case "ERROR_USER_NOT_FOUND":
+        case "user-not-found":
+        mensae =  "Ninguna usuario encontrada con este correo electrónico.";
+          break;
+        case "ERROR_USER_DISABLED":
+        case "user-disabled":
+        mensae =  "Usuario deshabilitado.";
+          break;
+        case "ERROR_TOO_MANY_REQUESTS":
+        case "operation-not-allowed":
+        mensae =  "Demasiadas solicitudes para iniciar sesión en esta cuenta.";
+          break;
+        case "ERROR_OPERATION_NOT_ALLOWED":
+        case "operation-not-allowed":
+        mensae =  "Error del servidor. Vuelve a intentarlo más tarde.";
+          break;
+        case "ERROR_INVALID_EMAIL":
+        case "invalid-email":
+        mensae =  "Dirección de correo electrónico es inválida.";
+          break;
+        default:
+          mensae =  "Error de inicio de sesion. Inténtalo de nuevo.";
+          break;
+      }
+      Fluttertoast.showToast(
+          msg: mensae,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color(0xff01579b),
+          textColor: Colors.white,
+          fontSize: 16.0);
+    }
+
+
   }
 
   @override
@@ -77,8 +153,9 @@ class _SignFormState extends State<SignForm> {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
+                login_normal(context);
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, PantallaUsuarioInicioSesionExitosa.routeName);
+
               }
             },
           ),

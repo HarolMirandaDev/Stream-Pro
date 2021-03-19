@@ -1,15 +1,19 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stream_pro/components/custom_sufijo_texto.dart';
 import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
-import 'package:stream_pro/screens/Usuario_Perfil_Completado/pantalla_usuario_perfil_completado.dart';
+import 'package:stream_pro/screens/Usuario_Inicio_Sesion/pantalla_usuario_inicio_sesion.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/screens/Usuario_Inicio_Sesion/components/cuerpo_usuario_inicio_sesion.dart';
 
 class FormularioNuevaCuenta extends StatefulWidget {
   @override
   _FormularioNuevaCuentaState createState() => _FormularioNuevaCuentaState();
 }
+
 
 class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
   final _formKey = GlobalKey<FormState>();
@@ -33,6 +37,34 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
       });
   }
 
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  void login(BuildContext context) async {
+
+    try{
+        if ( await _auth.createUserWithEmailAndPassword(email: email, password: password) != null) {
+          Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesion()));
+          Fluttertoast.showToast(
+              msg: "Usuario registrado con exito",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 2,
+              backgroundColor: Color(0xff01579b),
+              textColor: Colors.white,
+              fontSize: 16.0);
+        }
+    }catch(e){
+        Fluttertoast.showToast(
+        msg: e.code,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Color(0xff01579b),
+        textColor: Colors.white,
+        fontSize: 16.0);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -52,7 +84,8 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
-                Navigator.pushNamed(context, PantallaUsuarioPerfilCompletado.routeName);
+                login(context);
+                Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
               }
             },
           ),

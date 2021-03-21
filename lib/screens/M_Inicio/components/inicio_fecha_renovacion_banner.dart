@@ -42,7 +42,6 @@ class FechaRenovacion extends StatelessWidget {
       mes = "diciembre";
     }
 
-
     return Container(
       // height: 90,
       width: double.infinity,
@@ -56,7 +55,7 @@ class FechaRenovacion extends StatelessWidget {
       ),
 
       decoration: BoxDecoration(
-        color: Color(0xFFAD1457),
+        color: Color(0xFF01579B),
         borderRadius: BorderRadius.circular(5),
       ),
 

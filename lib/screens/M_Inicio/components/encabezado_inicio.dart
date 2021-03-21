@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/size_config.dart';
-import 'inicio_campo_buscar.dart';
 
 class EncabezadoInicio extends StatelessWidget {
   const EncabezadoInicio({
@@ -17,7 +16,7 @@ class EncabezadoInicio extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CampoBuscar(),
+
         ],
       ),
     );

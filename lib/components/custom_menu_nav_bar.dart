@@ -45,7 +45,7 @@ class CustomButtomNavBar extends StatelessWidget {
                 icon: SvgPicture.asset(
                   "assets/icons/Icono Menu Inicio.svg",
                   color: MenuState.inicio == selectedMenu
-                      ? kRosaMaterial
+                      ? kAzulMaterial
                       : inActiveIconColor,
 
                 ),

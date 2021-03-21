@@ -55,6 +55,11 @@
 - `Diseño` Pantalla de Ajustes
 - `Diseño` Pantalla Mi Cuenta
 - `Diseño` Pantalla de Ayuda
+- `Diseño` AppBar en pantalla de Inicio
+- `Creación` Proyecto en Firebase
+- `Conexión` de Firebase con StreamPro usando Google
+- `Conexión` de Firebase con StreamPro usando Correo Electronico
+
 
 
 Flutter es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:

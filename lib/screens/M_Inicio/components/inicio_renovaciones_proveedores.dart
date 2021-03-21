@@ -13,8 +13,8 @@ class RenovacionesProveedores extends StatelessWidget {
       children: [
         Padding(
           padding:
-              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)
-              ),
+          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)
+          ),
           child: TituloSeccion(
             title: "Renovación de Proveedores",
             press: () {},
@@ -106,8 +106,8 @@ class SpecialOfferCard extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Color(0xff01579b),
-                        Color(0xff01579b),
+                        Color(0xFF01579B),
+                        Color(0xFF01579B),
                       ],
                     ),
                   ),
@@ -135,8 +135,8 @@ class SpecialOfferCard extends StatelessWidget {
                             fontSize: getProportionateScreenWidth(22),
                             fontWeight: FontWeight.bold,
                           ),
-                        ),
 
+                        ),
                       ],
                     ),
                   ),

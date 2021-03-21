@@ -4,6 +4,7 @@ import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.d
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
 import 'package:stream_pro/config/size_config.dart';
+
 class NuevosRegistros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,6 +13,7 @@ class NuevosRegistros extends StatelessWidget {
       {"icon": "assets/icons/Icono Nuevo Proveedor.svg", "text": "Nuevo Proveedor"},
       {"icon": "assets/icons/Icono Nueva Cuenta.svg", "text": "Nueva Cuenta"},
     ];
+
     return Padding(
       padding:
       EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
@@ -26,6 +28,7 @@ class NuevosRegistros extends StatelessWidget {
               Navigator.pushNamed(context, PantallaNuevoClienteInicio.routeName);
             },
           ),
+
           CategoryCard(
             icon: categories[1]["icon"],
             text: categories[1]["text"],
@@ -33,6 +36,7 @@ class NuevosRegistros extends StatelessWidget {
               Navigator.pushNamed(context, PantallaNuevoProveedorInicio.routeName);
             },
           ),
+
           CategoryCard(
             icon: categories[2]["icon"],
             text: categories[2]["text"],
@@ -71,7 +75,7 @@ class CategoryCard extends StatelessWidget {
               height: getProportionateScreenWidth(65),
               width: getProportionateScreenWidth(110),
               decoration: BoxDecoration(
-                color: Color(0xff01579b),
+                color: Color(0xFFAD1457),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: SvgPicture.asset(icon),

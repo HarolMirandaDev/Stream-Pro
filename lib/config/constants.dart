@@ -13,8 +13,10 @@ const kSecondaryColor = Color(0xFF979797);
 
 const kTextColor = Color(0xFF757575);
 const kRosaMaterial = Color(0xFFAD1457);
-const kAzulMaterial = Color(0xff01579b);
+const KRosaMaterial2 = Color(0xFFE91E63);
+const kAzulMaterial = Color(0xFF01579B);
 const kTextLigntColor = Color(0xFF7286A5);
+
 
 const kAnimationDuration = Duration(milliseconds: 200);
 

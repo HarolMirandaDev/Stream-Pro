@@ -33,18 +33,11 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   List<String> seleccion_membresia = ["Estándar","Básico","Premium","Completa","Pantalla","Duo","Familiar","Estudiante"];
   String seleccion_membresia_valor;
 
-  List<String> seleccion_cantidad_perfiles = ["1 Pantalla","2 Pantallas","3 Pantallas", "4 Pantallas", "5 Pantallas","6 Pantallas"];
-  String seleccion_cantidad_perfiles_valor;
-
   bool visibleMembresia = false;
-  bool visibleCantidadPantallas = false;
+
 
   void _visibleMembresia(bool vMembresia){
     visibleMembresia = vMembresia;
-  }
-
-  void _visibleCantidadPantallas(bool vCantidadPantallas){
-    visibleCantidadPantallas = vCantidadPantallas;
   }
 
   String fecha_compra;
@@ -106,16 +99,6 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
               visible: visibleMembresia
           ),
 
-          Visibility(
-              child: buildSeleccionarCantidadPantallasFormDrop(),
-              visible: visibleCantidadPantallas
-          ),
-
-          Visibility(
-              child: SizedBox(height: getProportionateScreenHeight(10)),
-              visible: visibleCantidadPantallas
-          ),
-          
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
 
@@ -222,7 +205,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
     return DateTimeFormField(
       initialValue: DateTime.now(),
       label: "Fecha de Compra",
-      formatter: new DateFormat("yyyy-MMM-dd"),
+      formatter: new DateFormat("dd-MMMM-yyyy"),
       onlyDate: true,
       validator: (DateTime dateTime) {
         if (dateTime == null) {
@@ -308,7 +291,6 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
 
           if(newValue == "Netflix"){
             seleccion_membresia = ["Básico","Estándar","Premium"];
-            _visibleCantidadPantallas(false);
             _visibleMembresia(true);
           } else
 
@@ -329,18 +311,17 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
 
           if(newValue == "Spotify"){
             seleccion_membresia = ["Duo","Premium","Familiar","Estudiante"];
-            _visibleCantidadPantallas(false);
+
             _visibleMembresia(true);
           } else
 
           if(newValue == "YouTube"){
             seleccion_membresia = ["Premium","Familiar","Estudiante"];
-            _visibleCantidadPantallas(false);
+
             _visibleMembresia(true);
           } else
 
           {
-            _visibleCantidadPantallas(false);
             _visibleMembresia(true);
           }
 
@@ -372,39 +353,6 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
       elevation: 16,
       onChanged: (String newValue) {
         setState(() {
-          seleccion_membresia_valor = newValue;
-
-          if(newValue == "Pantalla" && seleccion_plataforma_streaming_valor=="Amazon Prime Video"){
-            seleccion_cantidad_perfiles = ["1 Pantalla","2 Pantallas","3 Pantallas", "4 Pantallas", "5 Pantallas"];
-            _visibleCantidadPantallas(true);
-          } else
-
-          if(newValue == "Pantalla" && seleccion_plataforma_streaming_valor=="Disney Plus"){
-            seleccion_cantidad_perfiles = ["1 Pantalla","2 Pantallas","3 Pantallas", "4 Pantallas", "5 Pantallas", "6 Pantallas"];
-            _visibleCantidadPantallas(true);
-          } else
-
-          if(newValue == "Pantalla" && seleccion_plataforma_streaming_valor=="HBO GO"){
-            seleccion_cantidad_perfiles = ["1 Pantalla"];
-            _visibleCantidadPantallas(true);
-          } else
-
-          if( seleccion_plataforma_streaming_valor=="HBO GO" && newValue == "Pantalla"){
-            _visibleCantidadPantallas(false);
-          } else
-
-          if( seleccion_plataforma_streaming_valor=="Amazon Prime Video" && newValue == "Pantalla"){
-            _visibleCantidadPantallas(false);
-          } else
-
-          if( seleccion_plataforma_streaming_valor=="Disney Plus" && newValue == "Completa"){
-            _visibleCantidadPantallas(false);
-          } else
-
-          {
-            _visibleCantidadPantallas(false);
-            _visibleMembresia(true);
-          }
 
         });
       },
@@ -422,33 +370,4 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
     );
   }
 
-
-
-
-  DropdownButtonFormField buildSeleccionarCantidadPantallasFormDrop() {
-    DropdownButtonFormField cmbo = DropdownButtonFormField<String>(
-      value: seleccion_cantidad_perfiles[0],
-      elevation: 16,
-      style: TextStyle(
-        color: Color(0xff01579b),
-        fontSize: 18,
-      ),
-      onChanged: (String newValue) {
-        setState(() {
-
-        });
-      },
-      items: seleccion_cantidad_perfiles.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
-      decoration: InputDecoration(
-          labelText: "Cantidad",
-          floatingLabelBehavior: FloatingLabelBehavior.always
-      ),
-    );
-    return cmbo;
-  }
 }

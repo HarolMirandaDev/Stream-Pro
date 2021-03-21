@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
+import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/components/custom_boton_predeterminado.dart';
@@ -19,7 +21,7 @@ class FormularioNuevoCliente extends StatefulWidget {
 
 class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   final _formKey = GlobalKey<FormState>();
-
+  String fecha_venta;
   String nombre;
   String apellido;
 
@@ -92,7 +94,8 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
           buildCorreoCuentaFormDrop(),
           SizedBox(height: getProportionateScreenHeight(10)),
 
-
+          buildFechaVentaSelectForm(),
+          SizedBox(height: getProportionateScreenHeight(20)),
 
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(15)),
@@ -407,6 +410,20 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
     );
   }
 
+  DateTimeFormField buildFechaVentaSelectForm() {
+    return DateTimeFormField(
+      initialValue: DateTime.now(),
+      label: "Fecha de Venta",
+      formatter: new DateFormat("dd-MMMM-yyyy"),
+      onlyDate: true,
+      validator: (DateTime dateTime) {
+        if (dateTime == null) {
+          return "Date Time Required";
+        }
+        return null;
+      },
+    );
+  }
 
 
 }

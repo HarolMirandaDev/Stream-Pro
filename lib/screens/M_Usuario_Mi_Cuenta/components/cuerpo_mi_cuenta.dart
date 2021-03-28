@@ -17,7 +17,7 @@ class BodyMiCuenta extends StatelessWidget {
             thickness: 3,
             indent: 70,
             endIndent: 70,
-            color: Color(0xFF37474F),
+            color: Color(0xFF01579B),
           ),
 
           UsuarioImagenMiCuenta(),
@@ -27,7 +27,7 @@ class BodyMiCuenta extends StatelessWidget {
             thickness: 3,
             indent: 30,
             endIndent: 30,
-            color: Color(0xFF37474F),
+            color: Color(0xFF01579B),
           ),
 
           Text.rich(
@@ -35,7 +35,7 @@ class BodyMiCuenta extends StatelessWidget {
                 text: 'Harol Miranda:',
                 style: TextStyle(
                   fontSize: 32,
-                  color: Color(0xFF263238),
+                  color: Color(0xFF01579B),
                   fontWeight: FontWeight.bold,
                 ),
               )
@@ -46,7 +46,7 @@ class BodyMiCuenta extends StatelessWidget {
             thickness: 3,
             indent: 30,
             endIndent: 30,
-            color: Color(0xFF37474F),
+            color: Color(0xFF01579B),
           ),
 
           Text.rich(
@@ -128,7 +128,7 @@ class BodyMiCuenta extends StatelessWidget {
             thickness: 3,
             indent: 30,
             endIndent: 30,
-            color: Color(0xFF37474F),
+            color: Color(0xFF01579B),
           ),
 
           RichText(

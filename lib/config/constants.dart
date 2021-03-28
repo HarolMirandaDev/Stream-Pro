@@ -27,6 +27,14 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 
+const kDefaultPadding = 20.0;
+
+const kDefaultShadow = BoxShadow(
+  offset: Offset(0, 4),
+  blurRadius: 4,
+  color: Colors.black26,
+);
+
 const defaultDuration = Duration(milliseconds: 250);
 
 // Form Error

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stream_pro/screens/M_Inicio/components/inicio_campo_buscar.dart';
 
 import '../../../config/constants.dart';
 
@@ -27,12 +28,12 @@ class UsuarioMenu extends StatelessWidget {
           children: [
             SvgPicture.asset(
               icon,
-              color: kPrimaryColor,
+              color: Color(0xFF01579B),
               width: 22,
             ),
             SizedBox(width: 20),
-            Expanded(child: Text(text)),
-            Icon(Icons.arrow_forward_ios),
+            Expanded(child: Text(text, style: TextStyle(color: Color(0xFF01579B)),)),
+            Icon(Icons.arrow_forward_ios, color: Color(0xFF01579B),),
           ],
         ),
       ),

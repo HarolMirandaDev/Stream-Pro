@@ -1,5 +1,6 @@
 
 #Stream Pro
+[Aplicación para vendedores de streaming](https://github.com/HarolMirandaDev/Stream-Pro).
 
 ## - Sprint 1
 ## Harol Miranda
@@ -52,24 +53,31 @@
 - `Aplicación` de colores y tipografía
 
 ## - Sprint 3
+## Harol Miranda
 - `Diseño` Pantalla de Ajustes
 - `Diseño` Pantalla Mi Cuenta
 - `Diseño` Pantalla de Ayuda
+- `Validaciones` formulario de Registro de Clientes
+- `Validaciones` formulario de Registro de Proveedores
+- `Validaciones` formulario de Registro de Cuentas
 - `Diseño` AppBar en pantalla de Inicio
 - `Creación` Proyecto en Firebase
 - `Conexión` de Firebase con StreamPro usando Google
 - `Conexión` de Firebase con StreamPro usando Correo Electronico
 
+## - Sprint 4
+## Harol Miranda
+- `Diseño` Base de Datos
+- `Creación` Base de Datos
+- `Implementación` Base de Datos
 
 
-Flutter es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:
 
-- [Stream Pro, aplicación para vendedores de streaming](https://github.com/HarolMirandaDev/Stream-Pro).
+## Descripción General
 
+Aplicación creada utilizando Flutter, el cual es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:
 
 Flutter es accesible, potente y proporciona las herramientas necesarias para aplicaciones móviles grandes y robustas.
-
-## Learning Flutter
 
 ## Flutter Sponsors
 
@@ -89,6 +97,8 @@ Nos gustaría extender nuestro agradecimiento al docente Lester Bogran, por fome
 - Harol Miranda
 
 ## Vulnerabilidades de seguridad
+
+Estamos enfocados en evitar vulnerabilidades que intervengan en la seguridad del usuario y su interacción con la aplcación.
 
 ## Licencia
 

@@ -68,6 +68,7 @@ class RenovacionCliente extends StatelessWidget {
                             : kSecondaryColor.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
+
                       child: SvgPicture.asset(
                         "assets/icons/Icono Corazon 2.svg",
                         color: cliente.pagado

@@ -9,7 +9,7 @@ class PantallaProveedores extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Proveedores"),
-        backgroundColor: Color(0xFF006064),
+        backgroundColor: Color(0xFF01579B),
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 10,
         textTheme: TextTheme(

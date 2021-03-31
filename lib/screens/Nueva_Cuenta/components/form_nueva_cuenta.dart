@@ -205,7 +205,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
     return DateTimeFormField(
       initialValue: DateTime.now(),
       label: "Fecha de Compra",
-      formatter: new DateFormat("dd-MMMM-yyyy"),
+      formatter: new DateFormat("dd MMMM yyyy"),
       onlyDate: true,
       validator: (DateTime dateTime) {
         if (dateTime == null) {

@@ -382,6 +382,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   String dropdownValueCorreo = 'alone@yopmail.com';
 
   DropdownButtonFormField buildCorreoCuentaFormDrop() {
+
     return DropdownButtonFormField<String>(
       value: dropdownValueCorreo,
       elevation: 16,
@@ -411,10 +412,15 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   }
 
   DateTimeFormField buildFechaVentaSelectForm() {
+    Locale locale = new Locale("es", "ES");
+
+
     return DateTimeFormField(
       initialValue: DateTime.now(),
       label: "Fecha de Venta",
-      formatter: new DateFormat("dd-MMMM-yyyy"),
+      formatter: new DateFormat("dd MMMM yy"),
+
+
       onlyDate: true,
       validator: (DateTime dateTime) {
         if (dateTime == null) {

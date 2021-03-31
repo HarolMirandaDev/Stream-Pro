@@ -55,7 +55,11 @@ class FechaRenovacion extends StatelessWidget {
       ),
 
       decoration: BoxDecoration(
-        color: Color(0xFF01579B),
+        color: Color(0xFF343434).withOpacity(0.4),
+        image: new DecorationImage(
+          image: ExactAssetImage('assets/images/background2.png'),
+          fit: BoxFit.fitHeight,
+        ),
         borderRadius: BorderRadius.circular(5),
       ),
 
@@ -85,3 +89,4 @@ class FechaRenovacion extends StatelessWidget {
     );
   }
 }
+

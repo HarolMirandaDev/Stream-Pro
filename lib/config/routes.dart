@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:stream_pro/screens/CalculadoraTM/pantalla_calculadoraTigoMoney.dart';
 import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
@@ -47,6 +48,7 @@ final Map<String, WidgetBuilder> routes = {
   PantallaMiCuenta.routeName: (context) => PantallaMiCuenta(),
   PantallaAyuda.routeName: (context) => PantallaAyuda(),
   PantallaAjustes.routeName: (context) => PantallaAjustes(),
+  PantallaCalculadoraTM.routeName: (context)  => PantallaCalculadoraTM(),
 
   PantallaUsuarioCerroSesionExitosa.routeName: (context) => PantallaUsuarioCerroSesionExitosa(),
 };

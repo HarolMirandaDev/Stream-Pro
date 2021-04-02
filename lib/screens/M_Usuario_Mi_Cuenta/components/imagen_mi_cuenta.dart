@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class UsuarioImagenMiCuenta extends StatelessWidget {
-  const UsuarioImagenMiCuenta({
-    Key key,
-  }) : super(key: key);
+  User user;
+  UsuarioImagenMiCuenta({this.user});
+
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class UsuarioImagenMiCuenta extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/images/imagen_perfil.jpg"),
+            backgroundImage: Image.network(user.photoURL).image,
             backgroundColor: Colors.white,
 
           ),

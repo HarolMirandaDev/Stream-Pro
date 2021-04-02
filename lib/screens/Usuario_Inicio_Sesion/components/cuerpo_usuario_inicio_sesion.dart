@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stream_pro/components/social_cards.dart';
@@ -9,7 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:google_sign_in/google_sign_in.dart';
 
-class Body extends StatelessWidget {
+class CuerpoUsuarioInicioSesion extends StatelessWidget {
 
 
   final GoogleSignIn _googleSignIn = GoogleSignIn();

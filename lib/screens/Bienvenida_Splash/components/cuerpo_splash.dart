@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
+import 'package:stream_pro/screens/usuario_inicio_sesion/pantalla_usuario_inicio_sesion.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
@@ -20,7 +22,7 @@ class _BodyState extends State<Body> {
     },
     {
       "text":
-          "Ayudamos a las personas a contabilizar cuentas streaming.",
+      "Ayudamos a las personas a contabilizar cuentas streaming.",
       "image": "assets/images/splash_2.png"
     },
     {
@@ -62,16 +64,24 @@ class _BodyState extends State<Body> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(
                         splashData.length,
-                        (index) => buildDot(index: index),
+                            (index) => buildDot(index: index),
                       ),
                     ),
                     Spacer(flex: 3),
                     BotonPredeterminado(
                       text: "Continuar",
                       press: (){
-                        Navigator.pushNamed(context, PantallaInicio.routeName );
-                        //Navigator.pushNamed(context, PantallaCalculadoraTM.routeName);
-                        //Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
+                        //Navigator.pushNamed(context, PantallaInicio.routeName );
+                        //Navigator.pushNamed(context, PantallaNuevoClienteInicio.routeName);
+                        FirebaseAuth.instance
+                            .authStateChanges()
+                            .listen((User user) {
+                          if (user == null) {
+                            Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
+                          } else {
+                            Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaInicio()));
+                          }
+                        });
                       },
                     ),
                     Spacer(),

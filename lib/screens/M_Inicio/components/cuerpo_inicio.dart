@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/screens/Usuario_Inicio_Sesion/pantalla_usuario_inicio_sesion.dart';
+import '../pantalla_inicio.dart';
 import 'inicio_nuevos_registros.dart';
 import 'inicio_fecha_renovacion_banner.dart';
 import 'encabezado_inicio.dart';
@@ -9,6 +12,13 @@ import 'inicio_renovaciones_proveedores.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth.instance
+        .authStateChanges()
+        .listen((User user) {
+      if (user == null) {
+        Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
+      }
+    });
     return SafeArea(
       child: SingleChildScrollView(
         child: Column(

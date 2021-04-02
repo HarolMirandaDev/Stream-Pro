@@ -34,7 +34,7 @@ class ItemWigetProveedor extends StatelessWidget{
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Modificar',
-          color: Colors.blue,
+          color: Color(0xFF006064),
           icon: Icons.edit,
           onTap: () {
 
@@ -62,13 +62,13 @@ class ItemWigetProveedor extends StatelessWidget{
         ),
         IconSlideAction(
           caption: 'Eliminar',
-          color: Colors.black45,
+          color: Color(0xFFAD1457),
           icon: Icons.delete,
           onTap: () => snapshot.reference.delete(),
         ),
         IconSlideAction(
           caption: 'Compartir',
-          color: Colors.indigo,
+          color: Color(0xFF01579B),
           icon: Icons.share,
           onTap: () async {
             Share.share("Proveedor:"+

@@ -37,7 +37,7 @@ class BodyMiCuenta extends StatelessWidget {
 
           Text.rich(
               TextSpan(
-                text:  user.displayName+':',
+                text:  user.displayName,
                 style: TextStyle(
                   fontSize: 32,
                   color: Color(0xFF01579B),
@@ -108,7 +108,7 @@ class BodyMiCuenta extends StatelessWidget {
 
           Text.rich(
               TextSpan(
-                text: 'Dirección:',
+                text: 'País o Región:',
                 style: TextStyle(
                   fontSize: 24,
                   color: Color(0xFF37474F),
@@ -119,7 +119,7 @@ class BodyMiCuenta extends StatelessWidget {
 
           Text.rich(
               TextSpan(
-                text: 'Danlí, El Paraíso',
+                text: "Honduras",
                 style: TextStyle(
                   fontSize: 22,
                   color: Color(0xFF263238),

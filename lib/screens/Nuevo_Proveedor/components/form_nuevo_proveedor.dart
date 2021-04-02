@@ -21,7 +21,7 @@ class FormularioNuevoProveedor extends StatefulWidget {
   }
 
   @override
-  _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
+    _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
 }
 
 class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {

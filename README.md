@@ -1,9 +1,8 @@
 
-#Stream Pro
+# Stream Pro #
 [Aplicación para vendedores de streaming](https://github.com/HarolMirandaDev/Stream-Pro).
 
-## - Sprint 1
-## Harol Miranda
+## Sprint 1
 - `Diseño` Menú Navegación Principal
 - `Diseño` Pantalla de Registro de Cuentas
 - `Diseño` Pantalla Principal
@@ -14,8 +13,6 @@
 - `Diseño` Pantalla Verificación OTP
 - `Diseño` Pantalla Ítem Proveedores
 - `Diseño` Icono de Aplicación
-
-## Cesar Mendoza
 - `Diseño` Pantalla de Registro de Clientes
 - `Diseño` Pantalla de Registro de Proveedores
 - `Diseño` Pantalla de Bienvenida
@@ -27,8 +24,7 @@
 - `Diseño` Pantalla Ítem Cliente
 - `Definición` de colores y tipografía
 
-## - Sprint 2
-## Harol Miranda
+## Sprint 2
 - `Funcionalidad` Menú Navegación Principal
 - `Funcionalidad` Pantalla de Registro de Cuentas
 - `Funcionalidad` Pantalla Principal
@@ -38,9 +34,7 @@
 - `Funcionalidad` Pantalla Control de Clientes
 - `Funcionalidad` Pantalla Verificación OTP
 - `Funcionalidad` Pantalla Ítem Proveedores
-- `Aplicación` Icono de Aplicación
-
-## Cesar Mendoza
+- `Aplicación` Icono de Stream-Pro
 - `Funcionalidad` Pantalla de Registro de Clientes
 - `Funcionalidad` Pantalla de Registro de Proveedores
 - `Funcionalidad` Pantalla de Bienvenida
@@ -53,7 +47,6 @@
 - `Aplicación` de colores y tipografía
 
 ## - Sprint 3
-## Harol Miranda
 - `Diseño` Pantalla de Ajustes
 - `Diseño` Pantalla Mi Cuenta
 - `Diseño` Pantalla de Ayuda
@@ -66,25 +59,22 @@
 - `Conexión` de Firebase con StreamPro usando Correo Electronico
 
 ## - Sprint 4
-## Harol Miranda
 - `Diseño` Base de Datos
 - `Creación` Base de Datos
 - `Implementación` Base de Datos
-
-
+- `Diseño` Pantalla Calculadora Tigo Money
+- `Diseño` Barra de tareas con menú de acciones
+- `Diseño` del menú de acciones en las listas de información
 
 ## Descripción General
-
 Aplicación creada utilizando Flutter, el cual es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:
 
 Flutter es accesible, potente y proporciona las herramientas necesarias para aplicaciones móviles grandes y robustas.
 
 ## Flutter Sponsors
-
 Nos gustaría extender nuestro agradecimiento al docente Lester Bogran, por fomentar el desarrollo y aprendizaje de lenguajes de programación.
 
 ## Herramientas
-
 - **[github](https://github.com/)**
 - **[dart](https://dart.dev/)**
 - **[flutter](https://flutter.dev/)**
@@ -92,14 +82,10 @@ Nos gustaría extender nuestro agradecimiento al docente Lester Bogran, por fome
 - **[Visual Studio Code](https://code.visualstudio.com/docs/?dv=win)**
 
 ## Contribución
-
-- Cesar Mendoza
 - Harol Miranda
 
 ## Vulnerabilidades de seguridad
-
 Estamos enfocados en evitar vulnerabilidades que intervengan en la seguridad del usuario y su interacción con la aplcación.
 
 ## Licencia
-
 Los archivos de LICENCIA en cada paquete pueden consistir en una sola licencia o pueden estar en el formato descrito anteriormente. En el último caso, la licencia de cada componente y la lista de nombres de paquetes se fusionan de forma independiente.

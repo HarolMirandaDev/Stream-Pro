@@ -43,7 +43,6 @@ class FechaRenovacion extends StatelessWidget {
     }
 
     return Container(
-      // height: 90,
       width: double.infinity,
       margin: EdgeInsets.all(
           getProportionateScreenWidth(20)
@@ -67,7 +66,6 @@ class FechaRenovacion extends StatelessWidget {
         TextSpan(
           style: TextStyle(color: Colors.white),
           children: [
-
             TextSpan(
               text: 'Bienvenido' + " Harol Miranda\n",
               style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'components/cuerpo_usuario_perfil.dart';
 
@@ -5,6 +6,7 @@ class PantallaUsuario extends StatelessWidget {
   static String routeName = "/usuario";
   @override
   Widget build(BuildContext context) {
+    User user = FirebaseAuth.instance.currentUser;
     return Scaffold(
       appBar: AppBar(
         title: Text("Usuario"),
@@ -16,7 +18,7 @@ class PantallaUsuario extends StatelessWidget {
         ),
       ),
 
-      body: Body(),
+      body: Body(user: user),
 
     );
   }

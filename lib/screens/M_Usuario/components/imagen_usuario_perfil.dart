@@ -1,10 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class UsuarioImagen extends StatelessWidget {
   const UsuarioImagen({
+    @required this.user,
     Key key,
   }) : super(key: key);
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class UsuarioImagen extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           CircleAvatar(
-            backgroundImage: AssetImage("assets/images/imagen_perfil.jpg"),
+            backgroundImage: Image.network(user.photoURL).image,
           ),
           Positioned(
             right: -16,

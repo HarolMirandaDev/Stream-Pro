@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/screens/M_Usuario_Ayuda/pantalla_ayuda.dart';
 import 'package:stream_pro/screens/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
@@ -8,13 +9,16 @@ import 'menu_usuario_perfil.dart';
 import 'imagen_usuario_perfil.dart';
 
 class Body extends StatelessWidget {
+  User user;
+  Body({this.user});
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          UsuarioImagen(),
+          UsuarioImagen(user: user),
           SizedBox(height: 30),
           UsuarioMenu(
             text: "Mi Cuenta",
@@ -42,7 +46,8 @@ class Body extends StatelessWidget {
             text: "Cerrar Sesión",
             icon: "assets/icons/Icono Cerrar Sesion.svg",
             press: () {
-              Navigator.pushNamed(context, PantallaUsuarioCerroSesionExitosa.routeName);
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioCerroSesionExitosa()));
             },
           ),
         ],

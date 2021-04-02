@@ -1,13 +1,25 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
-import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
+import 'package:stream_pro/models/Proveedores.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
 class FormularioNuevoProveedor extends StatefulWidget {
+  static bool update = false;
+
+  static void update_values(String apodo,String telefono, String red_social,String pais,String uid_update){
+    _FormularioNuevoClienteInicio2.apodo = apodo;
+    _FormularioNuevoClienteInicio2.dropdownValue = red_social;
+    _FormularioNuevoClienteInicio2.dropdownValue2 = pais;
+    _FormularioNuevoClienteInicio2.uid_update = uid_update;
+    _FormularioNuevoClienteInicio2.textControllerTelefono.text = telefono;
+  }
+
   @override
   _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
 }
@@ -15,14 +27,23 @@ class FormularioNuevoProveedor extends StatefulWidget {
 class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   final _formKey = GlobalKey<FormState>();
 
-  String apodo;
-  String cantida_cuentas="0";
+  var fireDatabase = FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME);
+  var fireauth = FirebaseAuth.instance.currentUser.uid;
+  Proveedores pro;
+
+  static String apodo="";
+  static String uid_update;
+  static String cantida_cuentas="0";
+  static String dropdownValue = 'Whatsapp';
+  static String dropdownValue2 = 'Honduras';
+  int id_proveedor;
 
 
   //TODO componente de telefono
-  String telefono;
+  static String telefono;
   //Controllador del campo de texto para poder limpiarlo
-  final textControllerTelefono = TextEditingController();
+  static final textControllerTelefono = TextEditingController();
+
   bool visible_format_honduras = true;
   bool visible_format_mexico = false;
   bool visible_format_colombia = false;
@@ -88,25 +109,57 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
 
-          BotomNuevosRegistros(
-            text: "Registrar",
-            press: () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                // if all are valid then go to success screen
-                Fluttertoast.showToast(
-                    msg: "El proveedor "+ apodo +", ha sido registrado",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
-                    backgroundColor: Color(0xff01579b),
-                    textColor: Colors.white,
-                    fontSize: 22.0
-                );
-                Navigator.pushNamed(context, PantallaInicio.routeName);
-              }
-            },
-          ),
+          StreamBuilder(
+              stream: fireDatabase.snapshots(),
+              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                if(snapshot.hasError){
+                  return Text("Error en la base de datos");
+                }
+                switch(snapshot.connectionState){
+                  case ConnectionState.waiting:
+                    return CircularProgressIndicator();
+                    break;
+                  default:
+                    return BotomNuevosRegistros(
+                      text: "Registrar",
+                      press: () {
+                        if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+
+
+                          pro = Proveedores(nombre: apodo,
+                                            pais: dropdownValue2,
+                                            red_social: dropdownValue,
+                                            telefono: telefono,
+                                            user: fireauth);
+
+                          String msg = "El proveedor "+ apodo +", ha sido registrado";
+                          if(FormularioNuevoProveedor.update) {
+                            fireDatabase.doc(uid_update).update(pro.toMap());
+                            msg = "El proveedor "+ apodo +", ha sido actualizado";
+                          } else {
+                            fireDatabase.add(pro.toMap());
+                          }
+
+                          Fluttertoast.showToast(
+                              msg: msg,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 2,
+                              backgroundColor: Color(0xff01579b),
+                              textColor: Colors.white,
+                              fontSize: 22.0
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                    );
+
+                    break;
+                }
+
+              },
+          )
 
         ],
       ),
@@ -115,6 +168,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
 
   TextFormField buildApodoFormField() {
     return TextFormField(
+      initialValue: apodo,
       style: TextStyle(
         color: Color(0xff01579b),
         fontSize: 18,
@@ -280,7 +334,6 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   }
   /********************------------------------Telefono--------------------------**************************/
 
-  String dropdownValue2 = 'Honduras';
 
   DropdownButtonFormField buildPaisFormDrop() {
     return DropdownButtonFormField<String>(
@@ -328,7 +381,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
 
   }
 
-  String dropdownValue = 'Whatsapp';
+
 
   DropdownButtonFormField buildRedSocialFormDrop() {
     return DropdownButtonFormField<String>(
@@ -367,7 +420,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
         fontSize: 18,
       ),
       readOnly: true,
-      onSaved: (newValue) => apodo = newValue,
+      onSaved: (newValue) => cantida_cuentas = newValue,
       decoration: InputDecoration(
         labelText: "Cantidad de Cuentas",
         floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -1,10 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'imagen_mi_cuenta.dart';
 
 class BodyMiCuenta extends StatelessWidget {
+  User user;
+  BodyMiCuenta({this.user});
+
   @override
   Widget build(BuildContext context) {
+
 
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 0),
@@ -20,7 +25,7 @@ class BodyMiCuenta extends StatelessWidget {
             color: Color(0xFF01579B),
           ),
 
-          UsuarioImagenMiCuenta(),
+          UsuarioImagenMiCuenta(user: user),
 
           Divider(
             height: 50,
@@ -32,7 +37,7 @@ class BodyMiCuenta extends StatelessWidget {
 
           Text.rich(
               TextSpan(
-                text: 'Harol Miranda:',
+                text:  user.displayName+':',
                 style: TextStyle(
                   fontSize: 32,
                   color: Color(0xFF01579B),
@@ -62,7 +67,7 @@ class BodyMiCuenta extends StatelessWidget {
 
           Text.rich(
               TextSpan(
-                text: 'harolmiranda@gmail.com',
+                text:  user.email,
                 style: TextStyle(
                     fontSize: 22,
                   color: Color(0xFF263238),
@@ -88,7 +93,7 @@ class BodyMiCuenta extends StatelessWidget {
 
           Text.rich(
               TextSpan(
-                text: '+504 9572 4342',
+                text: user.phoneNumber,
                 style: TextStyle(
                   fontSize: 22,
                   color: Color(0xFF263238),

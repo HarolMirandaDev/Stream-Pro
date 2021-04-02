@@ -5,6 +5,7 @@ import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/components/custom_sufijo_texto.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
 import 'package:stream_pro/helper/teclado.dart';
+import 'package:stream_pro/models/DBUtilities.dart';
 import 'package:stream_pro/screens/Usuario_Recuperar_Contrasena/pantalla_usuario_olvido_contrasena.dart';
 import 'package:stream_pro/screens/Usuario_Inicio_Sesion_Exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
 
@@ -29,6 +30,7 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.add(error);
       });
+
   }
 
   void removeError({String error}) {
@@ -40,9 +42,8 @@ class _SignFormState extends State<SignForm> {
 
   void login_normal(BuildContext context) async {
 
-
     try{
-      if ( await Body.auth().signInWithEmailAndPassword(email: email, password: password) != null) {
+      if ( await CuerpoUsuarioInicioSesion.auth().signInWithEmailAndPassword(email: email, password: password) != null) {
         Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesionExitosa()));
         Fluttertoast.showToast(
             msg: "Bienvenido",

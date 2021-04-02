@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:stream_pro/config/size_config.dart';
@@ -65,7 +66,7 @@ class FechaRenovacion extends StatelessWidget {
           children: [
 
             TextSpan(
-              text: 'Bienvenido' + " Harol Miranda\n",
+              text: 'Bienvenido ' + FirebaseAuth.instance.currentUser.displayName+ "\n",
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(15),
               ),

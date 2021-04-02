@@ -29,30 +29,28 @@ class RenovacionesProveedores extends StatelessWidget {
           child: Row (
             children: <Widget>[
               SpecialOfferCard(
-                image: "assets/images/Ejemplo.png",
-                category: "Crack",
-                numOfBrands: 10,
+                nombreProveedor: "Crack",
+                cantidadDeCuentas: 10,
                 press: () {},
               ),
 
               SpecialOfferCard(
-                image: "assets/images/Ejemplo.png",
-                category: "Death",
-                numOfBrands: 12,
+                nombreProveedor: "Death",
+                cantidadDeCuentas: 12,
                 press: () {},
               ),
 
               SpecialOfferCard(
-                image: "assets/images/Ejemplo.png",
-                category: "Jack",
-                numOfBrands: 04,
+
+                nombreProveedor: "Jack",
+                cantidadDeCuentas: 04,
                 press: () {},
               ),
 
               SpecialOfferCard(
-                image: "assets/images/Ejemplo.png",
-                category: "ColombiNet",
-                numOfBrands: 24,
+
+                nombreProveedor: "ColombiNet",
+                cantidadDeCuentas: 24,
                 press: () {},
               ),
               SizedBox(width: getProportionateScreenWidth(20)),
@@ -68,14 +66,13 @@ class RenovacionesProveedores extends StatelessWidget {
 class SpecialOfferCard extends StatelessWidget {
   const SpecialOfferCard({
     Key key,
-    @required this.category,
-    @required this.image,
-    @required this.numOfBrands,
+    @required this.nombreProveedor,
+    @required this.cantidadDeCuentas,
     @required this.press,
   }) : super(key: key);
 
-  final String category, image;
-  final int numOfBrands;
+  final String nombreProveedor;
+  final int cantidadDeCuentas;
   final GestureTapCallback press;
 
   @override
@@ -96,20 +93,14 @@ class SpecialOfferCard extends StatelessWidget {
             borderRadius: BorderRadius.circular(5),
             child: Stack(
               children: [
-                Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                ),
                 Container(
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        Color(0xFF01579B),
-                        Color(0xFF01579B),
-                      ],
+                    color: Color(0xFF343434).withOpacity(0.4),
+                    image: new DecorationImage(
+                      image: ExactAssetImage('assets/images/background1.png'),
+                      fit: BoxFit.fitHeight,
                     ),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                 ),
                 Padding(
@@ -123,14 +114,14 @@ class SpecialOfferCard extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                       children: [
                         TextSpan(
-                          text: "$category\n",
+                          text: "$nombreProveedor\n",
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(15),
                           ),
                         ),
 
                         TextSpan(
-                          text: "$numOfBrands Cuentas",
+                          text: "$cantidadDeCuentas Cuentas",
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(22),
                             fontWeight: FontWeight.bold,

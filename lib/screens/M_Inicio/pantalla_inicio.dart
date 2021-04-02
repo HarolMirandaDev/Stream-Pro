@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/components/custom_menu_nav_bar.dart';
 import 'package:stream_pro/config/enums.dart';
+import 'package:stream_pro/screens/CalculadoraTM/pantalla_calculadoraTigoMoney.dart';
 
 import 'components/cuerpo_inicio.dart';
 
@@ -24,7 +25,7 @@ class PantallaInicio extends StatelessWidget {
             icon: Icon(Icons.calculate ),
             tooltip: 'Calculadora de Saldos',
             onPressed: () {
-
+              Navigator.pushNamed(context, PantallaCalculadoraTM.routeName );
             },
           ),
 

@@ -20,7 +20,7 @@ import '../screens/M_Proveedores/pantalla_proveedores.dart';
 import '../screens/M_Usuario/pantalla_usuario.dart';
 
 import '../screens/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
-import '../screens/M_Usuario_Ayuda/pantalla_ayuda.dart';
+import '../screens/M_Usuario_Informacion/pantalla_informacion.dart';
 import '../screens/M_Usuario_Ajustes/pantalla_ajustes.dart';
 
 // Uso de ruta
@@ -46,9 +46,10 @@ final Map<String, WidgetBuilder> routes = {
   PantallaUsuario.routeName: (context) => PantallaUsuario(),
 
   PantallaMiCuenta.routeName: (context) => PantallaMiCuenta(),
-  PantallaAyuda.routeName: (context) => PantallaAyuda(),
+  PantallaInformacion.routeName: (context) => PantallaInformacion(),
   PantallaAjustes.routeName: (context) => PantallaAjustes(),
+  PantallaUsuarioCerroSesionExitosa.routeName: (context) => PantallaUsuarioCerroSesionExitosa(),
+
   PantallaCalculadoraTM.routeName: (context)  => PantallaCalculadoraTM(),
 
-  PantallaUsuarioCerroSesionExitosa.routeName: (context) => PantallaUsuarioCerroSesionExitosa(),
-};
+ };

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:stream_pro/screens/M_Usuario_Ayuda/pantalla_ayuda.dart';
+import 'package:stream_pro/screens/M_Usuario_Informacion/pantalla_informacion.dart';
 import 'package:stream_pro/screens/M_Usuario_Mi_Cuenta/pantalla_mi_cuenta.dart';
 import 'package:stream_pro/screens/M_Usuario_Ajustes/pantalla_ajustes.dart';
 import 'package:stream_pro/screens/Usuario_Cerro_Sesion_Exitosa/pantalla_usuario_inicio_sesion_exitosa.dart';
@@ -36,10 +36,10 @@ class Body extends StatelessWidget {
             },
           ),
           UsuarioMenu(
-            text: "Ayuda",
+            text: "Información",
             icon: "assets/icons/Icono Interrogacion.svg",
             press: () {
-              Navigator.pushNamed(context, PantallaAyuda.routeName);
+              Navigator.pushNamed(context, PantallaInformacion.routeName);
             },
           ),
           UsuarioMenu(

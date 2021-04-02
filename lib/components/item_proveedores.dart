@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
+import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Proveedores.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/components/form_nuevo_proveedor.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
@@ -19,18 +20,40 @@ class ItemWigetProveedor extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
-      child: Container(
-        color: Colors.white,
-        child: Column(
-            children: [
-              ListTile(
-                title: new Text(snapshot.data()["nombre"]),
-                subtitle: new Text(snapshot.data()["telefono"]),
-              )
-            ],),
+
+
+
+      actionPane: SlidableDrawerActionPane(
       ),
+      actionExtentRatio: 0.25,
+      child: Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: getProportionateScreenWidth(28),
+        vertical: getProportionateScreenWidth(1),
+      ),
+
+          child: Container(
+
+          decoration: BoxDecoration(
+            color: Color(0xFF343434).withOpacity(0.4),
+            image: new DecorationImage(
+              image: ExactAssetImage('assets/images/background3.png'),
+              fit: BoxFit.fitHeight,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+
+          child: Column(
+              children: [
+                ListTile(
+                  title: new Text(snapshot.data()["nombre"], style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 25,  )),
+                  subtitle: new Text(snapshot.data()["telefono"], style: TextStyle(fontWeight: FontWeight.normal, color: Colors.white, fontSize: 22,  )),
+                )
+              ],
+          ),
+        ),
+      ),
+
       secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'Modificar',

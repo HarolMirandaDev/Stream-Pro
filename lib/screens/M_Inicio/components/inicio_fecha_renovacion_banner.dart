@@ -46,7 +46,7 @@ class FechaRenovacion extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.all(
-          getProportionateScreenWidth(20)
+          getProportionateScreenWidth(22)
       ),
 
       padding: EdgeInsets.symmetric(

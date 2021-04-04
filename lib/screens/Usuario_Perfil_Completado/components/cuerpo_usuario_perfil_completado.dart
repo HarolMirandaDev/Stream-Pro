@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
@@ -5,6 +6,9 @@ import 'package:stream_pro/config/size_config.dart';
 import 'formulario_usuario_perfil_completado.dart';
 
 class Body extends StatelessWidget {
+  UserCredential user;
+  Body({this.user});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +27,7 @@ class Body extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: SizeConfig.screenHeight * 0.06),
-                CompleteProfileForm(),
+                CompleteProfileForm(user: user),
                 SizedBox(height: getProportionateScreenHeight(30)),
                 Text(
                   "Al continuar, confirma que está de acuerdo \n con nuestros Términos y Condiciones",

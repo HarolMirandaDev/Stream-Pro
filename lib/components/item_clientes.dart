@@ -45,7 +45,7 @@ class ItemWigetProveedor extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 25,
                       )),
-                  subtitle: new Text(snapshot.data()["telefono"],
+                  subtitle: new Text(snapshot.data()["red_social"],
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,

@@ -8,12 +8,12 @@ import 'package:stream_pro/screens/Usuario_Inicio_Sesion/pantalla_usuario_inicio
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/screens/Usuario_Inicio_Sesion/components/cuerpo_usuario_inicio_sesion.dart';
+import 'package:stream_pro/screens/Usuario_Perfil_Completado/pantalla_usuario_perfil_completado.dart';
 
 class FormularioNuevaCuenta extends StatefulWidget {
   @override
   _FormularioNuevaCuentaState createState() => _FormularioNuevaCuentaState();
 }
-
 
 class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
   final _formKey = GlobalKey<FormState>();
@@ -40,28 +40,25 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void login(BuildContext context) async {
-
-    try{
-        if ( await _auth.createUserWithEmailAndPassword(email: email, password: password) != null) {
-          Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesion()));
-          Fluttertoast.showToast(
-              msg: "Usuario registrado con exito",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 2,
-              backgroundColor: Color(0xff01579b),
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
-    }catch(e){
-        Fluttertoast.showToast(
-        msg: e.code,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Color(0xff01579b),
-        textColor: Colors.white,
-        fontSize: 16.0);
+    UserCredential user = await _auth.createUserWithEmailAndPassword(
+              email: email, password: password);
+    try {
+      if (user != null) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    PantallaUsuarioPerfilCompletado(user: user)));
+      }
+    } catch (e) {
+      Fluttertoast.showToast(
+          msg: e.code,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color(0xff01579b),
+          textColor: Colors.white,
+          fontSize: 16.0);
     }
   }
 
@@ -85,7 +82,6 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 login(context);
-                Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
               }
             },
           ),
@@ -122,7 +118,8 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
+        suffixIcon:
+            CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
       ),
     );
   }
@@ -155,7 +152,8 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
+        suffixIcon:
+            CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
       ),
     );
   }
@@ -188,7 +186,8 @@ class _FormularioNuevaCuentaState extends State<FormularioNuevaCuenta> {
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Correo Electronico.svg"),
+        suffixIcon: CustomSufijoTexto(
+            svgIcon: "assets/icons/Icono Correo Electronico.svg"),
       ),
     );
   }

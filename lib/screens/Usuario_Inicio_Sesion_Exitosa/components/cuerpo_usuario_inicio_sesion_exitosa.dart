@@ -27,7 +27,7 @@ class Body extends StatelessWidget {
           child: BotonPredeterminado(
             text: "Continuar",
             press: () {
-              Navigator.pushNamed(context, PantallaInicio.routeName);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => PantallaInicio()));
             },
           ),
         ),

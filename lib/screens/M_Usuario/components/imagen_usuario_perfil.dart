@@ -19,7 +19,10 @@ class UsuarioImagen extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           CircleAvatar(
-            backgroundImage: Image.network(user.photoURL).image,
+            backgroundImage: Image.network(user.photoURL == null
+                    ? "https://png.clipart.me/previews/85b/psd-universal-blue-web-user-icon-45876.jpg"
+                    : user.photoURL)
+                .image,
           ),
           Positioned(
             right: -16,

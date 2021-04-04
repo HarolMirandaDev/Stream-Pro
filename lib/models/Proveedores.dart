@@ -1,10 +1,10 @@
 
 class Proveedores{
    static final String TABLE_NAME = "proveedores";
+   final String user;
    final String nombre;
    final String pais;
    final String telefono;
-   final String user;
    final String red_social;
 
 

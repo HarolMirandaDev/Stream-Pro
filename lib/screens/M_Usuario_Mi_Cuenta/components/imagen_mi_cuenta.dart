@@ -6,10 +6,8 @@ class UsuarioImagenMiCuenta extends StatelessWidget {
   User user;
   UsuarioImagenMiCuenta({this.user});
 
-
   @override
   Widget build(BuildContext context) {
-
     return SizedBox(
       height: 180,
       width: 180,
@@ -18,9 +16,11 @@ class UsuarioImagenMiCuenta extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           CircleAvatar(
-            backgroundImage: Image.network(user.photoURL).image,
+            backgroundImage: Image.network(user.photoURL == null
+                    ? "https://png.clipart.me/previews/85b/psd-universal-blue-web-user-icon-45876.jpg"
+                    : user.photoURL)
+                .image,
             backgroundColor: Colors.white,
-
           ),
           Positioned(
             right: -12,
@@ -34,9 +34,7 @@ class UsuarioImagenMiCuenta extends StatelessWidget {
                   side: BorderSide(color: Colors.white),
                 ),
                 color: Color(0xFF37474F),
-                onPressed: () {
-
-                },
+                onPressed: () {},
                 child: SvgPicture.asset("assets/icons/Icono Camara 2.svg"),
               ),
             ),

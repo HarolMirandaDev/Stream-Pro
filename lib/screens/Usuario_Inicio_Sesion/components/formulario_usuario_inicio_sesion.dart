@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -30,7 +31,6 @@ class _SignFormState extends State<SignForm> {
       setState(() {
         errors.add(error);
       });
-
   }
 
   void removeError({String error}) {
@@ -41,12 +41,17 @@ class _SignFormState extends State<SignForm> {
   }
 
   void login_normal(BuildContext context) async {
-
-    try{
-      if ( await CuerpoUsuarioInicioSesion.auth().signInWithEmailAndPassword(email: email, password: password) != null) {
-        Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesionExitosa()));
+    UserCredential user = await CuerpoUsuarioInicioSesion.auth()
+        .signInWithEmailAndPassword(email: email, password: password);
+    try {
+      if (user != null) {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (BuildContext context) =>
+                    PantallaUsuarioInicioSesionExitosa()));
         Fluttertoast.showToast(
-            msg: "Bienvenido",
+            msg: user.toString(),
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 2,
@@ -61,43 +66,43 @@ class _SignFormState extends State<SignForm> {
             timeInSecForIosWeb: 2,
             backgroundColor: Color(0xff01579b),
             textColor: Colors.white,
-            fontSize: 16.0
-        );
+            fontSize: 16.0);
       }
-    }catch(e){
+    } catch (e) {
       String mensae = "";
       switch (e.code) {
         case "ERROR_EMAIL_ALREADY_IN_USE":
         case "account-exists-with-different-credential":
         case "email-already-in-use":
-        mensae = "Correo electronico ya fue usado. Vaya a la página de inicio de sesión.";
+          mensae =
+              "Correo electronico ya fue usado. Vaya a la página de inicio de sesión.";
           break;
         case "ERROR_WRONG_PASSWORD":
         case "wrong-password":
-        mensae =  "Correo electrónico / contraseña incorrectas.";
+          mensae = "Correo electrónico / contraseña incorrectas.";
           break;
         case "ERROR_USER_NOT_FOUND":
         case "user-not-found":
-        mensae =  "Ninguna usuario encontrada con este correo electrónico.";
+          mensae = "Ninguna usuario encontrada con este correo electrónico.";
           break;
         case "ERROR_USER_DISABLED":
         case "user-disabled":
-        mensae =  "Usuario deshabilitado.";
+          mensae = "Usuario deshabilitado.";
           break;
         case "ERROR_TOO_MANY_REQUESTS":
         case "operation-not-allowed":
-        mensae =  "Demasiadas solicitudes para iniciar sesión en esta cuenta.";
+          mensae = "Demasiadas solicitudes para iniciar sesión en esta cuenta.";
           break;
         case "ERROR_OPERATION_NOT_ALLOWED":
         case "operation-not-allowed":
-        mensae =  "Error del servidor. Vuelve a intentarlo más tarde.";
+          mensae = "Error del servidor. Vuelve a intentarlo más tarde.";
           break;
         case "ERROR_INVALID_EMAIL":
         case "invalid-email":
-        mensae =  "Dirección de correo electrónico es inválida.";
+          mensae = "Dirección de correo electrónico es inválida.";
           break;
         default:
-          mensae =  "Error de inicio de sesion. Inténtalo de nuevo.";
+          mensae = "Error de inicio de sesion. Inténtalo de nuevo.";
           break;
       }
       Fluttertoast.showToast(
@@ -109,8 +114,6 @@ class _SignFormState extends State<SignForm> {
           textColor: Colors.white,
           fontSize: 16.0);
     }
-
-
   }
 
   @override
@@ -150,13 +153,11 @@ class _SignFormState extends State<SignForm> {
           BotonPredeterminado(
             text: "Continuar",
             press: () {
-
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
                 // if all are valid then go to success screen
                 login_normal(context);
                 KeyboardUtil.hideKeyboard(context);
-
               }
             },
           ),
@@ -193,7 +194,8 @@ class _SignFormState extends State<SignForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
+        suffixIcon:
+            CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
       ),
     );
   }
@@ -226,7 +228,8 @@ class _SignFormState extends State<SignForm> {
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Correo Electronico.svg"),
+        suffixIcon: CustomSufijoTexto(
+            svgIcon: "assets/icons/Icono Correo Electronico.svg"),
       ),
     );
   }

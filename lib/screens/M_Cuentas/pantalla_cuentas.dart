@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/models/Proveedores.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/components/form_nueva_cuenta.dart';
@@ -15,7 +16,9 @@ class PantallaCuentas extends StatelessWidget {
     FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
-          lista.add(doc["nombre"]);
+          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
+            lista.add(doc["nombre"]);
+          }
         }
 
         )

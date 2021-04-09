@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/screens/Usuario_Inicio_Sesion/pantalla_usuario_inicio_sesion.dart';
+
+import '../pantalla_usuario_inicio_sesion_exitosa.dart';
 
 class BodyUsuarioCerroSesion extends StatelessWidget {
   @override
@@ -28,7 +31,8 @@ class BodyUsuarioCerroSesion extends StatelessWidget {
           child: BotonPredeterminado(
             text: "Continuar",
             press: () {
-              Navigator.pushNamed(context, PantallaUsuarioInicioSesion.routeName);
+              FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesion()));
             },
           ),
         ),

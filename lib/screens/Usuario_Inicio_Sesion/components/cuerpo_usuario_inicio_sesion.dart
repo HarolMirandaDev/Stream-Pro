@@ -34,14 +34,14 @@ class CuerpoUsuarioInicioSesion extends StatelessWidget {
 
     if (fUser != null) {
       Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesionExitosa()));
-      Fluttertoast.showToast(
+      /*Fluttertoast.showToast(
           msg: fUser.toString(),
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM,
           timeInSecForIosWeb: 2,
           backgroundColor: Color(0xff01579b),
           textColor: Colors.white,
-          fontSize: 16.0);
+          fontSize: 26.0);*/
     } else {
       Fluttertoast.showToast(
           msg: "El usario no existe",

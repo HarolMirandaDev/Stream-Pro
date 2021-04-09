@@ -32,7 +32,7 @@ class FormularioNuevaCuentaInicio extends StatefulWidget {
     _FormularioNuevaCuenta.uid_update = uid_update;
     _FormularioNuevaCuenta.textControllerCorreo.text = email;
     _FormularioNuevaCuenta.textControllerPassword.text = password;
-    _FormularioNuevaCuenta.fecha_compra = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(fecha_compra);
+    _FormularioNuevaCuenta.fecha_compra = new DateFormat("yyyy-MM-dd").parse(fecha_compra);
     _FormularioNuevaCuenta.dropdownProveedor = proveedor;
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor =
         seleccion_plataforma_streaming_valor;
@@ -173,7 +173,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
                 cuenta = Cuentas(
                     correoElectronico: email,
                     contrasenia: password,
-                    fechaCompra: DateFormat("yyyy-MM-dd hh:mm:ss").format(fecha_compra),
+                    fechaCompra: DateFormat("yyyy-MM-dd").format(fecha_compra),
                     proveedor: proveedor,
                     plataforma: seleccion_plataforma_streaming_valor,
                     membresia: seleccion_membresia_valor,

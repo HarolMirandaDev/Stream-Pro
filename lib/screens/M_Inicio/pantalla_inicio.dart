@@ -23,7 +23,7 @@ class PantallaInicio extends StatelessWidget {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.calculate ),
-            tooltip: 'Calculadora de Saldos',
+            tooltip: 'Calculadora Tigo Money',
             onPressed: () {
               Navigator.pushNamed(context, PantallaCalculadoraTM.routeName );
             },
@@ -31,7 +31,7 @@ class PantallaInicio extends StatelessWidget {
 
           IconButton(
             icon: Icon(Icons.help_center ),
-            tooltip: 'Ayuda',
+            tooltip: 'Enviar un correo a streampro@gmail.com',
             onPressed: () {
 
             },

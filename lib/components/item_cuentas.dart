@@ -5,20 +5,34 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Proveedores.dart';
-import 'package:stream_pro/screens/Nuevo_Proveedor/components/form_nuevo_proveedor.dart';
+import 'package:stream_pro/screens/Nueva_Cuenta/components/form_nueva_cuenta.dart';
+import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 
-class ItemWigetProveedor extends StatelessWidget {
+class ItemWigetCuentas extends StatelessWidget {
+
+
   QueryDocumentSnapshot snapshot;
   final databaseReference =
       FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME);
 
-  ItemWigetProveedor(QueryDocumentSnapshot snapshot) {
+  ItemWigetCuentas(QueryDocumentSnapshot snapshot) {
     this.snapshot = snapshot;
   }
 
   @override
   Widget build(BuildContext context) {
+    List<String> lista = ["Selecione ->"];
+
+    FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
+        .get().then((QuerySnapshot querySnapshot) =>
+        querySnapshot.docs.forEach((doc) {
+          lista.add(doc["nombre"]);
+        }
+
+        )
+
+    );
     return Container(
         margin: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(28),
@@ -39,13 +53,16 @@ class ItemWigetProveedor extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: new Text(snapshot.data()["nombre"],
+                  title: new Text(
+                      snapshot.data()["proveedor"] +
+                          " - " +
+                          snapshot.data()["fechaCompra"],
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 25,
                       )),
-                  subtitle: new Text(snapshot.data()["red_social"],
+                  subtitle: new Text(snapshot.data()["correoElectronico"],
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,
@@ -65,15 +82,19 @@ class ItemWigetProveedor extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                PantallaNuevoProveedorInicio()));
-                    FormularioNuevoProveedor.update = true;
-                    FormularioNuevoProveedor.update_values(
-                        snapshot.data()["nombre"],
-                        snapshot.data()["telefono"],
-                        snapshot.data()["red_social"],
-                        snapshot.data()["pais"],
-                        snapshot.id);
+                            builder: (context) => PantallaNuevaCuentaInicio(lista)));
+                    FormularioNuevaCuentaInicio.update = true;
+                    FormularioNuevaCuentaInicio.update_values(
+                      snapshot.id,
+                      snapshot.data()["correoElectronico"],
+                      snapshot.data()["contrasenia"],
+                      snapshot.data()["fechaCompra"],
+                      snapshot.data()["proveedor"],
+                      snapshot.data()["plataforma"],
+                      snapshot.data()["membresia"],
+                      snapshot.data()["precio"],
+                      snapshot.data()["pagado"],
+                    );
                   } catch (e) {
                     Fluttertoast.showToast(
                         msg: e.toString(),
@@ -96,15 +117,15 @@ class ItemWigetProveedor extends StatelessWidget {
               color: Color(0xFF01579B),
               icon: Icons.share,
               onTap: () async {
-                Share.share("Proveedor:" +
-                    "\nApodo: " +
-                    snapshot.data()['nombre'] +
-                    "\nPaís: " +
-                    snapshot.data()['pais'] +
-                    "\nTeléfono: " +
-                    snapshot.data()['telefono'] +
-                    "\nRed Social: " +
-                    snapshot.data()['red_social']);
+                Share.share("Cuenta:" +
+                    "\nProveedor: " +
+                    snapshot.data()['proveedor'] +
+                    "\nCorreo: " +
+                    snapshot.data()['correoElectronico'] +
+                    "\nPlataforma: " +
+                    snapshot.data()['plataforma'] +
+                    "\nMembresia: " +
+                    snapshot.data()['membresia']);
               },
             ),
           ],

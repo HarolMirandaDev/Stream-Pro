@@ -1,12 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 import 'package:intl/intl.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
-import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
-
-import 'package:stream_pro/components/custom_formulario_prueba.dart';
+import 'package:stream_pro/models/Cliente.dart';
+import 'package:stream_pro/models/Clientes.dart';
 
 import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -15,23 +15,68 @@ import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
 class FormularioNuevoCliente extends StatefulWidget {
+  List<String> lista_cuentas;
+  FormularioNuevoCliente(List<String> lista_cuentas){
+    this.lista_cuentas = lista_cuentas;
+  }
+  static bool update = false;
+
+  static void update_values(String nombre,
+      String pais,
+      String correo,
+      String telefono,
+      String fecha_venta,
+      String uid_update) {
+    _FormularioNuevoCliente.uid_update = uid_update;
+    _FormularioNuevoCliente.textControllerNombre.text = nombre;
+    _FormularioNuevoCliente.dropdownPais = pais;
+    _FormularioNuevoCliente.dropdownValueCorreo = correo;
+    _FormularioNuevoCliente.textControllerTelefono.text = telefono;
+    _FormularioNuevoCliente.fecha_venta =  new DateFormat("yyyy-MM-dd hh:mm:ss").parse(fecha_venta);
+  }
+
+  static void limpiar_values() {
+    _FormularioNuevoCliente.uid_update = "";
+    _FormularioNuevoCliente.textControllerNombre.text = "";
+    _FormularioNuevoCliente.dropdownPais = 'Honduras';
+    _FormularioNuevoCliente.dropdownValueCorreo = 'Selecione ->';
+    _FormularioNuevoCliente.textControllerTelefono.text = "";
+    _FormularioNuevoCliente.fecha_venta = DateTime.now();
+
+  }
   @override
-  _FormularioNuevoCliente createState() => _FormularioNuevoCliente();
+  _FormularioNuevoCliente createState() => _FormularioNuevoCliente(lista_cuentas);
+
+
 }
 
 class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   final _formKey = GlobalKey<FormState>();
-  String fecha_venta;
-  String nombre;
-  String apellido;
+  static String uid_update;
+  var fireDatabase = FirebaseFirestore.instance.collection(Clientes.TABLE_NAME);
+  var fireauth = FirebaseAuth.instance.currentUser.uid;
+  Clientes cli ;
+  List<String> correo_cuenta = null;
 
+  static String nombre;
+  static String dropdownPais = 'Honduras';
+  static String dropdownValueCorreo = 'Selecione ->';
+  static DateTime fecha_venta = DateTime.now();
   //TODO componente de telefono
-  String telefono;
+  static String telefono;
   //Controllador del campo de texto para poder limpiarlo
-  final textControllerTelefono = TextEditingController();
+  static final textControllerTelefono = TextEditingController();
+  static final textControllerNombre = TextEditingController();
+
+
+
   bool visible_format_honduras = true;
   bool visible_format_inglaterra = false;
   bool visible_format_espania = false;
+
+  _FormularioNuevoCliente(List<String> lista_cuentas){
+    this.correo_cuenta = lista_cuentas;
+  }
 
   void _visible_format_honduras(bool visible_format_honduras){
     this.visible_format_honduras = visible_format_honduras;
@@ -46,9 +91,6 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   //TODO otros componentes
   bool remember = false;
-  String fecha_compra;
-
-  final List<String> correo_cuenta = ["alone@yopmail.com","pascual@yopmail.com","mordaza@yopmail.com"];
 
   final List<String> pais = ["Honduras","Inglaterra","España"];
 
@@ -100,23 +142,46 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(15)),
 
-          BotomNuevosRegistros(
-            text: "Registrar",
-            press: () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                // if all are valid then go to success screen
-                Fluttertoast.showToast(
-                    msg: "El cliente "+ nombre +", ha sido registrado",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
-                    backgroundColor: Color(0xff01579b),
-                    textColor: Colors.white,
-                    fontSize: 22.0
-                );
-                Navigator.pushNamed(context, PantallaInicio.routeName);
+          StreamBuilder(
+            stream: fireDatabase.snapshots(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if(snapshot.hasError){
+                return Text("Error en la base de datos");
               }
+              switch(snapshot.connectionState){
+                case ConnectionState.waiting:
+                  return CircularProgressIndicator();
+                  break;
+                default:
+                  return BotomNuevosRegistros(
+                    text: "Registrar",
+                    press: () {
+                      if (_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
+
+
+                        cli = Clientes(nombre: nombre,
+                            pais: dropdownPais,
+                            correo_electronico: dropdownValueCorreo,
+                            fecha_ventas: DateFormat("yyyy-MM-dd hh:mm:ss").format(fecha_venta),
+                            telefono: telefono,
+                            user: fireauth);
+
+
+                        if (FormularioNuevoCliente.update) {
+                          cli.updateClientes(fireDatabase, uid_update);
+                        } else {
+                          cli.addClientes(fireDatabase);
+                        }
+
+                        Navigator.pop(context);
+                      }
+                    },
+                  );
+
+                  break;
+              }
+
             },
           ),
         ],
@@ -125,38 +190,9 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   }
 
 
-  TextFormField buildIdClienteFormField() {
-    return TextFormField(
-      style: TextStyle(
-        color: Color(0xff01579b),
-        fontSize: 18,
-      ),
-      onSaved: (newValue) => apellido = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kApellidoNullError);
-        }
-        apellido = value;
-      },
-      validator: (value) {
-        if (value.isEmpty) {
-          addError(error: kApellidoNullError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "Código Cliente",
-        hintText: "CLI0001",
-        // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
-        // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-      ),
-    );
-  }
-
   TextFormField buildNombreClienteFormField() {
     return TextFormField(
+      controller: textControllerNombre,
       style: TextStyle(
         color: Color(0xff01579b),
         fontSize: 18,
@@ -191,11 +227,9 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
     );
   }
 
-  String dropdownValue2 = 'Honduras';
-
   DropdownButtonFormField buildPaisClienteFormDrop() {
     return DropdownButtonFormField<String>(
-      value: dropdownValue2,
+      value: dropdownPais,
       elevation: 16,
       style: TextStyle(
         color: Color(0xff01579b),
@@ -203,7 +237,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
       ),
       onChanged: (String newValue) {
         setState(() {
-          dropdownValue2 = newValue;
+          dropdownPais = newValue;
           if(newValue == "Honduras"){
             _visible_format_honduras(true);
             _visible_format_inglaterra(false);
@@ -363,7 +397,6 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
-
                   borderRadius: const BorderRadius.all(Radius.circular(24)),
                   child: const Icon(Icons.clear, color: Colors.grey, size: 24),
                   onTap: () => textControllerTelefono.clear()
@@ -379,12 +412,12 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   /********************------------------------Telefono--------------------------**************************/
 
 
-  String dropdownValueCorreo = 'alone@yopmail.com';
+
 
   DropdownButtonFormField buildCorreoCuentaFormDrop() {
 
     return DropdownButtonFormField<String>(
-      value: dropdownValueCorreo,
+      value: correo_cuenta.length == 1 ?  'Selecione ->':dropdownValueCorreo,
       elevation: 16,
       style: TextStyle(
         color: Color(0xff01579b),
@@ -393,7 +426,6 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
       onChanged: (String newValue) {
         setState(() {
           dropdownValueCorreo = newValue;
-
         });
       },
       items: correo_cuenta
@@ -413,14 +445,10 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   DateTimeFormField buildFechaVentaSelectForm() {
     Locale locale = new Locale("es", "ES");
-
-
     return DateTimeFormField(
-      initialValue: DateTime.now(),
+      initialValue: fecha_venta,
       label: "Fecha de Venta",
       formatter: new DateFormat("dd MMMM yy"),
-
-
       onlyDate: true,
       validator: (DateTime dateTime) {
         if (dateTime == null) {

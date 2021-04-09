@@ -4,21 +4,36 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/models/Clientes.dart';
+import 'package:stream_pro/models/Cuentas.dart';
 import 'package:stream_pro/models/Proveedores.dart';
+import 'package:stream_pro/screens/Nuevo_Cliente/components/form_nuevo_cliente.dart';
+import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/components/form_nuevo_proveedor.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 
-class ItemWigetProveedor extends StatelessWidget {
+class ItemWigetClientes extends StatelessWidget {
   QueryDocumentSnapshot snapshot;
   final databaseReference =
-      FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME);
+      FirebaseFirestore.instance.collection(Clientes.TABLE_NAME);
 
-  ItemWigetProveedor(QueryDocumentSnapshot snapshot) {
+  ItemWigetClientes(QueryDocumentSnapshot snapshot) {
     this.snapshot = snapshot;
   }
 
   @override
   Widget build(BuildContext context) {
+    List<String> lista = ["Selecione ->"];
+
+    FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
+        .get().then((QuerySnapshot querySnapshot) =>
+        querySnapshot.docs.forEach((doc) {
+          lista.add(doc["correoElectronico"]);
+        }
+
+        )
+
+    );
     return Container(
         margin: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(28),
@@ -45,7 +60,7 @@ class ItemWigetProveedor extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 25,
                       )),
-                  subtitle: new Text(snapshot.data()["red_social"],
+                  subtitle: new Text(snapshot.data()["telefono"],
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,
@@ -66,13 +81,14 @@ class ItemWigetProveedor extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                PantallaNuevoProveedorInicio()));
-                    FormularioNuevoProveedor.update = true;
-                    FormularioNuevoProveedor.update_values(
+                                PantallaNuevoClienteInicio(lista)));
+                    FormularioNuevoCliente.update = true;
+                    FormularioNuevoCliente.update_values(
                         snapshot.data()["nombre"],
-                        snapshot.data()["telefono"],
-                        snapshot.data()["red_social"],
                         snapshot.data()["pais"],
+                        snapshot.data()["correo_electronico"],
+                        snapshot.data()["telefono"],
+                        snapshot.data()["fecha_venta"],
                         snapshot.id);
                   } catch (e) {
                     Fluttertoast.showToast(
@@ -96,15 +112,15 @@ class ItemWigetProveedor extends StatelessWidget {
               color: Color(0xFF01579B),
               icon: Icons.share,
               onTap: () async {
-                Share.share("Proveedor:" +
+                Share.share("Cliente:" +
                     "\nApodo: " +
                     snapshot.data()['nombre'] +
-                    "\nPaís: " +
-                    snapshot.data()['pais'] +
+                    "\nCorreo: " +
+                    snapshot.data()['correo_electronico'] +
                     "\nTeléfono: " +
                     snapshot.data()['telefono'] +
-                    "\nRed Social: " +
-                    snapshot.data()['red_social']);
+                    "\nFecha Venta: " +
+                    snapshot.data()['fecha_venta']);
               },
             ),
           ],

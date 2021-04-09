@@ -3,10 +3,15 @@ import 'package:stream_pro/screens/Nueva_Cuenta/components/cuerpo_nueva_cuenta.d
 
 class PantallaNuevaCuentaInicio extends StatelessWidget{
   static String routeName = "/nueva_cuenta";
+  List<String> lista;
+
+  PantallaNuevaCuentaInicio(List<String> lista){
+    this.lista = lista;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Body(),
+        body: Body(lista),
 
     );
   }

@@ -36,9 +36,9 @@ final Map<String, WidgetBuilder> routes = {
 
   PantallaInicio.routeName: (context) => PantallaInicio(),
 
-  PantallaNuevoClienteInicio.routeName: (context) => PantallaNuevoClienteInicio(),
+  //PantallaNuevoClienteInicio.routeName: (context) => PantallaNuevoClienteInicio(),
   PantallaNuevoProveedorInicio.routeName: (context) => PantallaNuevoProveedorInicio(),
-  PantallaNuevaCuentaInicio.routeName: (context) => PantallaNuevaCuentaInicio(),
+  //PantallaNuevaCuentaInicio.routeName: (context) => PantallaNuevaCuentaInicio(),
 
   PantallaCuentas.routeName: (context) => PantallaCuentas(),
   PantallaClientes.routeName: (context) => PantallaClientes(),

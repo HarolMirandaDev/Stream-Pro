@@ -5,6 +5,11 @@ import 'package:stream_pro/config/size_config.dart';
 import 'form_nuevo_cliente.dart';
 
 class Body extends StatelessWidget {
+  List<String> lista_cuentas;
+
+  Body(List<String> lista_cuentas){
+    this.lista_cuentas = lista_cuentas;
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -21,7 +26,7 @@ class Body extends StatelessWidget {
                 Text("Nuevo Cliente", style: headingStyle),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
-                FormularioNuevoCliente(),
+                FormularioNuevoCliente(lista_cuentas),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
 

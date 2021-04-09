@@ -20,6 +20,14 @@ class FormularioNuevoProveedor extends StatefulWidget {
     _FormularioNuevoClienteInicio2.textControllerTelefono.text = telefono;
   }
 
+  static void limpiar_values(){
+    _FormularioNuevoClienteInicio2.apodo = "";
+    _FormularioNuevoClienteInicio2.dropdownValue = "Whatsapp";
+    _FormularioNuevoClienteInicio2.dropdownValue2 = "Honduras";
+    _FormularioNuevoClienteInicio2.uid_update = "";
+    _FormularioNuevoClienteInicio2.textControllerTelefono.text = "";
+  }
+
   @override
     _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
 }

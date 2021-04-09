@@ -1,6 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:stream_pro/models/Cuentas.dart';
+import 'package:stream_pro/models/Proveedores.dart';
+import 'package:stream_pro/screens/Nueva_Cuenta/components/form_nueva_cuenta.dart';
+import 'package:stream_pro/screens/Nuevo_Cliente/components/form_nuevo_cliente.dart';
 import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
+import 'package:stream_pro/screens/Nuevo_Proveedor/components/form_nuevo_proveedor.dart';
 import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
 import 'package:stream_pro/config/size_config.dart';
@@ -8,6 +14,30 @@ import 'package:stream_pro/config/size_config.dart';
 class NuevosRegistros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    List<String> lista = ["Selecione ->"];
+
+    FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
+        .get().then((QuerySnapshot querySnapshot) =>
+        querySnapshot.docs.forEach((doc) {
+          lista.add(doc["nombre"]);
+        }
+
+        )
+
+    );
+
+    List<String> lista_cuentas = ["Selecione ->"];
+
+    FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
+        .get().then((QuerySnapshot querySnapshot) =>
+        querySnapshot.docs.forEach((doc) {
+          lista_cuentas.add(doc["correoElectronico"]);
+        }
+
+        )
+
+    );
+
     List<Map<String, dynamic>> categories = [
       {"icon": "assets/icons/Icono Nuevo Cliente.svg", "text": "Nuevo Cliente"},
       {"icon": "assets/icons/Icono Nuevo Proveedor.svg", "text": "Nuevo Proveedor"},
@@ -25,7 +55,8 @@ class NuevosRegistros extends StatelessWidget {
             icon: categories[0]["icon"],
             text: categories[0]["text"],
             press: () {
-              Navigator.pushNamed(context, PantallaNuevoClienteInicio.routeName);
+              FormularioNuevoCliente.limpiar_values();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PantallaNuevoClienteInicio(lista_cuentas),));
             },
           ),
 
@@ -33,6 +64,7 @@ class NuevosRegistros extends StatelessWidget {
             icon: categories[1]["icon"],
             text: categories[1]["text"],
             press: () {
+              FormularioNuevoProveedor.limpiar_values();
               Navigator.pushNamed(context, PantallaNuevoProveedorInicio.routeName);
             },
           ),
@@ -41,7 +73,8 @@ class NuevosRegistros extends StatelessWidget {
             icon: categories[2]["icon"],
             text: categories[2]["text"],
             press: () {
-              Navigator.pushNamed(context, PantallaNuevaCuentaInicio.routeName);
+              FormularioNuevaCuentaInicio.limpiar_values();
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>  PantallaNuevaCuentaInicio(lista)));
             },
           ),
         ],

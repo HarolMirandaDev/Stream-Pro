@@ -4,8 +4,6 @@ import 'config/routes.dart';
 import 'screens/Bienvenida_Splash/pantalla_splash.dart';
 import 'config/theme.dart';
 
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -23,7 +21,6 @@ class MyApp extends StatelessWidget {
       // Usamos routeName para que no necesitemos recordar el nombre
       initialRoute: PantallaSplash.routeName,
       routes: routes,
-
     );
   }
 }

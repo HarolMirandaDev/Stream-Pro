@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,12 +24,15 @@ class ItemWigetClientes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Selecione ->"];
+    List<String> lista = ["Ingrese una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
-          lista.add(doc["correoElectronico"]);
+          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
+            lista.add(doc["correoElectronico"]);
+          }
+
         }
 
         )

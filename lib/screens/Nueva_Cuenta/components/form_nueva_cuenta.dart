@@ -49,7 +49,7 @@ class FormularioNuevaCuentaInicio extends StatefulWidget {
     _FormularioNuevaCuenta.textControllerCorreo.text = "";
     _FormularioNuevaCuenta.textControllerPassword.text = "";
     _FormularioNuevaCuenta.fecha_compra = DateTime.now();
-    _FormularioNuevaCuenta.dropdownProveedor = 'Selecione ->';
+    _FormularioNuevaCuenta.dropdownProveedor = 'Ingrese un proveedor';
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor = "";
     _FormularioNuevaCuenta.seleccion_membresia_valor ='Básico';
     _FormularioNuevaCuenta.dropdownPlataforma ='Netflix';
@@ -80,13 +80,13 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   static String password;
   static final textControllerPassword = TextEditingController();
   static DateTime fecha_compra;
-  static String proveedor = "Selecciona un Proveedor";
+  static String proveedor = "Ingrese un proveedor";
   static String seleccion_plataforma_streaming_valor;
   static String seleccion_membresia_valor;
   static double precio;
   static String dropdownMembresia = 'Básico';
   static String dropdownPlataforma = 'Netflix';
-  static String dropdownProveedor = 'Selecione ->';
+  static String dropdownProveedor = 'Ingrese un proveedor';
   static bool pagado = false;
 
   final List<String> seleccion_plataforma_streaming = [
@@ -294,7 +294,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      value: lista.length == 1 ? 'Selecione ->':dropdownProveedor,
+      value: lista.length == 1 ? 'Ingrese un proveedor':dropdownProveedor,
       elevation: 16,
       onChanged: (String newValue) {
         setState(() {

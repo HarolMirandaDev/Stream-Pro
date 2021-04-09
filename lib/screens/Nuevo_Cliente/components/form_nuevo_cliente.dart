@@ -39,7 +39,7 @@ class FormularioNuevoCliente extends StatefulWidget {
     _FormularioNuevoCliente.uid_update = "";
     _FormularioNuevoCliente.textControllerNombre.text = "";
     _FormularioNuevoCliente.dropdownPais = 'Honduras';
-    _FormularioNuevoCliente.dropdownValueCorreo = 'Selecione ->';
+    _FormularioNuevoCliente.dropdownValueCorreo = 'Ingrese una cuenta';
     _FormularioNuevoCliente.textControllerTelefono.text = "";
     _FormularioNuevoCliente.fecha_venta = DateTime.now();
 
@@ -60,7 +60,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   static String nombre;
   static String dropdownPais = 'Honduras';
-  static String dropdownValueCorreo = 'Selecione ->';
+  static String dropdownValueCorreo = 'Ingrese una cuenta';
   static DateTime fecha_venta = DateTime.now();
   //TODO componente de telefono
   static String telefono;
@@ -142,18 +142,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(15)),
 
-          StreamBuilder(
-            stream: fireDatabase.snapshots(),
-            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if(snapshot.hasError){
-                return Text("Error en la base de datos");
-              }
-              switch(snapshot.connectionState){
-                case ConnectionState.waiting:
-                  return CircularProgressIndicator();
-                  break;
-                default:
-                  return BotomNuevosRegistros(
+           BotomNuevosRegistros(
                     text: "Registrar",
                     press: () {
                       if (_formKey.currentState.validate()) {
@@ -177,13 +166,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
                         Navigator.pop(context);
                       }
                     },
-                  );
-
-                  break;
-              }
-
-            },
-          ),
+                  ),
         ],
       ),
     );
@@ -417,7 +400,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   DropdownButtonFormField buildCorreoCuentaFormDrop() {
 
     return DropdownButtonFormField<String>(
-      value: correo_cuenta.length == 1 ?  'Selecione ->':dropdownValueCorreo,
+      value: correo_cuenta.length == 1 ?  'Ingrese una cuenta':dropdownValueCorreo,
       elevation: 16,
       style: TextStyle(
         color: Color(0xff01579b),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -7,7 +8,6 @@ import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Proveedores.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/components/form_nueva_cuenta.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
-import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 
 class ItemWigetCuentas extends StatelessWidget {
 
@@ -22,12 +22,14 @@ class ItemWigetCuentas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Selecione ->"];
+    List<String> lista = ["Ingrese un proveedor"];
 
     FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
-          lista.add(doc["nombre"]);
+          if(doc["user"] == FirebaseAuth.instance.currentUser.uid) {
+            lista.add(doc["nombre"]);
+          }
         }
 
         )
@@ -54,7 +56,7 @@ class ItemWigetCuentas extends StatelessWidget {
               children: [
                 ListTile(
                   title: new Text(
-                      snapshot.data()["proveedor"] +
+                (snapshot.data()["proveedor"]=='Ingrese un proveedor'?"No tiene proveedor":snapshot.data()["proveedor"]) +
                           " - " +
                           snapshot.data()["fechaCompra"],
                       style: TextStyle(

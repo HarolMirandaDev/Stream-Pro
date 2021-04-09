@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:stream_pro/models/Cuentas.dart';
@@ -14,24 +15,29 @@ import 'package:stream_pro/config/size_config.dart';
 class NuevosRegistros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Selecione ->"];
+    List<String> lista = ["Ingrese un proveedor"];
 
     FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
-          lista.add(doc["nombre"]);
+          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
+            lista.add(doc["nombre"]);
+          }
         }
 
         )
 
     );
 
-    List<String> lista_cuentas = ["Selecione ->"];
+    List<String> lista_cuentas = ["Ingrese una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
         querySnapshot.docs.forEach((doc) {
-          lista_cuentas.add(doc["correoElectronico"]);
+          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
+            lista_cuentas.add(doc["correoElectronico"]);
+          }
+
         }
 
         )

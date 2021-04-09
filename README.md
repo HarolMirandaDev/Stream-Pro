@@ -1,5 +1,5 @@
 
-# Stream Pro #
+# Stream Pro v.1.0.3#
 [Aplicación para vendedores de streaming](https://github.com/HarolMirandaDev/Stream-Pro).
 
 ## Sprint 1
@@ -59,12 +59,14 @@
 - `Conexión` de Firebase con StreamPro usando Correo Electronico
 
 ## - Sprint 4
-- `Diseño` Base de Datos
-- `Creación` Base de Datos
-- `Implementación` Base de Datos
-- `Diseño` Pantalla Calculadora Tigo Money
 - `Diseño` Barra de tareas con menú de acciones
-- `Diseño` del menú de acciones en las listas de información
+- `Diseño` Pantalla Calculadora Tigo Money
+- `Diseño` Base de Datos
+- `Implementación` Base de Datos
+- `Implementación` barra de acciones en formularios
+- `Funcionalidad` registro y `visualización` de clientes
+- `Funcionalidad` registro y `visualización` de proveedores
+- `Funcionalidad` registro y `visualización` de cuentas
 
 ## Descripción General
 Aplicación creada utilizando Flutter, el cual es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:

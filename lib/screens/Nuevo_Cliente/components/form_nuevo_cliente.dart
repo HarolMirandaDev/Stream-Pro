@@ -5,12 +5,7 @@ import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
 import 'package:intl/intl.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
-import 'package:stream_pro/models/Cliente.dart';
 import 'package:stream_pro/models/Clientes.dart';
-
-import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
@@ -32,14 +27,14 @@ class FormularioNuevoCliente extends StatefulWidget {
     _FormularioNuevoCliente.dropdownPais = pais;
     _FormularioNuevoCliente.dropdownValueCorreo = correo;
     _FormularioNuevoCliente.textControllerTelefono.text = telefono;
-    _FormularioNuevoCliente.fecha_venta =  new DateFormat("yyyy-MM-dd hh:mm:ss").parse(fecha_venta);
+    _FormularioNuevoCliente.fecha_venta =  new DateFormat("dd/MMMM/yy").parse(fecha_venta);
   }
 
   static void limpiar_values() {
     _FormularioNuevoCliente.uid_update = "";
     _FormularioNuevoCliente.textControllerNombre.text = "";
     _FormularioNuevoCliente.dropdownPais = 'Honduras';
-    _FormularioNuevoCliente.dropdownValueCorreo = 'Ingrese una cuenta';
+    _FormularioNuevoCliente.dropdownValueCorreo = 'Seleccione una cuenta';
     _FormularioNuevoCliente.textControllerTelefono.text = "";
     _FormularioNuevoCliente.fecha_venta = DateTime.now();
 
@@ -60,7 +55,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   static String nombre;
   static String dropdownPais = 'Honduras';
-  static String dropdownValueCorreo = 'Ingrese una cuenta';
+  static String dropdownValueCorreo = 'Seleccione una cuenta';
   static DateTime fecha_venta = DateTime.now();
   //TODO componente de telefono
   static String telefono;
@@ -152,7 +147,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
                         cli = Clientes(nombre: nombre,
                             pais: dropdownPais,
                             correo_electronico: dropdownValueCorreo,
-                            fecha_ventas: DateFormat("yyyy-MM-dd hh:mm:ss").format(fecha_venta),
+                            fecha_ventas: DateFormat("dd/MMMM/yy").format(fecha_venta),
                             telefono: telefono,
                             user: fireauth);
 
@@ -400,7 +395,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   DropdownButtonFormField buildCorreoCuentaFormDrop() {
 
     return DropdownButtonFormField<String>(
-      value: correo_cuenta.length == 1 ?  'Ingrese una cuenta':dropdownValueCorreo,
+      value: correo_cuenta.length == 1 ?  'Seleccione una cuenta':dropdownValueCorreo,
       elevation: 16,
       style: TextStyle(
         color: Color(0xff01579b),
@@ -427,11 +422,11 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   }
 
   DateTimeFormField buildFechaVentaSelectForm() {
-    Locale locale = new Locale("es", "ES");
+    //Locale locale = new Locale("es", "ES");
     return DateTimeFormField(
       initialValue: fecha_venta,
       label: "Fecha de Venta",
-      formatter: new DateFormat("dd MMMM yy"),
+      formatter: new DateFormat("dd/MMMM/yy"),
       onlyDate: true,
       validator: (DateTime dateTime) {
         if (dateTime == null) {

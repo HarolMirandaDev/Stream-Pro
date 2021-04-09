@@ -15,7 +15,7 @@ import 'package:stream_pro/config/size_config.dart';
 class NuevosRegistros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Ingrese un proveedor"];
+    List<String> lista = ["Seleccione un proveedor"];
 
     FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
@@ -29,7 +29,7 @@ class NuevosRegistros extends StatelessWidget {
 
     );
 
-    List<String> lista_cuentas = ["Ingrese una cuenta"];
+    List<String> lista_cuentas = ["Seleccione una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
@@ -79,7 +79,7 @@ class NuevosRegistros extends StatelessWidget {
             icon: categories[2]["icon"],
             text: categories[2]["text"],
             press: () {
-              FormularioNuevaCuentaInicio.limpiar_values();
+              FormularioNuevaCuenta.limpiar_values();
               Navigator.push(context, MaterialPageRoute(builder: (context) =>  PantallaNuevaCuentaInicio(lista)));
             },
           ),

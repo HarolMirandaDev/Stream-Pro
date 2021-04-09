@@ -25,7 +25,7 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
                 Text("Nueva Cuenta", style: headingStyle),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
-                FormularioNuevaCuentaInicio(lista),
+                FormularioNuevaCuenta(lista),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 SizedBox(height: getProportionateScreenHeight(20))
               ],
@@ -35,9 +35,6 @@ class Body extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
 
 

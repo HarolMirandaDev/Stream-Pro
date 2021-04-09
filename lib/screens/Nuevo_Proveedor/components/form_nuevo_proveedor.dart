@@ -69,7 +69,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   //TODO otros componentes
   bool remember = false;
   final List<String> pais = ["Honduras","Mexico","Colombia"];
-  final List<String> red_social = ["Whatsapp","Telegram","Ambos"];
+  final List<String> red_social = ["Whatsapp","Telegram"];
   int valor = 0;
   final List<String> errors = [];
 

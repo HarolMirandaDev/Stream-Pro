@@ -22,24 +22,25 @@ class ItemWigetCuentas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Ingrese un proveedor"];
+    List<String> lista = ["Seleccione un proveedor"];
 
-    FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
-        .get().then((QuerySnapshot querySnapshot) =>
-        querySnapshot.docs.forEach((doc) {
-          if(doc["user"] == FirebaseAuth.instance.currentUser.uid) {
-            lista.add(doc["nombre"]);
-          }
-        }
-
-        )
-
+    FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME).get().then(
+            (QuerySnapshot querySnapshot) =>
+              querySnapshot.docs.forEach(
+                  (doc) {
+                if(doc["user"] == FirebaseAuth.instance.currentUser.uid) {
+                  lista.add(doc["nombre"]);
+                }
+              }
+            )
     );
+
     return Container(
         margin: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(28),
           vertical: getProportionateScreenWidth(1),
         ),
+
         child: Slidable(
           actionPane: SlidableDrawerActionPane(),
           actionExtentRatio: 0.25,
@@ -56,13 +57,12 @@ class ItemWigetCuentas extends StatelessWidget {
               children: [
                 ListTile(
                   title: new Text(
-                (snapshot.data()["proveedor"]=='Ingrese un proveedor'?"No tiene proveedor":snapshot.data()["proveedor"]) +
-                          " - " +
-                          snapshot.data()["fechaCompra"],
+                      snapshot.data()["fechaCompra"] + " - " +
+                (snapshot.data()["proveedor"]=='Seleccione un proveedor'?"SIN PROVEEDOR":snapshot.data()["proveedor"]),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: 23,
                       )),
                   subtitle: new Text(snapshot.data()["correoElectronico"],
                       style: TextStyle(
@@ -84,9 +84,12 @@ class ItemWigetCuentas extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => PantallaNuevaCuentaInicio(lista)));
-                    FormularioNuevaCuentaInicio.update = true;
-                    FormularioNuevaCuentaInicio.update_values(
+                            builder: (context) => PantallaNuevaCuentaInicio(lista)
+                        )
+                    );
+
+                    FormularioNuevaCuenta.update = true;
+                    FormularioNuevaCuenta.update_values(
                       snapshot.id,
                       snapshot.data()["correoElectronico"],
                       snapshot.data()["contrasenia"],
@@ -97,6 +100,7 @@ class ItemWigetCuentas extends StatelessWidget {
                       snapshot.data()["precio"],
                       snapshot.data()["pagado"],
                     );
+
                   } catch (e) {
                     Fluttertoast.showToast(
                         msg: e.toString(),
@@ -107,29 +111,35 @@ class ItemWigetCuentas extends StatelessWidget {
                         textColor: Colors.white,
                         fontSize: 22.0);
                   }
+
                 }),
+
             IconSlideAction(
               caption: 'Eliminar',
               color: Color(0xFFAD1457),
               icon: Icons.delete,
               onTap: () => snapshot.reference.delete(),
             ),
+
             IconSlideAction(
               caption: 'Compartir',
               color: Color(0xFF01579B),
               icon: Icons.share,
               onTap: () async {
-                Share.share("Cuenta:" +
+                Share.share("*Renovación Cuenta:*" +
                     "\nProveedor: " +
                     snapshot.data()['proveedor'] +
                     "\nCorreo: " +
                     snapshot.data()['correoElectronico'] +
+                    "\nContraseña: " +
+                    snapshot.data()['contrasenia'] +
                     "\nPlataforma: " +
                     snapshot.data()['plataforma'] +
                     "\nMembresia: " +
                     snapshot.data()['membresia']);
               },
             ),
+
           ],
         ));
   }

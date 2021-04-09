@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
 
 
@@ -59,7 +58,7 @@ class CuerpoInformacion extends StatelessWidget {
                 
                   text: TextSpan(
                     children: <TextSpan>[
-                      TextSpan(text: 'v. 3.00 - 1.4.21',
+                      TextSpan(text: 'v.1.0.3 - f.9.4.21',
                         style: TextStyle(fontWeight: FontWeight.normal, color: Colors.black, fontSize: 15,  ),
                       ),
                     ],

@@ -6,16 +6,14 @@ import 'package:intl/intl.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
 import 'package:stream_pro/models/Cuentas.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
-import 'package:stream_pro/models/Proveedores.dart';
 
-class FormularioNuevaCuentaInicio extends StatefulWidget {
+class FormularioNuevaCuenta extends StatefulWidget {
   static bool update = false;
   List<String> lista;
-  FormularioNuevaCuentaInicio(List<String> lista){
+
+  FormularioNuevaCuenta(List<String> lista){
     this.lista = lista;
   }
 
@@ -28,20 +26,21 @@ class FormularioNuevaCuentaInicio extends StatefulWidget {
       String seleccion_plataforma_streaming_valor,
       String seleccion_membresia_valor,
       double precio,
-      bool pagado) {
-    _FormularioNuevaCuenta.uid_update = uid_update;
-    _FormularioNuevaCuenta.textControllerCorreo.text = email;
-    _FormularioNuevaCuenta.textControllerPassword.text = password;
-    _FormularioNuevaCuenta.fecha_compra = new DateFormat("yyyy-MM-dd").parse(fecha_compra);
-    _FormularioNuevaCuenta.dropdownProveedor = proveedor;
-    _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor =
-        seleccion_plataforma_streaming_valor;
-    _FormularioNuevaCuenta.seleccion_membresia_valor =
-        seleccion_membresia_valor;
-    _FormularioNuevaCuenta.dropdownPlataforma =
-        seleccion_plataforma_streaming_valor;
-    _FormularioNuevaCuenta.precio = precio;
-    _FormularioNuevaCuenta.pagado = pagado;
+      bool pagado)
+  {
+      _FormularioNuevaCuenta.uid_update = uid_update;
+      _FormularioNuevaCuenta.textControllerCorreo.text = email;
+      _FormularioNuevaCuenta.textControllerPassword.text = password;
+      _FormularioNuevaCuenta.fecha_compra = new DateFormat("dd/MM/yyyy").parse(fecha_compra);
+      _FormularioNuevaCuenta.dropdownProveedor = proveedor;
+      _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor =
+          seleccion_plataforma_streaming_valor;
+      _FormularioNuevaCuenta.seleccion_membresia_valor =
+          seleccion_membresia_valor;
+      _FormularioNuevaCuenta.dropdownPlataforma =
+          seleccion_plataforma_streaming_valor;
+      _FormularioNuevaCuenta.precio = precio;
+      _FormularioNuevaCuenta.pagado = pagado;
   }
 
   static void limpiar_values() {
@@ -49,7 +48,7 @@ class FormularioNuevaCuentaInicio extends StatefulWidget {
     _FormularioNuevaCuenta.textControllerCorreo.text = "";
     _FormularioNuevaCuenta.textControllerPassword.text = "";
     _FormularioNuevaCuenta.fecha_compra = DateTime.now();
-    _FormularioNuevaCuenta.dropdownProveedor = 'Ingrese un proveedor';
+    _FormularioNuevaCuenta.dropdownProveedor = 'Seleccione un proveedor';
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor = "";
     _FormularioNuevaCuenta.seleccion_membresia_valor ='Básico';
     _FormularioNuevaCuenta.dropdownPlataforma ='Netflix';
@@ -60,7 +59,7 @@ class FormularioNuevaCuentaInicio extends StatefulWidget {
   _FormularioNuevaCuenta createState() => _FormularioNuevaCuenta(lista);
 }
 
-class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
+class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   final _formKey = GlobalKey<FormState>();
   List<String> lista = null;
   _FormularioNuevaCuenta(List<String> lista){
@@ -72,21 +71,19 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   var fireauth = FirebaseAuth.instance.currentUser.uid;
   Cuentas cuenta;
 
- 
-
   static String uid_update;
   static String email;
   static final textControllerCorreo = TextEditingController();
   static String password;
   static final textControllerPassword = TextEditingController();
   static DateTime fecha_compra;
-  static String proveedor = "Ingrese un proveedor";
+  static String proveedor = "Seleccione un proveedor";
   static String seleccion_plataforma_streaming_valor;
   static String seleccion_membresia_valor;
   static double precio;
   static String dropdownMembresia = 'Básico';
   static String dropdownPlataforma = 'Netflix';
-  static String dropdownProveedor = 'Ingrese un proveedor';
+  static String dropdownProveedor = 'Seleccione un proveedor';
   static bool pagado = false;
   bool _passwordVisible = false;
   final List<String> seleccion_plataforma_streaming = [
@@ -110,7 +107,6 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   ];
 
   bool visibleMembresia = false;
-
 
   void _visibleMembresia(bool vMembresia) {
     visibleMembresia = vMembresia;
@@ -139,7 +135,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
 
   @override
   Widget build(BuildContext context) {
-    if(FormularioNuevaCuentaInicio.update){
+    if(FormularioNuevaCuenta.update){
       _visibleMembresia(true);
     }
     return Form(
@@ -173,14 +169,14 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
                 cuenta = Cuentas(
                     correoElectronico: email,
                     contrasenia: password,
-                    fechaCompra: DateFormat("yyyy-MM-dd").format(fecha_compra),
+                    fechaCompra: DateFormat("dd/MM/yyyy").format(fecha_compra),
                     proveedor: proveedor,
                     plataforma: seleccion_plataforma_streaming_valor,
                     membresia: seleccion_membresia_valor,
                     precio: precio,
                     user: fireauth);
 
-                if (FormularioNuevaCuentaInicio.update) {
+                if (FormularioNuevaCuenta.update) {
                   cuenta.updateCuentas(fireDatabase, uid_update);
                 } else {
                   cuenta.addCuentas(fireDatabase);
@@ -290,7 +286,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
     return DateTimeFormField(
       initialValue: fecha_compra,
       label: "Fecha de Compra",
-      formatter: new DateFormat("dd MMMM yyyy"),
+      formatter: new DateFormat("dd/MM/yyyy"),
       onSaved: (newValue) => fecha_compra = newValue,
       onlyDate: true,
       validator: (DateTime dateTime) {
@@ -309,7 +305,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      value: lista.length == 1 ? 'Ingrese un proveedor':dropdownProveedor,
+      value: lista.length == 1 ? 'Seleccione un proveedor':dropdownProveedor,
       elevation: 16,
       onChanged: (String newValue) {
         setState(() {

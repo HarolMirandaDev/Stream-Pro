@@ -1,17 +1,15 @@
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/material.dart';
 import 'package:share/share.dart';
+
+import 'package:stream_pro/screens/Nuevo_Cliente/components/form_nuevo_cliente.dart';
+import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Clientes.dart';
 import 'package:stream_pro/models/Cuentas.dart';
-import 'package:stream_pro/models/Proveedores.dart';
-import 'package:stream_pro/screens/Nuevo_Cliente/components/form_nuevo_cliente.dart';
-import 'package:stream_pro/screens/Nuevo_Cliente/pantalla_nuevo_cliente_inicio.dart';
-import 'package:stream_pro/screens/Nuevo_Proveedor/components/form_nuevo_proveedor.dart';
-import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inicio.dart';
 
 class ItemWigetClientes extends StatelessWidget {
   QueryDocumentSnapshot snapshot;
@@ -24,7 +22,7 @@ class ItemWigetClientes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Ingrese una cuenta"];
+    List<String> lista = ["Seleccione una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>
@@ -62,7 +60,7 @@ class ItemWigetClientes extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
-                        fontSize: 25,
+                        fontSize: 23,
                       )),
                   subtitle: new Text(snapshot.data()["telefono"],
                       style: TextStyle(
@@ -116,8 +114,8 @@ class ItemWigetClientes extends StatelessWidget {
               color: Color(0xFF01579B),
               icon: Icons.share,
               onTap: () async {
-                Share.share("Cliente:" +
-                    "\nApodo: " +
+                Share.share("*Cliente:*" +
+                    "\nNombre: " +
                     snapshot.data()['nombre'] +
                     "\nCorreo: " +
                     snapshot.data()['correo_electronico'] +

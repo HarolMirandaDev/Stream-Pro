@@ -11,7 +11,7 @@ class PantallaCuentas extends StatelessWidget {
   static String routeName = "/cuentas";
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Selecione ->"];
+    List<String> lista = ["Ingrese un proveedor"];
 
     FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
         .get().then((QuerySnapshot querySnapshot) =>

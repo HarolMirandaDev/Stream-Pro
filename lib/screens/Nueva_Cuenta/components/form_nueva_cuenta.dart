@@ -88,7 +88,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
   static String dropdownPlataforma = 'Netflix';
   static String dropdownProveedor = 'Ingrese un proveedor';
   static bool pagado = false;
-
+  bool _passwordVisible = false;
   final List<String> seleccion_plataforma_streaming = [
     "Netflix",
     "Spotify",
@@ -240,7 +240,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      obscureText: true,
+      obscureText: _passwordVisible,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
@@ -266,8 +266,23 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuentaInicio> {
         // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
         // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
         floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: IconButton(
+          icon: Icon(
+            // Based on passwordVisible state choose the icon
+            _passwordVisible
+                ? Icons.visibility
+                : Icons.visibility_off,
+            color: Theme.of(context).primaryColorDark,
+          ),
+          onPressed: () {
+            // Update the state i.e. toogle the state of passwordVisible variable
+            setState(() {
+              _passwordVisible = !_passwordVisible;
+            });
+          },
+        ),
+      )
         //suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
-      ),
     );
   }
 

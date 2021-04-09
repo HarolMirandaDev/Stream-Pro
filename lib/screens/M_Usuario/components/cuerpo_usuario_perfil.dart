@@ -46,9 +46,8 @@ class Body extends StatelessWidget {
             text: "Cerrar Sesión",
             icon: "assets/icons/Icono Cerrar Sesion.svg",
             press: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioCerroSesionExitosa()));
-            },
+              Navigator.pushNamed(context, PantallaUsuarioCerroSesionExitosa.routeName);
+              },
           ),
         ],
       ),

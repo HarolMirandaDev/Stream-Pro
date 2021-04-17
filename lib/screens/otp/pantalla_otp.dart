@@ -5,6 +5,7 @@ import 'components/cuerpo_otp.dart';
 
 class PantallaOtp extends StatelessWidget {
   static String routeName = "/otp";
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);

@@ -14,7 +14,6 @@ class RenovacionesClientes extends StatelessWidget {
       children: [
         Padding(
           padding:
-
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: TituloSeccion(title: "Renovación de Clientes", press: () {}),
         ),
@@ -36,14 +35,15 @@ class RenovacionesClientes extends StatelessWidget {
               default:
                 return Builder(
                   builder: (context) {
-                    return   SingleChildScrollView(
+                    return SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
                           ...List.generate(
                             snapshot.data.size,
-                                (index) {
-                                return RenovacionCliente(snapshot: snapshot.data.docs[index]);
+                            (index) {
+                              return RenovacionCliente(
+                                  snapshot: snapshot.data.docs[index]);
                               return SizedBox
                                   .shrink(); // here by default width and height is 0
                             },
@@ -58,7 +58,6 @@ class RenovacionesClientes extends StatelessWidget {
             }
           },
         ),
-
       ],
     );
   }

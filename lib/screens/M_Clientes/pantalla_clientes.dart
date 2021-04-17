@@ -8,20 +8,17 @@ import 'components/clientes_cuerpo.dart';
 
 class PantallaClientes extends StatelessWidget {
   static String routeName = "/clientes";
+
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Seleccione una cuenta"];
+    List<String> lista = ["Ingrese una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME).get().then(
-            (QuerySnapshot querySnapshot) =>
-          querySnapshot.docs.forEach(
-                  (doc) {
-            if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
-              lista.add(doc["correoElectronico"]);
-            }
-          }
-        )
-    );
+        (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
+              if (doc["user"] == FirebaseAuth.instance.currentUser.uid) {
+                lista.add(doc["correoElectronico"]);
+              }
+            }));
 
     return Scaffold(
       appBar: AppBar(
@@ -35,17 +32,19 @@ class PantallaClientes extends StatelessWidget {
             tooltip: 'Agregar Cliente',
             onPressed: () {
               FormularioNuevoCliente.limpiar_values();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PantallaNuevoClienteInicio(lista)));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PantallaNuevoClienteInicio(lista)));
               FormularioNuevoCliente.update = false;
-            },)
+            },
+          )
         ],
         textTheme: TextTheme(
           headline6: TextStyle(color: Colors.white, fontSize: 18),
         ),
       ),
-
       body: Body(),
-
     );
   }
 }

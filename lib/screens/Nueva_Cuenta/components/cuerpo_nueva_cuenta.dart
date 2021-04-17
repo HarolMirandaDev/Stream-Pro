@@ -6,24 +6,26 @@ import 'form_nueva_cuenta.dart';
 
 class Body extends StatelessWidget {
   List<String> lista;
-  Body(List<String> lista){
+
+  Body(List<String> lista) {
     this.lista = lista;
   }
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: SizedBox(
         width: double.infinity,
         child: Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                FormularioNuevaCuenta.update?Text("Actualizar Cuenta", style: headingStyle):Text("Nueva Cuenta", style: headingStyle),
+                FormularioNuevaCuenta.update
+                    ? Text("Actualizar Cuenta", style: headingStyle)
+                    : Text("Nueva Cuenta", style: headingStyle),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 FormularioNuevaCuenta(lista),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
@@ -36,5 +38,3 @@ class Body extends StatelessWidget {
     );
   }
 }
-
-

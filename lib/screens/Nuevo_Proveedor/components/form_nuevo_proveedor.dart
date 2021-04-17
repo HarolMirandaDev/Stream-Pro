@@ -12,47 +12,49 @@ import 'package:stream_pro/config/size_config.dart';
 class FormularioNuevoProveedor extends StatefulWidget {
   static bool update = false;
 
-  static void update_values(String apodo,String telefono, String red_social,String pais,String cuentas,String uid_update){
+  static void update_values(String apodo, String telefono, String red_social,
+      String pais, String cuentas, String uid_update) {
     _FormularioNuevoClienteInicio2.apodo = apodo;
     _FormularioNuevoClienteInicio2.dropdownValue = red_social;
     _FormularioNuevoClienteInicio2.dropdownValue2 = pais;
     _FormularioNuevoClienteInicio2.uid_update = uid_update;
     _FormularioNuevoClienteInicio2.textControllerTelefono.text = telefono;
-    _FormularioNuevoClienteInicio2.cantida_cuentas =  cuentas;
+    _FormularioNuevoClienteInicio2.cantida_cuentas = cuentas;
   }
 
-  static void limpiar_values(){
+  static void limpiar_values() {
     _FormularioNuevoClienteInicio2.apodo = "";
     _FormularioNuevoClienteInicio2.dropdownValue = "Whatsapp";
     _FormularioNuevoClienteInicio2.dropdownValue2 = "Honduras";
     _FormularioNuevoClienteInicio2.uid_update = "";
     _FormularioNuevoClienteInicio2.textControllerTelefono.text = "";
-    _FormularioNuevoClienteInicio2.cantida_cuentas =  "0";
+    _FormularioNuevoClienteInicio2.cantida_cuentas = "0";
     FormularioNuevoProveedor.update = false;
-
   }
 
   @override
-    _FormularioNuevoClienteInicio2 createState() => _FormularioNuevoClienteInicio2();
+  _FormularioNuevoClienteInicio2 createState() =>
+      _FormularioNuevoClienteInicio2();
 }
 
 class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   final _formKey = GlobalKey<FormState>();
 
-  var fireDatabase = FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME);
+  var fireDatabase =
+      FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME);
   var fireauth = FirebaseAuth.instance.currentUser.uid;
   Proveedores pro;
 
-  static String apodo="";
+  static String apodo = "";
   static String uid_update;
-  static String cantida_cuentas="0";
+  static String cantida_cuentas = "0";
   static String dropdownValue = 'Whatsapp';
   static String dropdownValue2 = 'Honduras';
   int id_proveedor;
 
-
   //TODO componente de telefono
   static String telefono;
+
   //Controllador del campo de texto para poder limpiarlo
   static final textControllerTelefono = TextEditingController();
 
@@ -60,20 +62,22 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   bool visible_format_mexico = false;
   bool visible_format_colombia = false;
 
-  void _visible_format_honduras(bool visible_format_honduras){
+  void _visible_format_honduras(bool visible_format_honduras) {
     this.visible_format_honduras = visible_format_honduras;
   }
-  void _visible_format_mexico(bool visible_format_mexico){
+
+  void _visible_format_mexico(bool visible_format_mexico) {
     this.visible_format_mexico = visible_format_mexico;
   }
-  void _visible_format_colombia(bool visible_format_colombia){
+
+  void _visible_format_colombia(bool visible_format_colombia) {
     this.visible_format_colombia = visible_format_colombia;
   }
 
   //TODO otros componentes
   bool remember = false;
-  final List<String> pais = ["Honduras","Mexico","Colombia"];
-  final List<String> red_social = ["Whatsapp","Telegram","Ambos"];
+  final List<String> pais = ["Honduras", "Mexico", "Colombia"];
+  final List<String> red_social = ["Whatsapp", "Telegram", "Ambos"];
   int valor = 0;
   final List<String> errors = [];
 
@@ -97,83 +101,84 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child:
-
-      Column(
+      child: Column(
         children: [
           buildApodoFormField(),
           SizedBox(height: getProportionateScreenHeight(20)),
-
           buildPaisFormDrop(),
           SizedBox(height: getProportionateScreenHeight(20)),
-
-          Visibility(child: buildTelefonoFormHNDField(), visible: visible_format_honduras,),
-          Visibility(child: buildTelefonoFormMXField(), visible: visible_format_mexico,),
-          Visibility(child: buildTelefonoFormCOLField(), visible: visible_format_colombia,),
+          Visibility(
+            child: buildTelefonoFormHNDField(),
+            visible: visible_format_honduras,
+          ),
+          Visibility(
+            child: buildTelefonoFormMXField(),
+            visible: visible_format_mexico,
+          ),
+          Visibility(
+            child: buildTelefonoFormCOLField(),
+            visible: visible_format_colombia,
+          ),
           SizedBox(height: getProportionateScreenHeight(20)),
-
           buildRedSocialFormDrop(),
           SizedBox(height: getProportionateScreenHeight(20)),
-
           buildNumCuentasFormField(),
           SizedBox(height: getProportionateScreenHeight(20)),
-
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
-
           StreamBuilder(
-              stream: fireDatabase.snapshots(),
-              builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                if(snapshot.hasError){
-                  return Text("Error en la base de datos");
-                }
-                switch(snapshot.connectionState){
-                  case ConnectionState.waiting:
-                    return CircularProgressIndicator();
-                    break;
-                  default:
-                    return BotomNuevosRegistros(
-                      text: "Registrar",
-                      press: () {
-                        if (_formKey.currentState.validate()) {
-                          _formKey.currentState.save();
+            stream: fireDatabase.snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text("Error en la base de datos");
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return CircularProgressIndicator();
+                  break;
+                default:
+                  return BotomNuevosRegistros(
+                    text: "Registrar",
+                    press: () {
+                      if (_formKey.currentState.validate()) {
+                        _formKey.currentState.save();
 
+                        pro = Proveedores(
+                            nombre: apodo,
+                            pais: dropdownValue2,
+                            red_social: dropdownValue,
+                            telefono: telefono,
+                            user: fireauth,
+                            cuenta: cantida_cuentas);
 
-                          pro = Proveedores(nombre: apodo,
-                                            pais: dropdownValue2,
-                                            red_social: dropdownValue,
-                                            telefono: telefono,
-                                            user: fireauth,
-                                            cuenta: cantida_cuentas);
-
-                          String msg = "El proveedor "+ apodo +", ha sido registrado";
-                          if(FormularioNuevoProveedor.update) {
-                            fireDatabase.doc(uid_update).update(pro.toMap());
-                            msg = "El proveedor "+ apodo +", ha sido actualizado";
-                          } else {
-                            fireDatabase.add(pro.toMap());
-                          }
-
-                          Fluttertoast.showToast(
-                              msg: msg,
-                              toastLength: Toast.LENGTH_SHORT,
-                              gravity: ToastGravity.BOTTOM,
-                              timeInSecForIosWeb: 2,
-                              backgroundColor: Color(0xff01579b),
-                              textColor: Colors.white,
-                              fontSize: 22.0
-                          );
-                          Navigator.pop(context);
+                        String msg =
+                            "El proveedor " + apodo + ", ha sido registrado";
+                        if (FormularioNuevoProveedor.update) {
+                          fireDatabase.doc(uid_update).update(pro.toMap());
+                          msg =
+                              "El proveedor " + apodo + ", ha sido actualizado";
+                        } else {
+                          fireDatabase.add(pro.toMap());
                         }
-                      },
-                    );
 
-                    break;
-                }
+                        Fluttertoast.showToast(
+                            msg: msg,
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Color(0xff01579b),
+                            textColor: Colors.white,
+                            fontSize: 22.0);
+                        Navigator.pop(context);
+                      }
+                    },
+                  );
 
-              },
+                  break;
+              }
+            },
           )
-
         ],
       ),
     );
@@ -232,26 +237,21 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
         }
         return null;
       },
-      inputFormatters: [formatter_hnd]
-      ,
+      inputFormatters: [formatter_hnd],
       decoration: InputDecoration(
         labelText: "Teléfono",
         hintText: "+504 ____-____",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-        SizedBox(
+        suffixIcon: SizedBox(
             width: 48,
             height: 48,
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
-
                   borderRadius: const BorderRadius.all(Radius.circular(24)),
                   child: const Icon(Icons.clear, color: Colors.grey, size: 24),
-                  onTap: () => textControllerTelefono.clear()
-              ),
-            )
-        ),
+                  onTap: () => textControllerTelefono.clear()),
+            )),
       ),
     );
   }
@@ -277,26 +277,21 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
         }
         return null;
       },
-      inputFormatters: [formatter_mex]
-      ,
+      inputFormatters: [formatter_mex],
       decoration: InputDecoration(
         labelText: "Teléfono",
         hintText: "+52 ___-___-____",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-        SizedBox(
+        suffixIcon: SizedBox(
             width: 48,
             height: 48,
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
-
                   borderRadius: const BorderRadius.all(Radius.circular(24)),
                   child: const Icon(Icons.clear, color: Colors.grey, size: 24),
-                  onTap: () => textControllerTelefono.clear()
-              ),
-            )
-        ),
+                  onTap: () => textControllerTelefono.clear()),
+            )),
       ),
     );
   }
@@ -322,31 +317,26 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
         }
         return null;
       },
-      inputFormatters: [formatter_col]
-      ,
+      inputFormatters: [formatter_col],
       decoration: InputDecoration(
         labelText: "Teléfono",
         hintText: "+57 ____-___",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-        SizedBox(
+        suffixIcon: SizedBox(
             width: 48,
             height: 48,
             child: Material(
               type: MaterialType.transparency,
               child: InkWell(
-
                   borderRadius: const BorderRadius.all(Radius.circular(24)),
                   child: const Icon(Icons.clear, color: Colors.grey, size: 24),
-                  onTap: () => textControllerTelefono.clear()
-              ),
-            )
-        ),
+                  onTap: () => textControllerTelefono.clear()),
+            )),
       ),
     );
   }
-  /********************------------------------Telefono--------------------------**************************/
 
+  /********************------------------------Telefono--------------------------**************************/
 
   DropdownButtonFormField buildPaisFormDrop() {
     return DropdownButtonFormField<String>(
@@ -359,17 +349,17 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       onChanged: (String newValue) {
         setState(() {
           dropdownValue2 = newValue;
-          if(newValue == "Honduras"){
+          if (newValue == "Honduras") {
             _visible_format_honduras(true);
             _visible_format_mexico(false);
             _visible_format_colombia(false);
             textControllerTelefono.clear();
-          }else if(newValue == "Mexico"){
+          } else if (newValue == "Mexico") {
             _visible_format_honduras(false);
             _visible_format_mexico(true);
             _visible_format_colombia(false);
             textControllerTelefono.clear();
-          }else{
+          } else {
             _visible_format_honduras(false);
             _visible_format_mexico(false);
             _visible_format_colombia(true);
@@ -377,8 +367,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
           }
         });
       },
-      items: pais
-          .map<DropdownMenuItem<String>>((String value) {
+      items: pais.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -386,15 +375,9 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       }).toList(),
       decoration: InputDecoration(
           labelText: "País",
-
-          floatingLabelBehavior: FloatingLabelBehavior.always
-      ),
-
+          floatingLabelBehavior: FloatingLabelBehavior.always),
     );
-
   }
-
-
 
   DropdownButtonFormField buildRedSocialFormDrop() {
     return DropdownButtonFormField<String>(
@@ -409,21 +392,17 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
           dropdownValue = newValue;
         });
       },
-      items: red_social
-          .map<DropdownMenuItem<String>>((String value) {
+      items: red_social.map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
         );
       }).toList(),
-          decoration: InputDecoration(
+      decoration: InputDecoration(
           labelText: "Red Social",
-          floatingLabelBehavior: FloatingLabelBehavior.always
-        ),
+          floatingLabelBehavior: FloatingLabelBehavior.always),
     );
-
   }
-
 
   TextFormField buildNumCuentasFormField() {
     return TextFormField(
@@ -440,6 +419,4 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
       ),
     );
   }
-
-
 }

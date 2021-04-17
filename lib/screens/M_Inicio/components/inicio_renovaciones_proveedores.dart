@@ -43,15 +43,17 @@ class RenovacionesProveedores extends StatelessWidget {
                 default:
                   return Builder(builder: (context) {
                     List<Widget> proveedores = [];
-                    for(int i=0; i<snapshot.data.size;i++){
+                    for (int i = 0; i < snapshot.data.size; i++) {
                       proveedores.add(SpecialOfferCard(
                         nombreProveedor: snapshot.data.docs[i].data()['nombre'],
-                        cantidadDeCuentas: int.parse(snapshot.data.docs[i].data()['cuentas'].toString()),
+                        cantidadDeCuentas: int.parse(
+                            snapshot.data.docs[i].data()['cuentas'].toString()),
                         press: () {},
                       ));
                     }
 
-                    proveedores.add(SizedBox(width: getProportionateScreenWidth(20)));
+                    proveedores
+                        .add(SizedBox(width: getProportionateScreenWidth(20)));
                     return Row(
                       children: proveedores,
                     );

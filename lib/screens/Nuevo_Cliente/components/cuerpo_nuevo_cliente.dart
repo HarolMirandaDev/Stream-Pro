@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                Text("Nuevo Cliente", style: headingStyle),
+                FormularioNuevoCliente.update?Text("Actualizar Cliente", style: headingStyle):Text("Nuevo Cliente", style: headingStyle),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 FormularioNuevoCliente(lista_cuentas),
@@ -38,9 +38,6 @@ class Body extends StatelessWidget {
       ),
     );
   }
-
-
-
 }
 
 

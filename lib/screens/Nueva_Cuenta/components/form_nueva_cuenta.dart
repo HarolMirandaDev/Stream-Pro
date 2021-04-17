@@ -2,18 +2,20 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
-import 'package:stream_pro/models/Cuentas.dart';
 import 'package:stream_pro/config/constants.dart';
+import 'package:stream_pro/models/Cuentas.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/models/Proveedores.dart';
 
 class FormularioNuevaCuenta extends StatefulWidget {
   static bool update = false;
   List<String> lista;
 
-  FormularioNuevaCuenta(List<String> lista){
+  FormularioNuevaCuenta(List<String> lista) {
     this.lista = lista;
   }
 
@@ -26,21 +28,21 @@ class FormularioNuevaCuenta extends StatefulWidget {
       String seleccion_plataforma_streaming_valor,
       String seleccion_membresia_valor,
       double precio,
-      bool pagado)
-  {
-      _FormularioNuevaCuenta.uid_update = uid_update;
-      _FormularioNuevaCuenta.textControllerCorreo.text = email;
-      _FormularioNuevaCuenta.textControllerPassword.text = password;
-      _FormularioNuevaCuenta.fecha_compra = new DateFormat("dd/MM/yyyy").parse(fecha_compra);
-      _FormularioNuevaCuenta.dropdownProveedor = proveedor;
-      _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor =
-          seleccion_plataforma_streaming_valor;
-      _FormularioNuevaCuenta.seleccion_membresia_valor =
-          seleccion_membresia_valor;
-      _FormularioNuevaCuenta.dropdownPlataforma =
-          seleccion_plataforma_streaming_valor;
-      _FormularioNuevaCuenta.precio = precio;
-      _FormularioNuevaCuenta.pagado = pagado;
+      bool pagado) {
+    _FormularioNuevaCuenta.uid_update = uid_update;
+    _FormularioNuevaCuenta.textControllerCorreo.text = email;
+    _FormularioNuevaCuenta.textControllerPassword.text = password;
+    _FormularioNuevaCuenta.fecha_compra =
+        new DateFormat("dd/MM/yyyy").parse(fecha_compra);
+    _FormularioNuevaCuenta.dropdownProveedor = proveedor;
+    _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor =
+        seleccion_plataforma_streaming_valor;
+    _FormularioNuevaCuenta.seleccion_membresia_valor =
+        seleccion_membresia_valor;
+    _FormularioNuevaCuenta.dropdownPlataforma =
+        seleccion_plataforma_streaming_valor;
+    _FormularioNuevaCuenta.precio = precio;
+    _FormularioNuevaCuenta.pagado = pagado;
   }
 
   static void limpiar_values() {
@@ -48,22 +50,26 @@ class FormularioNuevaCuenta extends StatefulWidget {
     _FormularioNuevaCuenta.textControllerCorreo.text = "";
     _FormularioNuevaCuenta.textControllerPassword.text = "";
     _FormularioNuevaCuenta.fecha_compra = DateTime.now();
-    _FormularioNuevaCuenta.dropdownProveedor = 'Seleccione un proveedor';
+    _FormularioNuevaCuenta.dropdownProveedor = 'Ingrese un proveedor';
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor = "";
-    _FormularioNuevaCuenta.seleccion_membresia_valor ='Básico';
-    _FormularioNuevaCuenta.dropdownPlataforma ='Netflix';
+    _FormularioNuevaCuenta.seleccion_membresia_valor = 'Básico';
+    _FormularioNuevaCuenta.dropdownPlataforma = 'Netflix';
     _FormularioNuevaCuenta.precio = 0.00;
+    _FormularioNuevaCuenta.textControllerPrecio.text = "";
     _FormularioNuevaCuenta.pagado = false;
+    FormularioNuevaCuenta.update = false;
   }
+
   @override
   _FormularioNuevaCuenta createState() => _FormularioNuevaCuenta(lista);
 }
 
 class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   final _formKey = GlobalKey<FormState>();
-  List<String> lista = null;
-  _FormularioNuevaCuenta(List<String> lista){
-    this.lista=lista;
+  List<String> lista = ["Ingrese un proveedor"];
+
+  _FormularioNuevaCuenta(List<String> lista) {
+    this.lista = lista;
   }
 
   var fireDatabase = FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME);
@@ -74,16 +80,18 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   static String uid_update;
   static String email;
   static final textControllerCorreo = TextEditingController();
+  static final textControllerPrecio = TextEditingController();
+
   static String password;
   static final textControllerPassword = TextEditingController();
   static DateTime fecha_compra;
-  static String proveedor = "Seleccione un proveedor";
+  static String proveedor = "Ingrese un proveedor";
   static String seleccion_plataforma_streaming_valor;
   static String seleccion_membresia_valor;
   static double precio;
   static String dropdownMembresia = 'Básico';
   static String dropdownPlataforma = 'Netflix';
-  static String dropdownProveedor = 'Seleccione un proveedor';
+  static String dropdownProveedor = 'Ingrese un proveedor';
   static bool pagado = false;
   bool _passwordVisible = false;
   final List<String> seleccion_plataforma_streaming = [
@@ -135,7 +143,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
 
   @override
   Widget build(BuildContext context) {
-    if(FormularioNuevaCuenta.update){
+    if (FormularioNuevaCuenta.update) {
       _visibleMembresia(true);
     }
     return Form(
@@ -148,6 +156,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
           SizedBox(height: getProportionateScreenHeight(20)),
           buildFechaCompraSelectForm(),
           SizedBox(height: getProportionateScreenHeight(20)),
+          builCorreo(),
           buildProveedorFormDrop(),
           SizedBox(height: getProportionateScreenHeight(20)),
           buildSelecionarPlataformaStreamingFormDrop(),
@@ -158,6 +167,8 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
           Visibility(
               child: SizedBox(height: getProportionateScreenHeight(10)),
               visible: visibleMembresia),
+          buildPrecioField(),
+          SizedBox(height: getProportionateScreenHeight(20)),
           FormularioErroneo(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
           BotomNuevosRegistros(
@@ -188,6 +199,40 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
           ),
         ],
       ),
+    );
+  }
+
+  StreamBuilder builCorreo() {
+    return StreamBuilder<QuerySnapshot>(
+      stream: FirebaseFirestore.instance
+          .collection(Proveedores.TABLE_NAME)
+          .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
+          .snapshots(),
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text("Error en la base de datos");
+        }
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return CircularProgressIndicator();
+            break;
+          default:
+            return Builder(
+              builder: (context) {
+                lista.clear();
+                lista.add('Ingrese un proveedor');
+                for (int i = 0; i < snapshot.data.size; i++) {
+                  if (snapshot.data.docs[i].data()['user'] ==
+                      FirebaseAuth.instance.currentUser.uid) {
+                    lista.add(snapshot.data.docs[i].data()["nombre"]);
+                  }
+                }
+                return Container();
+              },
+            );
+            break;
+        }
+      },
     );
   }
 
@@ -231,55 +276,53 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
 
   TextFormField buildPasswordFormField() {
     return TextFormField(
-      controller: textControllerPassword,
-      style: TextStyle(
-        color: Color(0xff01579b),
-        fontSize: 18,
-      ),
-      obscureText: _passwordVisible,
-      onSaved: (newValue) => password = newValue,
-      onChanged: (value) {
-        if (value.isNotEmpty) {
-          removeError(error: kContrasenaNullError);
-        } else if (value.length >= 8) {
-          removeError(error: kContrasenaCortaError);
-        }
-        password = value;
-      },
-      validator: (value) {
-        if (value.isEmpty) {
-          addError(error: kContrasenaNullError);
-          return "";
-        } else if (value.length < 8) {
-          addError(error: kContrasenaCortaError);
-          return "";
-        }
-        return null;
-      },
-      decoration: InputDecoration(
-        labelText: "Contraseña",
-        hintText: "Escriba la contraseña",
-        // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
-        // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: IconButton(
-          icon: Icon(
-            // Based on passwordVisible state choose the icon
-            _passwordVisible
-                ? Icons.visibility
-                : Icons.visibility_off,
-            color: Theme.of(context).primaryColorDark,
-          ),
-          onPressed: () {
-            // Update the state i.e. toogle the state of passwordVisible variable
-            setState(() {
-              _passwordVisible = !_passwordVisible;
-            });
-          },
+        controller: textControllerPassword,
+        style: TextStyle(
+          color: Color(0xff01579b),
+          fontSize: 18,
         ),
-      )
+        obscureText: _passwordVisible,
+        onSaved: (newValue) => password = newValue,
+        onChanged: (value) {
+          if (value.isNotEmpty) {
+            removeError(error: kContrasenaNullError);
+          } else if (value.length >= 8) {
+            removeError(error: kContrasenaCortaError);
+          }
+          password = value;
+        },
+        validator: (value) {
+          if (value.isEmpty) {
+            addError(error: kContrasenaNullError);
+            return "";
+          } else if (value.length < 8) {
+            addError(error: kContrasenaCortaError);
+            return "";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          labelText: "Contraseña",
+          hintText: "Escriba la contraseña",
+          // Si está utilizando la última versión de flutter, entonces el texto de la etiqueta y el texto de sugerencia se muestran así
+          // si está usando flutter menos de 1.20. * entonces tal vez esto no esté funcionando correctamente
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          suffixIcon: IconButton(
+            icon: Icon(
+              // Based on passwordVisible state choose the icon
+              _passwordVisible ? Icons.visibility : Icons.visibility_off,
+              color: Theme.of(context).primaryColorDark,
+            ),
+            onPressed: () {
+              // Update the state i.e. toogle the state of passwordVisible variable
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            },
+          ),
+        )
         //suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
-    );
+        );
   }
 
   DateTimeFormField buildFechaCompraSelectForm() {
@@ -297,36 +340,76 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
       },
     );
   }
+
   /*********************************---------------------Cliente - Proveedor----------------------***************************************/
 
   DropdownButtonFormField buildProveedorFormDrop() {
-    return DropdownButtonFormField<String>(
+
+      return DropdownButtonFormField<String>(
+        style: TextStyle(
+          color: Color(0xff01579b),
+          fontSize: 18,
+        ),
+        value: lista.length == 0 ? 'Ingrese un proveedor' : dropdownProveedor,
+        elevation: 16,
+        onChanged: (String newValue) {
+          setState(() {
+            proveedor = newValue;
+          });
+        },
+        items: lista.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList(),
+        decoration: InputDecoration(
+            labelText: "Proveedor",
+            floatingLabelBehavior: FloatingLabelBehavior.always),
+      );
+  }
+
+  /**************************************************************-**********************************************************************/
+
+  TextFormField buildPrecioField() {
+    return TextFormField(
+      controller: textControllerPrecio,
       style: TextStyle(
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      value: lista.length == 1 ? 'Seleccione un proveedor':dropdownProveedor,
-      elevation: 16,
-      onChanged: (String newValue) {
-        setState(() {
-          proveedor = newValue;
-        });
+      onSaved: (newValue) => precio = newValue==""?0:double.parse(newValue),
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kTelefonoNullError);
+        }
+        precio = value==""?0:double.parse(value);
       },
-      items: lista.map<DropdownMenuItem<String>>((String value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kPrecioNullError);
+          return "";
+        }
+        return null;
+      },
+      inputFormatters: [formatter_lempiras],
       decoration: InputDecoration(
-          labelText: "Proveedor",
-          floatingLabelBehavior: FloatingLabelBehavior.always),
+        labelText: "Precio",
+        hintText: "L. ",
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: SizedBox(
+            width: 48,
+            height: 48,
+            child: Material(
+              type: MaterialType.transparency,
+              child: InkWell(
+                  borderRadius: const BorderRadius.all(Radius.circular(24)),
+                  child: const Icon(Icons.clear, color: Colors.grey, size: 24),
+                  onTap: () => textControllerPrecio.clear()),
+            )),
+      ),
     );
   }
-
-/**************************************************************-**********************************************************************/
-
-
 
   DropdownButtonFormField buildSelecionarPlataformaStreamingFormDrop() {
     return DropdownButtonFormField<String>(
@@ -384,7 +467,6 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
 
   DropdownButtonFormField buildSeleccionarMembresiaFormDrop() {
     return DropdownButtonFormField<String>(
-
       style: TextStyle(
         color: Color(0xff01579b),
         fontSize: 18,

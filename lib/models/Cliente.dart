@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Cliente {
-  final int idCliente;
+  final String idCliente;
   final String cliente, descripcion;
   final List<String> images;
   final List<Color> colors;
@@ -18,14 +18,16 @@ class Cliente {
     @required this.cliente,
     @required this.precio,
     @required this.descripcion,
-  });
+  }){
+
+  }
 }
 
 // Our demo Products
 
 List<Cliente> demoClientes = [
   Cliente(
-    idCliente: 1,
+    idCliente: "1",
     images: [
       "assets/images/item_netflix.png",
     ],
@@ -44,7 +46,7 @@ List<Cliente> demoClientes = [
   ),
 
   Cliente(
-    idCliente: 2,
+    idCliente: "2",
     images: [
       "assets/images/item_disney_plus.png",
     ],
@@ -63,7 +65,7 @@ List<Cliente> demoClientes = [
   ),
 
   Cliente(
-    idCliente: 3,
+    idCliente: "3",
     images: [
       "assets/images/item_spotify.png",
     ],
@@ -82,7 +84,7 @@ List<Cliente> demoClientes = [
   ),
 
   Cliente(
-    idCliente: 4,
+    idCliente: "4",
     images: [
       "assets/images/item_prime_video.png",
     ],
@@ -101,7 +103,7 @@ List<Cliente> demoClientes = [
   ),
 
   Cliente(
-    idCliente: 5,
+    idCliente: "5",
     images: [
       "assets/images/item_youtube.png",
     ],

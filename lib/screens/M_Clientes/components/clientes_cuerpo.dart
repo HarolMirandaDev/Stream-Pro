@@ -15,7 +15,12 @@ class Body extends StatelessWidget {
           children: [
             SizedBox(height: getProportionateScreenHeight(20)),
             EncabezadoClientes(),
-            Divider(height: 20, thickness: 3, indent: 25, endIndent: 25, color: Color(0xFF01579B)),
+            Divider(
+                height: 20,
+                thickness: 3,
+                indent: 25,
+                endIndent: 25,
+                color: Color(0xFF01579B)),
             SizedBox(height: getProportionateScreenWidth(10)),
             ListWigetClientes(),
             SizedBox(height: getProportionateScreenWidth(30)),
@@ -27,40 +32,40 @@ class Body extends StatelessWidget {
   }
 }
 
-
 class ListWigetClientes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection(Clientes.TABLE_NAME)
-          .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
-          .snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Error en la base de datos");
-        }
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return CircularProgressIndicator();
-            break;
-          default:
-            return Builder(
-              builder: (context) {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: snapshot.data.size,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ItemWigetClientes(snapshot.data.docs[index]);
-                  },
-                );
-              },
-            );
-            break;
-        }
-      },
+    return SingleChildScrollView(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection(Clientes.TABLE_NAME)
+            .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Error en la base de datos");
+          }
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+              break;
+            default:
+              return Builder(
+                builder: (context) {
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshot.data.size,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ItemWigetClientes(snapshot.data.docs[index]);
+                    },
+                  );
+                },
+              );
+              break;
+          }
+        },
+      ),
     );
   }
 }
-

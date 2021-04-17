@@ -50,6 +50,8 @@ const String kApodoNullError = "Por favor, escriba el apodo";
 
 const String kApellidoNullError = "Por favor, escriba el apellido";
 const String kTelefonoNullError = "Por favor, introduzca el número de teléfono";
+
+const String kPrecioNullError = "Por favor, introduzca el precio de la cuenta";
 const String kDireccionNullError = "Ingrese la dirección";
 const String kFechaDeCompraNullError = "Seleccione la fecha de compra";
 const String kFechaDeVentaNullError = "Seleccione la fecha de venta";
@@ -60,6 +62,8 @@ const String kMembresiaNullError = "Seleccione la membresia";
 const String kPantallasNullError = "Seleccione la cantidad de pantallas";
 
 
+
+
 //TODO fomatos de telefonos
 
 MaskTextInputFormatter formatter_hnd = MaskTextInputFormatter(mask:  "+504 ####-####");
@@ -67,6 +71,8 @@ MaskTextInputFormatter formatter_esp = MaskTextInputFormatter(mask:  "+34 ###-##
 MaskTextInputFormatter formatter_ing = MaskTextInputFormatter(mask:  "+44 ####-####-###");
 MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-###-####");
 MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
+
+MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "#####");
 
 /**final formatos*/
 final otpInputDecoration = InputDecoration(

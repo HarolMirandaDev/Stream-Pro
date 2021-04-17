@@ -73,6 +73,7 @@ class ItemWigetProveedor extends StatelessWidget {
                         snapshot.data()["telefono"],
                         snapshot.data()["red_social"],
                         snapshot.data()["pais"],
+                        snapshot.data()["cuentas"],
                         snapshot.id);
                   } catch (e) {
                     Fluttertoast.showToast(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:stream_pro/models/Proveedores.dart';
 
 class Cuentas {
   static final String TABLE_NAME = "cuentas";
@@ -18,6 +19,7 @@ class Cuentas {
   bool cuenta_pagada() {
     return pagado;
   }
+
   void traer_pagada(bool pagado) {
     this.pagado = pagado;
   }
@@ -59,66 +61,76 @@ class Cuentas {
   }
 
   Future<void> addCuentas(CollectionReference cuentas) {
-      // Call the user's CollectionReference to add a new user
-      return cuentas
-          .add({'correoElectronico': correoElectronico,
-              'contrasenia': contrasenia,
-              'fechaCompra': fechaCompra,
-              'proveedor': proveedor,
-              'plataforma': plataforma,
-              'membresia': membresia,
-              'precio': precio,
-              'pagado': pagado,
-              'user': user
-          })
-          .then((value) =>  Fluttertoast.showToast(
-                    msg: "La cuenta  " + correoElectronico + ", ha sido registrada",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
-                    backgroundColor: Color(0xff01579b),
-                    textColor: Colors.white,
-                    fontSize: 22.0)
-                    )
-          .catchError((error) => Fluttertoast.showToast(
-                    msg: error,
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
-                    backgroundColor: Color(0xff01579b),
-                    textColor: Colors.white,
-                    fontSize: 22.0));
-    }
+    // Call the user's CollectionReference to add a new user
+    return cuentas.add({
+      'correoElectronico': correoElectronico,
+      'contrasenia': contrasenia,
+      'fechaCompra': fechaCompra,
+      'proveedor': proveedor,
+      'plataforma': plataforma,
+      'membresia': membresia,
+      'precio': precio,
+      'pagado': pagado,
+      'user': user
+    }).then((value) {
+      FirebaseFirestore.instance
+          .collection(Proveedores.TABLE_NAME)
+          .where("nombre", isEqualTo: proveedor)
+          .get()
+          .then((value) {
+        int cuentas = int.parse(value.docs[0].data()['cuentas']);
+        cuentas += 1;
+        value.docs[0].reference.update({'cuentas': cuentas.toString()});
+      });
 
-     Future<void> updateCuentas(CollectionReference cuentas,String uid) {
-      // Call the user's CollectionReference to add a new user
-      return cuentas
-          .doc(uid)
-          .update({'correoElectronico': correoElectronico,
-                    'contrasenia': contrasenia,
-                    'fechaCompra': fechaCompra,
-                    'proveedor': proveedor,
-                    'plataforma': plataforma,
-                    'membresia': membresia,
-                    'precio': precio,
-                    'pagado': pagado,
-                    'user': user
-                }).then((value) =>  Fluttertoast.showToast(
-                    msg: "La cuenta  " + correoElectronico + ", ha sido actualizada",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
-                    backgroundColor: Color(0xff01579b),
-                    textColor: Colors.white,
-                    fontSize: 22.0)
-                    )
-          .catchError((error) => Fluttertoast.showToast(
-                    msg: error,
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.BOTTOM,
-                    timeInSecForIosWeb: 2,
-                    backgroundColor: Color(0xff01579b),
-                    textColor: Colors.white,
-                    fontSize: 22.0));
-    }
+      Fluttertoast.showToast(
+          msg: "La cuenta  " + correoElectronico + ", ha sido registrada",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 2,
+          backgroundColor: Color(0xff01579b),
+          textColor: Colors.white,
+          fontSize: 22.0);
+    }).catchError((error) => Fluttertoast.showToast(
+        msg: error,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 2,
+        backgroundColor: Color(0xff01579b),
+        textColor: Colors.white,
+        fontSize: 22.0));
+  }
+
+  Future<void> updateCuentas(CollectionReference cuentas, String uid) {
+    // Call the user's CollectionReference to add a new user
+    return cuentas
+        .doc(uid)
+        .update({
+          'correoElectronico': correoElectronico,
+          'contrasenia': contrasenia,
+          'fechaCompra': fechaCompra,
+          'proveedor': proveedor,
+          'plataforma': plataforma,
+          'membresia': membresia,
+          'precio': precio,
+          'pagado': pagado,
+          'user': user
+        })
+        .then((value) => Fluttertoast.showToast(
+            msg: "La cuenta  " + correoElectronico + ", ha sido actualizada",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color(0xff01579b),
+            textColor: Colors.white,
+            fontSize: 22.0))
+        .catchError((error) => Fluttertoast.showToast(
+            msg: error,
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 2,
+            backgroundColor: Color(0xff01579b),
+            textColor: Colors.white,
+            fontSize: 22.0));
+  }
 }

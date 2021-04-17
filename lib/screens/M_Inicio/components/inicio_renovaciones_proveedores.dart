@@ -1,5 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/models/Clientes.dart';
+import 'package:stream_pro/models/Proveedores.dart';
 import 'inicio_titulo_seccion.dart';
 
 class RenovacionesProveedores extends StatelessWidget {
@@ -13,49 +17,48 @@ class RenovacionesProveedores extends StatelessWidget {
       children: [
         Padding(
           padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)
-          ),
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: TituloSeccion(
             title: "Renovación de Proveedores",
             press: () {},
           ),
         ),
-
         SizedBox(height: getProportionateScreenWidth(20)),
-
         SingleChildScrollView(
-          scrollDirection: Axis.horizontal ,
+          scrollDirection: Axis.horizontal,
+          child: StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection(Proveedores.TABLE_NAME)
+                .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text("Error en la base de datos");
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return CircularProgressIndicator();
+                  break;
+                default:
+                  return Builder(builder: (context) {
+                    List<Widget> proveedores = [];
+                    for(int i=0; i<snapshot.data.size;i++){
+                      proveedores.add(SpecialOfferCard(
+                        nombreProveedor: snapshot.data.docs[i].data()['nombre'],
+                        cantidadDeCuentas: int.parse(snapshot.data.docs[i].data()['cuentas'].toString()),
+                        press: () {},
+                      ));
+                    }
 
-          child: Row (
-            children: <Widget>[
-              SpecialOfferCard(
-                nombreProveedor: "Crack",
-                cantidadDeCuentas: 10,
-                press: () {},
-              ),
-
-              SpecialOfferCard(
-                nombreProveedor: "Death",
-                cantidadDeCuentas: 12,
-                press: () {},
-              ),
-
-              SpecialOfferCard(
-
-                nombreProveedor: "Jack",
-                cantidadDeCuentas: 04,
-                press: () {},
-              ),
-
-              SpecialOfferCard(
-
-                nombreProveedor: "ColombiNet",
-                cantidadDeCuentas: 24,
-                press: () {},
-              ),
-              SizedBox(width: getProportionateScreenWidth(20)),
-
-            ],
+                    proveedores.add(SizedBox(width: getProportionateScreenWidth(20)));
+                    return Row(
+                      children: proveedores,
+                    );
+                  });
+                  break;
+              }
+            },
           ),
         ),
       ],
@@ -83,7 +86,6 @@ class SpecialOfferCard extends StatelessWidget {
         right: getProportionateScreenWidth(20),
         bottom: getProportionateScreenWidth(5),
       ),
-
       child: GestureDetector(
         onTap: press,
         child: SizedBox(
@@ -109,7 +111,6 @@ class SpecialOfferCard extends StatelessWidget {
                     vertical: getProportionateScreenWidth(10),
                   ),
                   child: Text.rich(
-
                     TextSpan(
                       style: TextStyle(color: Colors.white),
                       children: [
@@ -119,14 +120,12 @@ class SpecialOfferCard extends StatelessWidget {
                             fontSize: getProportionateScreenWidth(15),
                           ),
                         ),
-
                         TextSpan(
                           text: "$cantidadDeCuentas Cuentas",
                           style: TextStyle(
                             fontSize: getProportionateScreenWidth(22),
                             fontWeight: FontWeight.bold,
                           ),
-
                         ),
                       ],
                     ),

@@ -12,12 +12,13 @@ import 'package:stream_pro/config/size_config.dart';
 class FormularioNuevoProveedor extends StatefulWidget {
   static bool update = false;
 
-  static void update_values(String apodo,String telefono, String red_social,String pais,String uid_update){
+  static void update_values(String apodo,String telefono, String red_social,String pais,String cuentas,String uid_update){
     _FormularioNuevoClienteInicio2.apodo = apodo;
     _FormularioNuevoClienteInicio2.dropdownValue = red_social;
     _FormularioNuevoClienteInicio2.dropdownValue2 = pais;
     _FormularioNuevoClienteInicio2.uid_update = uid_update;
     _FormularioNuevoClienteInicio2.textControllerTelefono.text = telefono;
+    _FormularioNuevoClienteInicio2.cantida_cuentas =  cuentas;
   }
 
   static void limpiar_values(){
@@ -26,6 +27,9 @@ class FormularioNuevoProveedor extends StatefulWidget {
     _FormularioNuevoClienteInicio2.dropdownValue2 = "Honduras";
     _FormularioNuevoClienteInicio2.uid_update = "";
     _FormularioNuevoClienteInicio2.textControllerTelefono.text = "";
+    _FormularioNuevoClienteInicio2.cantida_cuentas =  "0";
+    FormularioNuevoProveedor.update = false;
+
   }
 
   @override
@@ -69,7 +73,7 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
   //TODO otros componentes
   bool remember = false;
   final List<String> pais = ["Honduras","Mexico","Colombia"];
-  final List<String> red_social = ["Whatsapp","Telegram"];
+  final List<String> red_social = ["Whatsapp","Telegram","Ambos"];
   int valor = 0;
   final List<String> errors = [];
 
@@ -139,7 +143,8 @@ class _FormularioNuevoClienteInicio2 extends State<FormularioNuevoProveedor> {
                                             pais: dropdownValue2,
                                             red_social: dropdownValue,
                                             telefono: telefono,
-                                            user: fireauth);
+                                            user: fireauth,
+                                            cuenta: cantida_cuentas);
 
                           String msg = "El proveedor "+ apodo +", ha sido registrado";
                           if(FormularioNuevoProveedor.update) {

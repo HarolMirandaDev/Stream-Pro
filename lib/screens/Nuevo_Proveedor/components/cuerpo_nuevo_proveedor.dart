@@ -20,8 +20,9 @@ class Body extends StatelessWidget {
             child: Column(
               children: [
 
-                SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
-                Text("Nuevo Proveedor", style: headingStyle),
+                SizedBox(height: SizeConfig.screenHeight * 0.04),
+                // 4%
+                FormularioNuevoProveedor.update?Text("Actualizar Proveedor", style: headingStyle):Text("Nuevo Proveedor", style: headingStyle),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 FormularioNuevoProveedor(),

@@ -35,35 +35,37 @@ class Body extends StatelessWidget {
 class ListWigetProveedor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection(Cuentas.TABLE_NAME)
-          .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
-          .snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text("Error en la base de datos");
-        }
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            return CircularProgressIndicator();
-            break;
-          default:
-            return Builder(
-              builder: (context) {
-                return ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: snapshot.data.size,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ItemWigetCuentas(snapshot.data.docs[index]);
-                  },
-                );
-              },
-            );
-            break;
-        }
-      },
+    return SingleChildScrollView(
+      child: StreamBuilder<QuerySnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection(Cuentas.TABLE_NAME)
+            .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Error en la base de datos");
+          }
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return CircularProgressIndicator();
+              break;
+            default:
+              return Builder(
+                builder: (context) {
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: snapshot.data.size,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return ItemWigetCuentas(snapshot.data.docs[index]);
+                    },
+                  );
+                },
+              );
+              break;
+          }
+        },
+      ),
     );
   }
 }

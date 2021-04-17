@@ -37,6 +37,14 @@ class PantallaInicio extends StatelessWidget {
             },
           ),
 
+          IconButton(
+            icon: Icon(Icons.wb_incandescent),
+            tooltip: 'Modo Nocturno',
+            onPressed: () {
+
+            },
+          ),
+
         ],
       ),
 

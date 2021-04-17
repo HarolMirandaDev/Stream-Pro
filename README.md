@@ -68,6 +68,14 @@
 - `Funcionalidad` registro y `visualización` de proveedores
 - `Funcionalidad` registro y `visualización` de cuentas
 
+## - Sprint 5
+- `Diseño` Menú deslizable en los ítems de datos
+- `Funcionalidad` Calculadora Tigo Money
+- `Funcionalidad` ver Renovaciones Clientes
+- `Funcionalidad` ver Renovaciones Proveedores
+- `Funcionalidad` para contactar con los desarrolladores
+- `Diseño` tema modo día, y modo noche
+
 ## Descripción General
 Aplicación creada utilizando Flutter, el cual es un marco de aplicación móvil con una sintaxis elegante y expresiva. Creemos que el desarrollo debe ser una experiencia divertida y creativa para ser verdaderamente satisfactorio. Flutter elimina la molestia del desarrollo al facilitar las tareas comunes que se utilizan en muchos proyectos móviles, como:
 

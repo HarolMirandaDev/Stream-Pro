@@ -16,10 +16,8 @@ class PantallaInformacion extends StatelessWidget{
         ),
       ),
 
-        body: CuerpoInformacion(
+        body: Body(
         ),
     );
   }
-
-
 }

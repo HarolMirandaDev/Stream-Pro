@@ -17,6 +17,11 @@ const KRosaMaterial2 = Color(0xFFE91E63);
 const kAzulMaterial = Color(0xFF01579B);
 const kTextLigntColor = Color(0xFF7286A5);
 
+const DarkPrimaryColor = Color(0xFF263238);
+const DarkFondoExternoColor = Color(0xFF1C1C1C);
+const DarkFondoInterno= Color(0xFF212121);
+const DarkBorde = Color(0xFF2C2C2C);
+const DarkTextColor = Color(0xFFCFCFCF);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
@@ -47,34 +52,24 @@ const String kContrasenaCortaError = "La contraseña es demasiado corta";
 const String kContrasenaNoCoincideError = "Las contraseñas no coinciden";
 const String kNombreNullError = "Por favor, escriba el nombre";
 const String kApodoNullError = "Por favor, escriba el apodo";
-
 const String kApellidoNullError = "Por favor, escriba el apellido";
 const String kTelefonoNullError = "Por favor, introduzca el número de teléfono";
-
 const String kPrecioNullError = "Por favor, introduzca el precio de la cuenta";
 const String kDireccionNullError = "Ingrese la dirección";
 const String kFechaDeCompraNullError = "Seleccione la fecha de compra";
 const String kFechaDeVentaNullError = "Seleccione la fecha de venta";
 const String kProvedorNullError = "Seleccione el propietario de la cuenta";
-
 const String kPlataformaNullError = "Seleccione la plataforma";
 const String kMembresiaNullError = "Seleccione la membresia";
 const String kPantallasNullError = "Seleccione la cantidad de pantallas";
-
-
-
-
-//TODO fomatos de telefonos
 
 MaskTextInputFormatter formatter_hnd = MaskTextInputFormatter(mask:  "+504 ####-####");
 MaskTextInputFormatter formatter_esp = MaskTextInputFormatter(mask:  "+34 ###-###-###");
 MaskTextInputFormatter formatter_ing = MaskTextInputFormatter(mask:  "+44 ####-####-###");
 MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-###-####");
 MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
-
 MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "#####");
 
-/**final formatos*/
 final otpInputDecoration = InputDecoration(
   contentPadding:
       EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),

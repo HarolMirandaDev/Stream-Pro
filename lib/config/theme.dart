@@ -3,6 +3,19 @@ import 'package:stream_pro/config/guardado_preferences.dart';
 
 import 'constants.dart';
 
+class ThemeChanger with ChangeNotifier {
+
+  ThemeData _themeData;
+  ThemeChanger( this._themeData );
+
+  getTheme() => _themeData;
+
+  setTheme( ThemeData theme ) {
+    this._themeData = theme;
+    notifyListeners();
+  }
+
+}
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,

@@ -11,17 +11,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class CuerpoUsuarioInicioSesion extends StatelessWidget {
-
-
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  static FirebaseAuth auth(){
+  static FirebaseAuth auth() {
     return _auth;
   }
 
   void login_google(BuildContext context) async {
-
     GoogleSignInAccount gUser = await _googleSignIn.signIn();
     GoogleSignInAuthentication googleAuth = await gUser.authentication;
 
@@ -33,7 +30,11 @@ class CuerpoUsuarioInicioSesion extends StatelessWidget {
     UserCredential fUser = (await _auth.signInWithCredential(credential));
 
     if (fUser != null) {
-      Navigator.pushReplacement(context,MaterialPageRoute(builder: (BuildContext context) =>  PantallaUsuarioInicioSesionExitosa()));
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) =>
+                  PantallaUsuarioInicioSesionExitosa()));
       /*Fluttertoast.showToast(
           msg: fUser.toString(),
           toastLength: Toast.LENGTH_SHORT,
@@ -50,11 +51,9 @@ class CuerpoUsuarioInicioSesion extends StatelessWidget {
           timeInSecForIosWeb: 2,
           backgroundColor: Color(0xff01579b),
           textColor: Colors.white,
-          fontSize: 16.0
-      );
+          fontSize: 16.0);
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +70,9 @@ class CuerpoUsuarioInicioSesion extends StatelessWidget {
                 Text(
                   "Iniciar Sesión",
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: getProportionateScreenWidth(28),
-                    fontWeight: FontWeight.bold
-                  ),
+                      color: Colors.black,
+                      fontSize: getProportionateScreenWidth(28),
+                      fontWeight: FontWeight.bold),
                 ),
                 Text(
                   "Utilice su correo electrónico y contraseña \no utilice su red social.",

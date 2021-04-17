@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stream_pro/components/custom_boton_predeterminado.dart';
 import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
 import 'package:stream_pro/config/size_config.dart';
+
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -27,14 +28,14 @@ class Body extends StatelessWidget {
           child: BotonPredeterminado(
             text: "Continuar",
             press: () {
-              Navigator.pushReplacement(context, MaterialPageRoute(builder:(context) => PantallaInicio()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => PantallaInicio()));
             },
           ),
         ),
         Spacer(),
       ],
     );
-
 
     return col;
   }

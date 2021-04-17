@@ -12,7 +12,6 @@ class EncabezadoProveedores extends StatelessWidget {
     return Padding(
       padding:
           EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

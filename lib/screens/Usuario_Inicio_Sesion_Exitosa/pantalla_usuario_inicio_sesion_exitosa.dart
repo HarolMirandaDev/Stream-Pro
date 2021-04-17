@@ -4,6 +4,7 @@ import 'components/cuerpo_usuario_inicio_sesion_exitosa.dart';
 
 class PantallaUsuarioInicioSesionExitosa extends StatelessWidget {
   static String routeName = "/login_success";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,8 +12,7 @@ class PantallaUsuarioInicioSesionExitosa extends StatelessWidget {
         leading: SizedBox(),
         title: Text(""),
       ),
-      body: Center(
-          child: Body()) ,
+      body: Center(child: Body()),
     );
   }
 }

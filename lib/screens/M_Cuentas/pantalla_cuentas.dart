@@ -8,21 +8,18 @@ import 'components/cuentas_cuerpo.dart';
 
 class PantallaCuentas extends StatelessWidget {
   static String routeName = "/cuentas";
+
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Seleccione un proveedor"];
+    List<String> lista = ["Ingrese un proveedor"];
 
-    FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME)
-        .get().then((QuerySnapshot querySnapshot) =>
-        querySnapshot.docs.forEach((doc) {
-          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
-            lista.add(doc["nombre"]);
-          }
-        }
+    FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME).get().then(
+        (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
+              if (doc["user"] == FirebaseAuth.instance.currentUser.uid) {
+                lista.add(doc["nombre"]);
+              }
+            }));
 
-        )
-
-    );
     return Scaffold(
       appBar: AppBar(
         title: Text("Cuentas"),
@@ -35,17 +32,19 @@ class PantallaCuentas extends StatelessWidget {
             tooltip: 'Agregar Cuenta',
             onPressed: () {
               FormularioNuevaCuenta.limpiar_values();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PantallaNuevaCuentaInicio(lista)));
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PantallaNuevaCuentaInicio(lista)));
               FormularioNuevaCuenta.update = false;
-            },)
+            },
+          )
         ],
         textTheme: TextTheme(
           headline6: TextStyle(color: Colors.white, fontSize: 18),
         ),
       ),
-
       body: Body(),
-
     );
   }
 }

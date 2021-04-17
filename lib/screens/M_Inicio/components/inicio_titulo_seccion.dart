@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/size_config.dart';
+
 class TituloSeccion extends StatelessWidget {
   const TituloSeccion({
     Key key,

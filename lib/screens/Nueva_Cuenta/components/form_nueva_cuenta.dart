@@ -344,29 +344,28 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   /*********************************---------------------Cliente - Proveedor----------------------***************************************/
 
   DropdownButtonFormField buildProveedorFormDrop() {
-
-      return DropdownButtonFormField<String>(
-        style: TextStyle(
-          color: Color(0xff01579b),
-          fontSize: 18,
-        ),
-        value: lista.length == 0 ? 'Ingrese un proveedor' : dropdownProveedor,
-        elevation: 16,
-        onChanged: (String newValue) {
-          setState(() {
-            proveedor = newValue;
-          });
-        },
-        items: lista.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(value),
-          );
-        }).toList(),
-        decoration: InputDecoration(
-            labelText: "Proveedor",
-            floatingLabelBehavior: FloatingLabelBehavior.always),
-      );
+    return DropdownButtonFormField<String>(
+      style: TextStyle(
+        color: Color(0xff01579b),
+        fontSize: 18,
+      ),
+      value: lista.length == 0 ? 'Ingrese un proveedor' : dropdownProveedor,
+      elevation: 16,
+      onChanged: (String newValue) {
+        setState(() {
+          proveedor = newValue;
+        });
+      },
+      items: lista.map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+      decoration: InputDecoration(
+          labelText: "Proveedor",
+          floatingLabelBehavior: FloatingLabelBehavior.always),
+    );
   }
 
   /**************************************************************-**********************************************************************/
@@ -378,12 +377,13 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      onSaved: (newValue) => precio = newValue==""?0:double.parse(newValue),
+      onSaved: (newValue) =>
+          precio = newValue == "" ? 0 : double.parse(newValue),
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kTelefonoNullError);
         }
-        precio = value==""?0:double.parse(value);
+        precio = value == "" ? 0 : double.parse(value);
       },
       validator: (value) {
         if (value.isEmpty) {

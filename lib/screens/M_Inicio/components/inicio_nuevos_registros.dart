@@ -32,17 +32,12 @@ class NuevosRegistros extends StatelessWidget {
 
     List<String> lista_cuentas = ["Ingrese una cuenta"];
 
-    FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
-        .get().then((QuerySnapshot querySnapshot) =>
-        querySnapshot.docs.forEach((doc) {
-          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
-            lista_cuentas.add(doc["correoElectronico"]);
-          }
-
-        }
-        )
-
-    );
+    FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME).get().then(
+        (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
+              if (doc["user"] == FirebaseAuth.instance.currentUser.uid) {
+                lista_cuentas.add(doc["correoElectronico"]);
+              }
+            }));
 
     List<Map<String, dynamic>> categories = [
       {"icon": "assets/icons/Icono Nuevo Cliente.svg", "text": "Nuevo Cliente"},

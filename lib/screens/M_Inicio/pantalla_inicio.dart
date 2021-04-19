@@ -35,7 +35,7 @@ class PantallaInicio extends StatelessWidget {
               final Email email = Email(
                 body: '',
                 subject: '',
-                recipients: ['streampro@gmail.com'],
+                recipients: ['alonehadeshn@gmail.com'],
               );
 
               await FlutterEmailSender.send(email);

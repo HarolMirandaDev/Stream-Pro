@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
-
 import 'form_nuevo_cliente.dart';
 
 class Body extends StatelessWidget {

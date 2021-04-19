@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
 import 'package:stream_pro/screens/M_Usuario_Informacion/components/contenido_informacion.dart';
@@ -81,12 +82,16 @@ class _BodyState extends State<Body> {
 
                     Spacer(flex: 3),
 
-
-
                     BotomNuevosRegistros(
                       text: "Contáctanos",
-                      press: () {
+                      press: () async {
+                          final Email email = Email(
+                            body: '',
+                            subject: '',
+                            recipients: ['alonehadeshn@gmail.com'],
+                          );
 
+                          await FlutterEmailSender.send(email);
                         },
                     ),
 

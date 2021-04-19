@@ -87,7 +87,6 @@ class ItemWigetCuentas extends StatelessWidget {
                             builder: (context) => PantallaNuevaCuentaInicio(lista)
                         )
                     );
-
                     FormularioNuevaCuenta.update = true;
                     FormularioNuevaCuenta.update_values(
                       snapshot.id,
@@ -111,7 +110,6 @@ class ItemWigetCuentas extends StatelessWidget {
                         textColor: Colors.white,
                         fontSize: 22.0);
                   }
-
                 }),
 
             IconSlideAction(

@@ -77,8 +77,9 @@ class ItemWigetClientes extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                PantallaNuevoClienteInicio(lista)));
+                            builder: (context) => PantallaNuevoClienteInicio(lista)
+                        )
+                    );
                     FormularioNuevoCliente.update = true;
                     FormularioNuevoCliente.update_values(
                         snapshot.data()["nombre"],
@@ -99,12 +100,14 @@ class ItemWigetClientes extends StatelessWidget {
                         fontSize: 22.0);
                   }
                 }),
+
             IconSlideAction(
               caption: 'Eliminar',
               color: Color(0xFFAD1457),
               icon: Icons.delete,
               onTap: () => snapshot.reference.delete(),
             ),
+
             IconSlideAction(
               caption: 'Compartir',
               color: Color(0xFF01579B),

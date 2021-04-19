@@ -71,7 +71,7 @@ class RenovacionesProveedores extends StatelessWidget {
                       }
                     }else{
                       proveedores.add(SpecialOfferCard(
-                        nombreProveedor: "No hay renovaciones en esta fecha",
+                        nombreProveedor: "Sin Renovación de Proveedores",
                         cantidadDeCuentas: 0,
                         press: () {
 

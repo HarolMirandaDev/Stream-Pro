@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_formfield/flutter_datetime_formfield.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
 import 'package:stream_pro/components/custom_formulario_erroneo.dart';
@@ -89,7 +88,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   static String seleccion_plataforma_streaming_valor;
   static String seleccion_membresia_valor;
   static double precio;
-  static String dropdownMembresia = 'Básico';
+  static String dropdownMembresia = 'Premium';
   static String dropdownPlataforma = 'Netflix';
   static String dropdownProveedor = 'Ingrese un proveedor';
   static bool pagado = false;
@@ -395,7 +394,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
       inputFormatters: [formatter_lempiras],
       decoration: InputDecoration(
         labelText: "Precio",
-        hintText: "L. ",
+        hintText: "L. 0.00",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: SizedBox(
             width: 48,

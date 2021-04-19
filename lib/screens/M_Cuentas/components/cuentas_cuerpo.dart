@@ -68,7 +68,7 @@ class ListWigetProveedor extends StatelessWidget {
                           vertical: getProportionateScreenWidth(1),
                         ),
                         child: Image(
-                            image: Image.asset('assets/images/background4.png')
+                            image: Image.asset('assets/images/sin_cuentas.jpg')
                                 .image));
                   }
                 },

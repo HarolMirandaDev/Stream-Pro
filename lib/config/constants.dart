@@ -69,7 +69,7 @@ MaskTextInputFormatter formatter_esp = MaskTextInputFormatter(mask:  "+34 ###-##
 MaskTextInputFormatter formatter_ing = MaskTextInputFormatter(mask:  "+44 ####-####-###");
 MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-###-####");
 MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
-MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "#####");
+MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "###.##");
 
 
 final otpInputDecoration = InputDecoration(

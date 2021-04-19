@@ -52,14 +52,25 @@ class ListWigetClientes extends StatelessWidget {
             default:
               return Builder(
                 builder: (context) {
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    itemCount: snapshot.data.size,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ItemWigetClientes(snapshot.data.docs[index]);
-                    },
-                  );
+                  if (snapshot.data.size > 0) {
+                    return ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      itemCount: snapshot.data.size,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ItemWigetClientes(snapshot.data.docs[index]);
+                      },
+                    );
+                  } else {
+                    return Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: getProportionateScreenWidth(22),
+                          vertical: getProportionateScreenWidth(1),
+                        ),
+                        child: Image(
+                            image: Image.asset('assets/images/background4.png')
+                                .image));
+                  }
                 },
               );
               break;

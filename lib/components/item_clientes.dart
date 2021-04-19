@@ -24,18 +24,13 @@ class ItemWigetClientes extends StatelessWidget {
   Widget build(BuildContext context) {
     List<String> lista = ["Seleccione una cuenta"];
 
-    FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME)
-        .get().then((QuerySnapshot querySnapshot) =>
-        querySnapshot.docs.forEach((doc) {
-          if(doc["user"]==FirebaseAuth.instance.currentUser.uid) {
-            lista.add(doc["correoElectronico"]);
-          }
+    FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME).get().then(
+        (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
+              if (doc["user"] == FirebaseAuth.instance.currentUser.uid) {
+                lista.add(doc["correoElectronico"]);
+              }
+            }));
 
-        }
-
-        )
-
-    );
     return Container(
         margin: EdgeInsets.symmetric(
           horizontal: getProportionateScreenWidth(28),
@@ -91,6 +86,7 @@ class ItemWigetClientes extends StatelessWidget {
                         snapshot.data()["correo_electronico"],
                         snapshot.data()["telefono"],
                         snapshot.data()["fecha_venta"],
+                        snapshot.data()["pago"],
                         snapshot.id);
                   } catch (e) {
                     Fluttertoast.showToast(

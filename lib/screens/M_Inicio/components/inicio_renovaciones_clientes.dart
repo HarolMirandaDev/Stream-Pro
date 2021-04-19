@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:stream_pro/components/renovacion_cliente.dart';
-import 'package:stream_pro/models/Cliente.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Clientes.dart';
+import 'inicio_renovaciones_proveedores.dart';
 import 'inicio_titulo_seccion.dart';
 
 class RenovacionesClientes extends StatelessWidget {
@@ -22,6 +23,7 @@ class RenovacionesClientes extends StatelessWidget {
           stream: FirebaseFirestore.instance
               .collection(Clientes.TABLE_NAME)
               .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
+              .where("fecha_renovacion", isEqualTo: DateFormat("dd/MMMM/yy").format(DateTime.now()))
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -33,8 +35,8 @@ class RenovacionesClientes extends StatelessWidget {
                 return CircularProgressIndicator();
                 break;
               default:
-                return Builder(
-                  builder: (context) {
+                return Builder(builder: (context) {
+                  if (snapshot.data.size != 0) {
                     return SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -52,8 +54,15 @@ class RenovacionesClientes extends StatelessWidget {
                         ],
                       ),
                     );
-                  },
-                );
+                  } else {
+                    return SpecialOfferCard(
+                      nombreProveedor: "Sin renovaciones de cleintes",
+                      cantidadDeCuentas: 0,
+                      press: () {},
+                    );
+                  }
+                });
+
                 break;
             }
           },

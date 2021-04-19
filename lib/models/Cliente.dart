@@ -18,9 +18,7 @@ class Cliente {
     @required this.cliente,
     @required this.precio,
     @required this.descripcion,
-  }){
-
-  }
+  });
 }
 
 // Our demo Products
@@ -44,7 +42,6 @@ List<Cliente> demoClientes = [
     pagado: true,
     vigente: true,
   ),
-
   Cliente(
     idCliente: "2",
     images: [
@@ -63,7 +60,6 @@ List<Cliente> demoClientes = [
     pagado: true,
     vigente: true,
   ),
-
   Cliente(
     idCliente: "3",
     images: [
@@ -82,7 +78,6 @@ List<Cliente> demoClientes = [
     pagado: false,
     vigente: true,
   ),
-
   Cliente(
     idCliente: "4",
     images: [
@@ -101,7 +96,6 @@ List<Cliente> demoClientes = [
     pagado: true,
     vigente: true,
   ),
-
   Cliente(
     idCliente: "5",
     images: [
@@ -120,9 +114,6 @@ List<Cliente> demoClientes = [
     pagado: true,
     vigente: true,
   ),
-
-
 ];
 
-const String descripcion =
-    "Ejemplo …";
+const String descripcion = "Ejemplo …";

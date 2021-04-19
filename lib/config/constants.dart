@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stream_pro/config/size_config.dart';
 
@@ -44,7 +45,7 @@ const defaultDuration = Duration(milliseconds: 250);
 
 // Form Error
 final RegExp emailValidatorRegExp =
-    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Por favor introduzca el correo electrónico";
 const String kInvalidoEmailError = "Por favor introduzca un correo electrónico válido";
 const String kContrasenaNullError = "Por favor, introduzca la contraseña";
@@ -70,9 +71,10 @@ MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-##
 MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
 MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "#####");
 
+
 final otpInputDecoration = InputDecoration(
   contentPadding:
-      EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),
+  EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),
   border: outlineInputBorder(),
   focusedBorder: outlineInputBorder(),
   enabledBorder: outlineInputBorder(),
@@ -83,4 +85,15 @@ OutlineInputBorder outlineInputBorder() {
     borderRadius: BorderRadius.circular(getProportionateScreenWidth(15)),
     borderSide: BorderSide(color: kTextColor),
   );
+}
+
+void mensajeToast(String e) {
+  Fluttertoast.showToast(
+      msg: e,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 2,
+      backgroundColor: Color(0xff01579b),
+      textColor: Colors.white,
+      fontSize: 22.0);
 }

@@ -21,7 +21,7 @@ class FormularioNuevoCliente extends StatefulWidget {
   static bool update = false;
 
   static void update_values(String nombre, String pais, String correo,
-      String telefono, String fecha_venta, String uid_update) {
+      String telefono, String fecha_venta,String pago, String uid_update) {
     _FormularioNuevoCliente.uid_update = uid_update;
     _FormularioNuevoCliente.textControllerNombre.text = nombre;
     _FormularioNuevoCliente.dropdownPais = pais;
@@ -29,6 +29,7 @@ class FormularioNuevoCliente extends StatefulWidget {
     _FormularioNuevoCliente.textControllerTelefono.text = telefono;
     _FormularioNuevoCliente.fecha_venta =
         new DateFormat("dd/MMMM/yy").parse(fecha_venta);
+    _FormularioNuevoCliente.pago = pago;
   }
 
   static void limpiar_values() {
@@ -39,6 +40,7 @@ class FormularioNuevoCliente extends StatefulWidget {
     _FormularioNuevoCliente.textControllerTelefono.text = "";
     _FormularioNuevoCliente.fecha_venta = DateTime.now();
     FormularioNuevoCliente.update = false;
+    _FormularioNuevoCliente.pago = 'false';
   }
 
   @override
@@ -58,6 +60,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   static String nombre;
   static String dropdownPais = 'Honduras';
   static String dropdownValueCorreo = 'Ingrese una cuenta';
+  static String pago = 'false';
   static DateTime fecha_venta = DateTime.now();
 
   //TODO componente de telefono
@@ -154,7 +157,9 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
                     pais: dropdownPais,
                     correo_electronico: dropdownValueCorreo,
                     fecha_ventas: DateFormat("dd/MMMM/yy").format(fecha_venta),
+                    fecha_renovacion: DateFormat("dd/MMMM/yy").format(new DateTime(fecha_venta.year,fecha_venta.month+1,fecha_venta.day)),
                     telefono: telefono,
+                    pago: pago,
                     user: fireauth);
 
                 if (FormularioNuevoCliente.update) {

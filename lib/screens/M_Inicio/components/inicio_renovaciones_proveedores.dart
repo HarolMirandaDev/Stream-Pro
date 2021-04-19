@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:share/share.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Clientes.dart';
 import 'package:stream_pro/models/Proveedores.dart';
@@ -43,12 +45,37 @@ class RenovacionesProveedores extends StatelessWidget {
                 default:
                   return Builder(builder: (context) {
                     List<Widget> proveedores = [];
-                    for (int i = 0; i < snapshot.data.size; i++) {
+                    if(snapshot.data.size>0) {
+                      for (int i = 0; i < snapshot.data.size; i++) {
+                        proveedores.add(SpecialOfferCard(
+                          nombreProveedor: snapshot.data.docs[i]
+                              .data()['nombre'],
+                          cantidadDeCuentas: int.parse(
+                              snapshot.data.docs[i].data()['cuentas']
+                                  .toString()),
+                          press: () {
+                            alerta([
+                              TextButton(onPressed: () {
+
+                                Navigator.of(context).pop();
+                                Share.share("*RENOVACIÓN "+DateFormat("dd/MMMM/yy").format(DateTime.now()) + "*\n"+
+                                    "Cuentas:\n"+""
+                                );
+                              }, child: Text("Si")),
+                              TextButton(onPressed: () {
+                                Navigator.of(context).pop();
+                              }, child: Text("No"))
+                            ]);
+                          },
+                        ));
+                      }
+                    }else{
                       proveedores.add(SpecialOfferCard(
-                        nombreProveedor: snapshot.data.docs[i].data()['nombre'],
-                        cantidadDeCuentas: int.parse(
-                            snapshot.data.docs[i].data()['cuentas'].toString()),
-                        press: () {},
+                        nombreProveedor: "No hay renovaciones en esta fecha",
+                        cantidadDeCuentas: 0,
+                        press: () {
+
+                        },
                       ));
                     }
 
@@ -140,4 +167,13 @@ class SpecialOfferCard extends StatelessWidget {
       ),
     );
   }
+
+
+}
+AlertDialog alerta(var actions) {
+  return AlertDialog(
+    title: new Text("Advertencia"),
+    content: new Text("Desea renovar las cuentas de este proveedor:"),
+    actions: actions,
+  );
 }

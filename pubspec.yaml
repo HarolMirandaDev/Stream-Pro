@@ -43,6 +43,7 @@ dependencies:
   flutter_slidable: ^0.5.7
   share: ^2.0.1
   shared_preferences: ^2.0.5
+  flutter_email_sender: ^5.0.0
 
   provider: ^5.0.0 # for State management
   intl: ^0.16.0

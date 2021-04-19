@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:stream_pro/components/custom_menu_nav_bar.dart';
 import 'package:stream_pro/config/enums.dart';
 import 'package:stream_pro/screens/CalculadoraTM/pantalla_calculadoraTigoMoney.dart';
@@ -30,7 +31,15 @@ class PantallaInicio extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.help_center),
             tooltip: 'Enviar un correo a streampro@gmail.com',
-            onPressed: () {},
+            onPressed: () async {
+              final Email email = Email(
+                body: '',
+                subject: '',
+                recipients: ['streampro@gmail.com'],
+              );
+
+              await FlutterEmailSender.send(email);
+            },
           ),
 
 

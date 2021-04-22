@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:share/share.dart';
 import 'package:stream_pro/config/size_config.dart';
-import 'package:stream_pro/models/Clientes.dart';
 import 'package:stream_pro/models/Proveedores.dart';
 import 'inicio_titulo_seccion.dart';
 
@@ -71,7 +70,7 @@ class RenovacionesProveedores extends StatelessWidget {
                       }
                     }else{
                       proveedores.add(SpecialOfferCard(
-                        nombreProveedor: "Sin Renovación de Proveedores",
+                        nombreProveedor: "No hay renovaciones este día",
                         cantidadDeCuentas: 0,
                         press: () {
 

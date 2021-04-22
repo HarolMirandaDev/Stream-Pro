@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/screens/M_Inicio/components/inicio_titulo_seccion.dart';
 import 'package:stream_pro/screens/Usuario_Inicio_Sesion/pantalla_usuario_inicio_sesion.dart';
 import '../pantalla_inicio.dart';
 import 'inicio_nuevos_registros.dart';
@@ -27,6 +28,12 @@ class Body extends StatelessWidget {
             EncabezadoInicio(),
 
             FechaRenovacion(),
+
+            Padding(
+              padding:
+              EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+              child: TituloSeccion(title: "Registro de nuevo"),
+            ),
 
             NuevosRegistros(),
 

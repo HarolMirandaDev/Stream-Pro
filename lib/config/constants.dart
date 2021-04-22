@@ -24,7 +24,7 @@ const DarkFondoInterno= Color(0xFF212121);
 const DarkBorde = Color(0xFF2C2C2C);
 const DarkTextColor = Color(0xFFCFCFCF);
 
-const kAnimationDuration = Duration(milliseconds: 200);
+const kAnimationDuration = Duration(milliseconds: 100);
 
 final headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(28),
@@ -41,9 +41,8 @@ const kDefaultShadow = BoxShadow(
   color: Colors.black26,
 );
 
-const defaultDuration = Duration(milliseconds: 250);
+const defaultDuration = Duration(milliseconds: 50);
 
-// Form Error
 final RegExp emailValidatorRegExp =
 RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Por favor introduzca el correo electrónico";
@@ -69,7 +68,7 @@ MaskTextInputFormatter formatter_esp = MaskTextInputFormatter(mask:  "+34 ###-##
 MaskTextInputFormatter formatter_ing = MaskTextInputFormatter(mask:  "+44 ####-####-###");
 MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-###-####");
 MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
-MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "###.##");
+MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "#####");
 
 
 final otpInputDecoration = InputDecoration(

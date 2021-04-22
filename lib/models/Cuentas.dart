@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/models/Proveedores.dart';
 
@@ -62,7 +59,6 @@ class Cuentas {
   }
 
   Future<void> addCuentas(CollectionReference cuentas) {
-    // Call the user's CollectionReference to add a new user
     return cuentas.add(toMap()).then((value) {
       FirebaseFirestore.instance
           .collection(Proveedores.TABLE_NAME)

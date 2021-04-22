@@ -51,13 +51,14 @@ class ItemWigetClientes extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: new Text(snapshot.data()["nombre"],
+
+                  title: new Text(snapshot.data()["fecha_renovacion"] + " - "+snapshot.data()["nombre"],
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         fontSize: 23,
                       )),
-                  subtitle: new Text(snapshot.data()["telefono"],
+                  subtitle: new Text(snapshot.data()["correo_electronico"]=='Seleccione una cuenta' ? "SIN CUENTA":snapshot.data()["correo_electronico"],
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,

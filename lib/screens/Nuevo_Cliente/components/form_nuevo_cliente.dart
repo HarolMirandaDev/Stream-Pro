@@ -21,7 +21,8 @@ class FormularioNuevoCliente extends StatefulWidget {
   static bool update = false;
 
   static void update_values(String nombre, String pais, String correo,
-      String telefono, String fecha_venta,String pago, String uid_update) {
+      String telefono, String fecha_venta,String pago, String uid_update)
+  {
     _FormularioNuevoCliente.uid_update = uid_update;
     _FormularioNuevoCliente.textControllerNombre.text = nombre;
     _FormularioNuevoCliente.dropdownPais = pais;
@@ -36,7 +37,7 @@ class FormularioNuevoCliente extends StatefulWidget {
     _FormularioNuevoCliente.uid_update = "";
     _FormularioNuevoCliente.textControllerNombre.text = "";
     _FormularioNuevoCliente.dropdownPais = 'Honduras';
-    _FormularioNuevoCliente.dropdownValueCorreo = 'Ingrese una cuenta';
+    _FormularioNuevoCliente.dropdownValueCorreo = 'Seleccione una cuenta';
     _FormularioNuevoCliente.textControllerTelefono.text = "";
     _FormularioNuevoCliente.fecha_venta = DateTime.now();
     FormularioNuevoCliente.update = false;
@@ -59,7 +60,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   static String nombre;
   static String dropdownPais = 'Honduras';
-  static String dropdownValueCorreo = 'Ingrese una cuenta';
+  static String dropdownValueCorreo = 'Seleccione una cuenta';
   static String pago = 'false';
   static DateTime fecha_venta = DateTime.now();
 
@@ -166,6 +167,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
                   cli.updateClientes(fireDatabase, uid_update);
                 } else {
                   cli.addClientes(fireDatabase);
+
                 }
 
                 Navigator.pop(context);
@@ -195,12 +197,11 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
             return Builder(
               builder: (context) {
                 correo_cuenta.clear();
-                correo_cuenta.add('Ingrese una cuenta');
+                correo_cuenta.add('Seleccione una cuenta');
                 for (int i = 0; i < snapshot.data.size; i++) {
                   if (snapshot.data.docs[i].data()['user'] ==
                       FirebaseAuth.instance.currentUser.uid) {
-                    correo_cuenta
-                        .add(snapshot.data.docs[i].data()["correoElectronico"]);
+                    correo_cuenta.add(snapshot.data.docs[i].data()["correoElectronico"]);
                   }
                 }
                 return Container();
@@ -417,7 +418,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
     try {
       return DropdownButtonFormField<String>(
         value: correo_cuenta.length == 0
-            ? 'Ingrese una cuenta'
+            ? 'Seleccione una cuenta'
             : dropdownValueCorreo,
         elevation: 16,
         style: TextStyle(

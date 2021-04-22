@@ -42,53 +42,55 @@ class CustomButtomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/Icono Menu Inicio.svg",
+                icon:Icon (
+                  Icons.home,
                   color: MenuState.inicio == selectedMenu
-                      ? kAzulMaterial
+                      ? kRosaMaterial
                       : inActiveIconColor,
-
                 ),
                 onPressed: () =>
                     null,
                 ),
 
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Icono Menu Cuentas.svg",
-                  color: MenuState.cuentas == selectedMenu
-                      ? kAzulMaterial
-                      : inActiveIconColor,
-                ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, PantallaCuentas.routeName),
-              ),
-
-              IconButton(
-                icon: SvgPicture.asset("assets/icons/Icono Menu Clientes.svg",
+                icon:Icon (
+                  Icons.wc,
                   color: MenuState.clientes == selectedMenu
-                      ? kAzulMaterial
-                      : inActiveIconColor,
+                      ? inActiveIconColor
+                      : kAzulMaterial,
                 ),
                 onPressed: () =>
                     Navigator.pushNamed(context, PantallaClientes.routeName),
               ),
 
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Icono Menu Proveedores.svg",
+                icon:Icon (
+                  Icons.article_outlined,
                   color: MenuState.proveedores == selectedMenu
-                      ? kAzulMaterial
-                      : inActiveIconColor,
+                      ? inActiveIconColor
+                      : kAzulMaterial,
                 ),
                 onPressed: () =>
                     Navigator.pushNamed(context, PantallaProveedores.routeName),
               ),
 
               IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/Icono Menu Usuario.svg",
+                icon:Icon (
+                  Icons.wysiwyg,
+                  color: MenuState.cuentas == selectedMenu
+                      ? inActiveIconColor
+                      : kAzulMaterial,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, PantallaCuentas.routeName),
+              ),
+
+              IconButton(
+                icon:Icon (
+                  Icons.assignment_ind_outlined,
                   color: MenuState.usuario == selectedMenu
-                      ? kAzulMaterial
-                      : inActiveIconColor,
+                      ? inActiveIconColor
+                      : kAzulMaterial,
                 ),
                 onPressed: () =>
                     Navigator.pushNamed(context, PantallaUsuario.routeName),

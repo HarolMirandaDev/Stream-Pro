@@ -32,7 +32,7 @@ class FormularioNuevaCuenta extends StatefulWidget {
     _FormularioNuevaCuenta.textControllerCorreo.text = email;
     _FormularioNuevaCuenta.textControllerPassword.text = password;
     _FormularioNuevaCuenta.fecha_compra =
-        new DateFormat("dd/MM/yyyy").parse(fecha_compra);
+        new DateFormat("dd").parse(fecha_compra);
     _FormularioNuevaCuenta.dropdownProveedor = proveedor;
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor =
         seleccion_plataforma_streaming_valor;
@@ -49,7 +49,7 @@ class FormularioNuevaCuenta extends StatefulWidget {
     _FormularioNuevaCuenta.textControllerCorreo.text = "";
     _FormularioNuevaCuenta.textControllerPassword.text = "";
     _FormularioNuevaCuenta.fecha_compra = DateTime.now();
-    _FormularioNuevaCuenta.dropdownProveedor = 'Ingrese un proveedor';
+    _FormularioNuevaCuenta.dropdownProveedor = 'Seleccione un proveedor';
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor = "";
     _FormularioNuevaCuenta.seleccion_membresia_valor = 'Básico';
     _FormularioNuevaCuenta.dropdownPlataforma = 'Netflix';
@@ -65,7 +65,7 @@ class FormularioNuevaCuenta extends StatefulWidget {
 
 class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   final _formKey = GlobalKey<FormState>();
-  List<String> lista = ["Ingrese un proveedor"];
+  List<String> lista = ["Seleccione un proveedor"];
 
   _FormularioNuevaCuenta(List<String> lista) {
     this.lista = lista;
@@ -84,13 +84,13 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   static String password;
   static final textControllerPassword = TextEditingController();
   static DateTime fecha_compra;
-  static String proveedor = "Ingrese un proveedor";
+  static String proveedor = "Seleccione un proveedor";
   static String seleccion_plataforma_streaming_valor;
   static String seleccion_membresia_valor;
   static double precio;
   static String dropdownMembresia = 'Premium';
   static String dropdownPlataforma = 'Netflix';
-  static String dropdownProveedor = 'Ingrese un proveedor';
+  static String dropdownProveedor = 'Seleccione un proveedor';
   static bool pagado = false;
   bool _passwordVisible = false;
   final List<String> seleccion_plataforma_streaming = [
@@ -179,7 +179,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
                 cuenta = Cuentas(
                     correoElectronico: email,
                     contrasenia: password,
-                    fechaCompra: DateFormat("dd/MM/yyyy").format(fecha_compra),
+                    fechaCompra: DateFormat("dd").format(fecha_compra),
                     proveedor: proveedor,
                     plataforma: seleccion_plataforma_streaming_valor,
                     membresia: seleccion_membresia_valor,
@@ -219,7 +219,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
             return Builder(
               builder: (context) {
                 lista.clear();
-                lista.add('Ingrese un proveedor');
+                lista.add('Seleccione un proveedor');
                 for (int i = 0; i < snapshot.data.size; i++) {
                   if (snapshot.data.docs[i].data()['user'] ==
                       FirebaseAuth.instance.currentUser.uid) {
@@ -320,8 +320,8 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
             },
           ),
         )
-        //suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
-        );
+      //suffixIcon: CustomSufijoTexto(svgIcon: "assets/icons/Icono Bloqueo.svg"),
+    );
   }
 
   DateTimeFormField buildFechaCompraSelectForm() {
@@ -348,7 +348,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      value: lista.length == 0 ? 'Ingrese un proveedor' : dropdownProveedor,
+      value: lista.length == 0 ? 'Seleccione un proveedor' : dropdownProveedor,
       elevation: 16,
       onChanged: (String newValue) {
         setState(() {
@@ -377,7 +377,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
         fontSize: 18,
       ),
       onSaved: (newValue) =>
-          precio = newValue == "" ? 0 : double.parse(newValue),
+      precio = newValue == "" ? 0 : double.parse(newValue),
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kTelefonoNullError);

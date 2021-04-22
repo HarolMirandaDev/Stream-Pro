@@ -12,6 +12,8 @@ import 'package:stream_pro/screens/Nuevo_Proveedor/pantalla_nuevo_proveedor_inic
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
 import 'package:stream_pro/config/size_config.dart';
 
+import 'inicio_titulo_seccion.dart';
+
 class NuevosRegistros extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -40,9 +42,9 @@ class NuevosRegistros extends StatelessWidget {
             }));
 
     List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Icono Nuevo Cliente.svg", "text": "Nuevo Cliente"},
-      {"icon": "assets/icons/Icono Nuevo Proveedor.svg", "text": "Nuevo Proveedor"},
-      {"icon": "assets/icons/Icono Nueva Cuenta.svg", "text": "Nueva Cuenta"},
+      {"icon": "assets/icons/comprador.svg", "text": "Cliente"},
+      {"icon": "assets/icons/vendedor.svg", "text": "Proveedor"},
+      {"icon": "assets/icons/compra.svg", "text": "Cuenta"},
     ];
 
     return Padding(
@@ -106,12 +108,13 @@ class CategoryCard extends StatelessWidget {
         width: getProportionateScreenWidth(100),
         child: Column(
           children: [
+
             Container(
               padding: EdgeInsets.all(getProportionateScreenWidth(15)),
               height: getProportionateScreenWidth(65),
               width: getProportionateScreenWidth(110),
               decoration: BoxDecoration(
-                color: Color(0xFFAD1457),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: SvgPicture.asset(icon),

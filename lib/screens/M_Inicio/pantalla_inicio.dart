@@ -30,27 +30,16 @@ class PantallaInicio extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.help_center),
-            tooltip: 'Enviar un correo a streampro@gmail.com',
+            tooltip: 'Enviar un correo a alonehadeshn@gmail.com',
             onPressed: () async {
               final Email email = Email(
                 body: '',
                 subject: '',
                 recipients: ['alonehadeshn@gmail.com'],
               );
-
               await FlutterEmailSender.send(email);
             },
           ),
-
-
-          IconButton(
-            icon: Icon(Icons.wb_incandescent),
-            tooltip: 'Modo Nocturno',
-            onPressed: () {
-
-            },
-          ),
-
         ],
       ),
       body: Body(),

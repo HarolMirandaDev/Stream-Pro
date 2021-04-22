@@ -28,7 +28,7 @@ class Clientes {
 
   @override
   String toString() {
-    return nombre;
+    return fecha_ventas;
   }
 
   Map<String, dynamic> toMap() {

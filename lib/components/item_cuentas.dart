@@ -58,7 +58,7 @@ class ItemWigetCuentas extends StatelessWidget {
                 ListTile(
                   title: new Text(
                       snapshot.data()["fechaCompra"] + " - " +
-                (snapshot.data()["proveedor"]=='Seleccione un proveedor'?"SIN PROVEEDOR":snapshot.data()["proveedor"]),
+                (snapshot.data()["proveedor"]=='Seleccione un proveedor' ? "SIN PROVEEDOR":snapshot.data()["proveedor"]),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,

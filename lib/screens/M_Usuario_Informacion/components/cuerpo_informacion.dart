@@ -1,14 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:stream_pro/components/custom_boton_nuevos_registros.dart';
-import 'package:stream_pro/screens/M_Inicio/pantalla_inicio.dart';
 import 'package:stream_pro/screens/M_Usuario_Informacion/components/contenido_informacion.dart';
-import 'package:stream_pro/screens/usuario_inicio_sesion/pantalla_usuario_inicio_sesion.dart';
 import 'package:stream_pro/config/constants.dart';
 import 'package:stream_pro/config/size_config.dart';
-
-import '../../../components/custom_boton_predeterminado.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -74,8 +69,8 @@ class _BodyState extends State<Body> {
                         text: 'versión ',
                         style: DefaultTextStyle.of(context).style,
                         children: <TextSpan>[
-                          TextSpan(text: '1.0.4 ', style: TextStyle(fontWeight: FontWeight.bold)),
-                          TextSpan(text: 'abril, 2021'),
+                          TextSpan(text: '1.0.5 ', style: TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: 'mayo, 2021'),
                         ],
                       ),
                     ),

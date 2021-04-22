@@ -56,7 +56,7 @@ class RenovacionesClientes extends StatelessWidget {
                     );
                   } else {
                     return SpecialOfferCard(
-                      nombreProveedor: "Sin renovación de clintes",
+                      nombreProveedor: "No hay renovaciones este día",
                       cantidadDeCuentas: 0,
                       press: () {},
                     );

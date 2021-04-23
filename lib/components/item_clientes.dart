@@ -22,7 +22,7 @@ class ItemWigetClientes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Seleccione una cuenta"];
+    List<String> lista = ["Ingrese una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME).get().then(
         (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {
@@ -58,7 +58,7 @@ class ItemWigetClientes extends StatelessWidget {
                         color: Colors.white,
                         fontSize: 23,
                       )),
-                  subtitle: new Text(snapshot.data()["correo_electronico"]=='Seleccione una cuenta' ? "SIN CUENTA":snapshot.data()["correo_electronico"],
+                  subtitle: new Text(snapshot.data()["correo_electronico"]=="Ingrese una cuenta" ? "SIN CUENTA":snapshot.data()["correo_electronico"],
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
                         color: Colors.white,

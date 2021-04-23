@@ -11,7 +11,7 @@ class PantallaClientes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Seleccione una cuenta"];
+    List<String> lista = ["Ingrese una cuenta"];
 
     FirebaseFirestore.instance.collection(Cuentas.TABLE_NAME).get().then(
         (QuerySnapshot querySnapshot) => querySnapshot.docs.forEach((doc) {

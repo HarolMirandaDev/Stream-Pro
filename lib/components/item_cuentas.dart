@@ -5,6 +5,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/models/Clientes.dart';
 import 'package:stream_pro/models/Proveedores.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/components/form_nueva_cuenta.dart';
 import 'package:stream_pro/screens/Nueva_Cuenta/pantalla_nueva_cuenta_inicio.dart';
@@ -22,7 +23,7 @@ class ItemWigetCuentas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> lista = ["Seleccione un proveedor"];
+    List<String> lista = ["Ingrese un proveedor"];
 
     FirebaseFirestore.instance.collection(Proveedores.TABLE_NAME).get().then(
             (QuerySnapshot querySnapshot) =>
@@ -58,7 +59,7 @@ class ItemWigetCuentas extends StatelessWidget {
                 ListTile(
                   title: new Text(
                       snapshot.data()["fechaCompra"] + " - " +
-                (snapshot.data()["proveedor"]=='Seleccione un proveedor' ? "SIN PROVEEDOR":snapshot.data()["proveedor"]),
+                (snapshot.data()["proveedor"]=="Ingrese un proveedor" ? "SIN PROVEEDOR":snapshot.data()["proveedor"]),
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
@@ -80,43 +81,122 @@ class ItemWigetCuentas extends StatelessWidget {
                 color: Color(0xFF006064),
                 icon: Icons.edit,
                 onTap: () {
-                  try {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PantallaNuevaCuentaInicio(lista)
-                        )
-                    );
-                    FormularioNuevaCuenta.update = true;
-                    FormularioNuevaCuenta.update_values(
-                      snapshot.id,
-                      snapshot.data()["correoElectronico"],
-                      snapshot.data()["contrasenia"],
-                      snapshot.data()["fechaCompra"],
-                      snapshot.data()["proveedor"],
-                      snapshot.data()["plataforma"],
-                      snapshot.data()["membresia"],
-                      snapshot.data()["precio"],
-                      snapshot.data()["pagado"],
-                    );
 
-                  } catch (e) {
-                    Fluttertoast.showToast(
-                        msg: e.toString(),
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 2,
-                        backgroundColor: Color(0xff01579b),
-                        textColor: Colors.white,
-                        fontSize: 22.0);
-                  }
+                  FirebaseFirestore.instance.collection(Clientes.TABLE_NAME).get().then(
+                          (QuerySnapshot querySnapshot) {
+
+                            int deci = 0;
+                            querySnapshot.docs.forEach(
+                                    (doc) {
+
+                                  if (doc["user"] ==
+                                      FirebaseAuth.instance.currentUser.uid
+                                      && snapshot.data()["correoElectronico"] ==
+                                          doc["correo_electronico"]) {
+                                    deci--;
+                                  } else {
+                                    deci++;
+                                  }
+                                }
+                            );
+
+                            if(querySnapshot.docs.length == deci) {
+                              try {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => PantallaNuevaCuentaInicio(lista)
+                                    )
+                                );
+                                FormularioNuevaCuenta.update = true;
+                                FormularioNuevaCuenta.update_values(
+                                  snapshot.id,
+                                  snapshot.data()["correoElectronico"],
+                                  snapshot.data()["contrasenia"],
+                                  snapshot.data()["fechaCompra"],
+                                  snapshot.data()["proveedor"],
+                                  snapshot.data()["plataforma"],
+                                  snapshot.data()["membresia"],
+                                  snapshot.data()["precio"],
+                                  snapshot.data()["pagado"],
+                                );
+                              } catch (e) {
+                                Fluttertoast.showToast(
+                                    msg: e.toString(),
+                                    toastLength: Toast.LENGTH_SHORT,
+                                    gravity: ToastGravity.BOTTOM,
+                                    timeInSecForIosWeb: 2,
+                                    backgroundColor: Color(0xff01579b),
+                                    textColor: Colors.white,
+                                    fontSize: 22.0);
+                              }
+                            }else{
+                              Fluttertoast.showToast(
+                                  msg: "Esta cuenta no se puede modificar\nporque hay un cliente usandola",
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  gravity: ToastGravity.BOTTOM,
+                                  timeInSecForIosWeb: 2,
+                                  backgroundColor: Color(0xff01579b),
+                                  textColor: Colors.white,
+                                  fontSize: 22.0);
+                            }
+
+
+                          }
+                  );
+
                 }),
 
             IconSlideAction(
               caption: 'Eliminar',
               color: Color(0xFFAD1457),
               icon: Icons.delete,
-              onTap: () => snapshot.reference.delete(),
+              onTap: () {
+                FirebaseFirestore.instance.collection(Clientes.TABLE_NAME).get().then(
+                        (QuerySnapshot querySnapshot) {
+
+                      int deci = 0;
+                      querySnapshot.docs.forEach(
+                              (doc) {
+
+                            if (doc["user"] ==
+                                FirebaseAuth.instance.currentUser.uid
+                                && snapshot.data()["correoElectronico"] ==
+                                    doc["correo_electronico"]) {
+                              deci--;
+                            } else {
+                              deci++;
+                            }
+                          }
+                      );
+
+                      if(querySnapshot.docs.length == deci) {
+                              FirebaseFirestore.instance
+                                  .collection(Proveedores.TABLE_NAME)
+                                  .where("nombre", isEqualTo: snapshot.data()["proveedor"])
+                                  .get()
+                                  .then((value) {
+                                int cuentas = int.parse(value.docs[0].data()['cuentas']);
+                                cuentas -= 1;
+                                value.docs[0].reference.update({'cuentas': cuentas.toString()});
+                              });
+                        snapshot.reference.delete();
+                      }else{
+                        Fluttertoast.showToast(
+                            msg: "Esta cuenta no se puede eliminar\nporque esta en uso",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Color(0xff01579b),
+                            textColor: Colors.white,
+                            fontSize: 22.0);
+                      }
+
+
+                    }
+                );
+
+              },
             ),
 
             IconSlideAction(

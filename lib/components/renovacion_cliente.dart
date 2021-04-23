@@ -142,15 +142,8 @@ class RenovacionCliente extends StatelessWidget {
                                                 fecha_ventas: DateFormat(
                                                     "dd/MMMM/yy").format(
                                                     DateTime.now()),
-                                                fecha_renovacion: DateFormat(
-                                                    "dd/MMMM/yy").format(
-                                                    new DateTime(DateTime
-                                                        .now()
-                                                        .year, DateTime
-                                                        .now()
-                                                        .month+1, DateTime
-                                                        .now()
-                                                        .day)),
+                                                fecha_renovacion: this.snapshot
+                                                    .data()['fecha_renovacion'],
                                                 telefono: this.snapshot
                                                     .data()['telefono'],
                                                 pago: 'true',

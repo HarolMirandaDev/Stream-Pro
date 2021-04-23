@@ -37,7 +37,7 @@ class FormularioNuevoCliente extends StatefulWidget {
     _FormularioNuevoCliente.uid_update = "";
     _FormularioNuevoCliente.textControllerNombre.text = "";
     _FormularioNuevoCliente.dropdownPais = 'Honduras';
-    _FormularioNuevoCliente.dropdownValueCorreo = 'Seleccione una cuenta';
+    _FormularioNuevoCliente.dropdownValueCorreo = "Ingrese una cuenta";
     _FormularioNuevoCliente.textControllerTelefono.text = "";
     _FormularioNuevoCliente.fecha_venta = DateTime.now();
     FormularioNuevoCliente.update = false;
@@ -60,7 +60,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
 
   static String nombre;
   static String dropdownPais = 'Honduras';
-  static String dropdownValueCorreo = 'Seleccione una cuenta';
+  static String dropdownValueCorreo = "Ingrese una cuenta";
   static String pago = 'false';
   static DateTime fecha_venta = DateTime.now();
 
@@ -158,7 +158,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
                     pais: dropdownPais,
                     correo_electronico: dropdownValueCorreo,
                     fecha_ventas: DateFormat("dd/MMMM/yy").format(fecha_venta),
-                    fecha_renovacion: DateFormat("dd/MMMM/yy").format(new DateTime(fecha_venta.year,fecha_venta.month+1,fecha_venta.day)),
+                    fecha_renovacion: DateFormat("dd").format(fecha_venta),
                     telefono: telefono,
                     pago: pago,
                     user: fireauth);
@@ -197,7 +197,7 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
             return Builder(
               builder: (context) {
                 correo_cuenta.clear();
-                correo_cuenta.add('Seleccione una cuenta');
+                correo_cuenta.add("Ingrese una cuenta");
                 for (int i = 0; i < snapshot.data.size; i++) {
                   if (snapshot.data.docs[i].data()['user'] ==
                       FirebaseAuth.instance.currentUser.uid) {
@@ -417,8 +417,8 @@ class _FormularioNuevoCliente extends State<FormularioNuevoCliente> {
   DropdownButtonFormField buildCorreoCuentaFormDrop() {
     try {
       return DropdownButtonFormField<String>(
-        value: correo_cuenta.length == 0
-            ? 'Seleccione una cuenta'
+        value: correo_cuenta.length == 1
+            ? "Ingrese una cuenta"
             : dropdownValueCorreo,
         elevation: 16,
         style: TextStyle(

@@ -49,7 +49,7 @@ class FormularioNuevaCuenta extends StatefulWidget {
     _FormularioNuevaCuenta.textControllerCorreo.text = "";
     _FormularioNuevaCuenta.textControllerPassword.text = "";
     _FormularioNuevaCuenta.fecha_compra = DateTime.now();
-    _FormularioNuevaCuenta.dropdownProveedor = 'Seleccione un proveedor';
+    _FormularioNuevaCuenta.dropdownProveedor = "Ingrese un proveedor";
     _FormularioNuevaCuenta.seleccion_plataforma_streaming_valor = "";
     _FormularioNuevaCuenta.seleccion_membresia_valor = 'Básico';
     _FormularioNuevaCuenta.dropdownPlataforma = 'Netflix';
@@ -65,7 +65,7 @@ class FormularioNuevaCuenta extends StatefulWidget {
 
 class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   final _formKey = GlobalKey<FormState>();
-  List<String> lista = ["Seleccione un proveedor"];
+  List<String> lista = ["Ingrese un proveedor"];
 
   _FormularioNuevaCuenta(List<String> lista) {
     this.lista = lista;
@@ -84,13 +84,13 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
   static String password;
   static final textControllerPassword = TextEditingController();
   static DateTime fecha_compra;
-  static String proveedor = "Seleccione un proveedor";
+  static String proveedor = "Ingrese un proveedor";
   static String seleccion_plataforma_streaming_valor;
   static String seleccion_membresia_valor;
   static double precio;
   static String dropdownMembresia = 'Premium';
   static String dropdownPlataforma = 'Netflix';
-  static String dropdownProveedor = 'Seleccione un proveedor';
+  static String dropdownProveedor = "Ingrese un proveedor";
   static bool pagado = false;
   bool _passwordVisible = false;
   final List<String> seleccion_plataforma_streaming = [
@@ -179,7 +179,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
                 cuenta = Cuentas(
                     correoElectronico: email,
                     contrasenia: password,
-                    fechaCompra: DateFormat("dd").format(fecha_compra),
+                    fechaCompra: DateFormat("dd/MM/yy").format(fecha_compra),
                     proveedor: proveedor,
                     plataforma: seleccion_plataforma_streaming_valor,
                     membresia: seleccion_membresia_valor,
@@ -219,7 +219,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
             return Builder(
               builder: (context) {
                 lista.clear();
-                lista.add('Seleccione un proveedor');
+                lista.add("Ingrese un proveedor");
                 for (int i = 0; i < snapshot.data.size; i++) {
                   if (snapshot.data.docs[i].data()['user'] ==
                       FirebaseAuth.instance.currentUser.uid) {
@@ -348,7 +348,7 @@ class _FormularioNuevaCuenta extends State<FormularioNuevaCuenta> {
         color: Color(0xff01579b),
         fontSize: 18,
       ),
-      value: lista.length == 0 ? 'Seleccione un proveedor' : dropdownProveedor,
+      value: lista.length == 0 ? "Ingrese un proveedor" : dropdownProveedor,
       elevation: 16,
       onChanged: (String newValue) {
         setState(() {

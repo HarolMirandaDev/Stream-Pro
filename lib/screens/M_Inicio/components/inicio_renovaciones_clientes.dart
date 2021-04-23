@@ -23,7 +23,7 @@ class RenovacionesClientes extends StatelessWidget {
           stream: FirebaseFirestore.instance
               .collection(Clientes.TABLE_NAME)
               .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
-              .where("fecha_renovacion", isEqualTo: DateFormat("dd/MMMM/yy").format(DateTime.now()))
+              .where("fecha_renovacion", isEqualTo: DateFormat("dd").format(DateTime.now()))
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {

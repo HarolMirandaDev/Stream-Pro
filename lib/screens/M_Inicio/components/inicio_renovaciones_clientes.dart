@@ -1,17 +1,26 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stream_pro/components/renovacion_cliente.dart';
+import 'package:stream_pro/config/constants.dart';
+import 'package:stream_pro/config/guardado_preferences.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Clientes.dart';
+import '../../../Notificacion.dart';
 import 'inicio_renovaciones_proveedores.dart';
 import 'inicio_titulo_seccion.dart';
 
 class RenovacionesClientes extends StatelessWidget {
+  final Notifications _notifications =  Notifications();
+
+
   @override
   Widget build(BuildContext context) {
-    return Column(
+    this._notifications.initNotifications();
+   return Column(
       children: [
         Padding(
           padding:
@@ -44,8 +53,20 @@ class RenovacionesClientes extends StatelessWidget {
                           ...List.generate(
                             snapshot.data.size,
                             (index) {
+
+                              StorageManager.readData("notificaciones").then((value){
+
+                                if(value.toString()=="true") {
+                                  this._notifications.pushNotification(index + 9999, "Renovacion de:",
+                                      "Cliente: " + snapshot.data.docs[index].data()["nombre"] + ",  \n" +
+                                          "Fecha venta: " +
+                                          snapshot.data.docs[index].data()["fecha_venta"]);
+                                }
+                              }
+                              );
                               return RenovacionCliente(
                                   snapshot: snapshot.data.docs[index]);
+
                               return SizedBox
                                   .shrink(); // here by default width and height is 0
                             },

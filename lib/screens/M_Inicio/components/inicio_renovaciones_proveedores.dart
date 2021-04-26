@@ -1,19 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:share/share.dart';
+import 'package:stream_pro/config/constants.dart';
+import 'package:stream_pro/config/guardado_preferences.dart';
 import 'package:stream_pro/config/size_config.dart';
 import 'package:stream_pro/models/Proveedores.dart';
+import '../../../Notificacion.dart';
 import 'inicio_titulo_seccion.dart';
 
 class RenovacionesProveedores extends StatelessWidget {
+  static Notifications _notifications =  Notifications();
   const RenovacionesProveedores({
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    RenovacionesProveedores._notifications.initNotifications();
     return Column(
       children: [
         Padding(
@@ -46,6 +53,19 @@ class RenovacionesProveedores extends StatelessWidget {
                     List<Widget> proveedores = [];
                     if(snapshot.data.size>0) {
                       for (int i = 0; i < snapshot.data.size; i++) {
+
+                        StorageManager.readData("notificaciones").then((value){
+
+                              if(value.toString()=="true") {
+                            RenovacionesProveedores._notifications
+                                .pushNotification(i + 1, "Renovaciones de:",
+                                snapshot.data.docs[i].data()["cuentas"] +
+                                    " de el Proveedor: " +
+                                    snapshot.data.docs[i].data()["nombre"]);
+                              }
+                        }
+                        );
+
                         proveedores.add(SpecialOfferCard(
                           nombreProveedor: snapshot.data.docs[i]
                               .data()['nombre'],
@@ -92,6 +112,11 @@ class RenovacionesProveedores extends StatelessWidget {
       ],
     );
   }
+}
+
+Future<bool> notoficacion() async{
+  var noti = await SharedPreferences.getInstance();
+  return noti.getBool("notificaciones");
 }
 
 class SpecialOfferCard extends StatelessWidget {

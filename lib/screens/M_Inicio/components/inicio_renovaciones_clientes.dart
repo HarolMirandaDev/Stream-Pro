@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,12 @@ import 'inicio_renovaciones_proveedores.dart';
 import 'inicio_titulo_seccion.dart';
 
 class RenovacionesClientes extends StatelessWidget {
-  final Notifications _notifications =  Notifications();
-
+  final Notifications _notifications = Notifications();
 
   @override
   Widget build(BuildContext context) {
     this._notifications.initNotifications();
-   return Column(
+    return Column(
       children: [
         Padding(
           padding:
@@ -32,7 +30,8 @@ class RenovacionesClientes extends StatelessWidget {
           stream: FirebaseFirestore.instance
               .collection(Clientes.TABLE_NAME)
               .where("user", isEqualTo: FirebaseAuth.instance.currentUser.uid)
-              .where("fecha_renovacion", isEqualTo: DateFormat("dd").format(DateTime.now()))
+              .where("fecha_renovacion",
+                  isEqualTo: DateFormat("dd").format(DateTime.now()))
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -53,17 +52,23 @@ class RenovacionesClientes extends StatelessWidget {
                           ...List.generate(
                             snapshot.data.size,
                             (index) {
-
-                              StorageManager.readData("notificaciones").then((value){
-
-                                if(value.toString()=="true") {
-                                  this._notifications.pushNotification(index + 9999, "Renovacion de:",
-                                      "Cliente: " + snapshot.data.docs[index].data()["nombre"] + ",  \n" +
+                              StorageManager.readData("notificaciones")
+                                  .then((value) {
+                                if (value.toString() == "true" &&
+                                    snapshot.data.docs[index].data()["pago"] ==
+                                        'false') {
+                                  this._notifications.pushNotification(
+                                      index + 9999,
+                                      "Renovacion de:",
+                                      "Cliente: " +
+                                          snapshot.data.docs[index]
+                                              .data()["nombre"] +
+                                          ",  \n" +
                                           "Fecha venta: " +
-                                          snapshot.data.docs[index].data()["fecha_venta"]);
+                                          snapshot.data.docs[index]
+                                              .data()["fecha_venta"]);
                                 }
-                              }
-                              );
+                              });
                               return RenovacionCliente(
                                   snapshot: snapshot.data.docs[index]);
 

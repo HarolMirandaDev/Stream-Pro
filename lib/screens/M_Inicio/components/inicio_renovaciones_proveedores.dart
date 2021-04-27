@@ -13,7 +13,7 @@ import '../../../Notificacion.dart';
 import 'inicio_titulo_seccion.dart';
 
 class RenovacionesProveedores extends StatelessWidget {
-  static Notifications _notifications =  Notifications();
+  static Notifications _notifications = Notifications();
   const RenovacionesProveedores({
     Key key,
   }) : super(key: key);
@@ -51,50 +51,57 @@ class RenovacionesProveedores extends StatelessWidget {
                 default:
                   return Builder(builder: (context) {
                     List<Widget> proveedores = [];
-                    if(snapshot.data.size>0) {
+                    if (snapshot.data.size > 0) {
                       for (int i = 0; i < snapshot.data.size; i++) {
-
-                        StorageManager.readData("notificaciones").then((value){
-
-                              if(value.toString()=="true") {
+                        StorageManager.readData("notificaciones").then((value) {
+                          if (value.toString() == "true" &&
+                              int.parse(snapshot.data.docs[i]
+                                      .data()["cuentas"]
+                                      .toString()) >
+                                  0) {
                             RenovacionesProveedores._notifications
-                                .pushNotification(i + 1, "Renovaciones de:",
-                                snapshot.data.docs[i].data()["cuentas"] +
-                                    " de el Proveedor: " +
-                                    snapshot.data.docs[i].data()["nombre"]);
-                              }
-                        }
-                        );
+                                .pushNotification(
+                                    i + 1,
+                                    "Renovaciones de:",
+                                    snapshot.data.docs[i].data()["cuentas"] +
+                                        " de el Proveedor: " +
+                                        snapshot.data.docs[i].data()["nombre"]);
+                          }
+                        });
 
                         proveedores.add(SpecialOfferCard(
-                          nombreProveedor: snapshot.data.docs[i]
-                              .data()['nombre'],
-                          cantidadDeCuentas: int.parse(
-                              snapshot.data.docs[i].data()['cuentas']
-                                  .toString()),
+                          nombreProveedor:
+                              snapshot.data.docs[i].data()['nombre'],
+                          cantidadDeCuentas: int.parse(snapshot.data.docs[i]
+                              .data()['cuentas']
+                              .toString()),
                           press: () {
                             alerta([
-                              TextButton(onPressed: () {
-
-                                Navigator.of(context).pop();
-                                Share.share("*RENOVACIÓN "+DateFormat("dd/MMMM/yy").format(DateTime.now()) + "*\n"+
-                                    "Cuentas:\n"+""
-                                );
-                              }, child: Text("Si")),
-                              TextButton(onPressed: () {
-                                Navigator.of(context).pop();
-                              }, child: Text("No"))
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                    Share.share("*RENOVACIÓN " +
+                                        DateFormat("dd/MMMM/yy")
+                                            .format(DateTime.now()) +
+                                        "*\n" +
+                                        "Cuentas:\n" +
+                                        "");
+                                  },
+                                  child: Text("Si")),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("No"))
                             ]);
                           },
                         ));
                       }
-                    }else{
+                    } else {
                       proveedores.add(SpecialOfferCard(
                         nombreProveedor: "No hay renovaciones este día",
                         cantidadDeCuentas: 0,
-                        press: () {
-
-                        },
+                        press: () {},
                       ));
                     }
 
@@ -114,7 +121,7 @@ class RenovacionesProveedores extends StatelessWidget {
   }
 }
 
-Future<bool> notoficacion() async{
+Future<bool> notoficacion() async {
   var noti = await SharedPreferences.getInstance();
   return noti.getBool("notificaciones");
 }
@@ -191,9 +198,8 @@ class SpecialOfferCard extends StatelessWidget {
       ),
     );
   }
-
-
 }
+
 AlertDialog alerta(var actions) {
   return AlertDialog(
     title: new Text("Advertencia"),

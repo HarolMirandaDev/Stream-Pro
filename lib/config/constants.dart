@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:stream_pro/config/size_config.dart';
+import 'package:stream_pro/config/theme.dart';
 
 const kPrimaryColor = Color(0xFF006064);
 const kPrimaryLightColor = Color(0xFFE0F7FA);
@@ -20,7 +21,7 @@ const kTextLigntColor = Color(0xFF7286A5);
 
 const DarkPrimaryColor = Color(0xFF263238);
 const DarkFondoExternoColor = Color(0xFF1C1C1C);
-const DarkFondoInterno= Color(0xFF212121);
+const DarkFondoInterno = Color(0xFF212121);
 const DarkBorde = Color(0xFF2C2C2C);
 const DarkTextColor = Color(0xFFCFCFCF);
 
@@ -29,7 +30,7 @@ const kAnimationDuration = Duration(milliseconds: 100);
 final headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(28),
   fontWeight: FontWeight.bold,
-  color: Colors.black,
+  color: theme().hintColor,
   height: 1.5,
 );
 
@@ -44,9 +45,10 @@ const kDefaultShadow = BoxShadow(
 const defaultDuration = Duration(milliseconds: 50);
 
 final RegExp emailValidatorRegExp =
-RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Por favor introduzca el correo electrónico";
-const String kInvalidoEmailError = "Por favor introduzca un correo electrónico válido";
+const String kInvalidoEmailError =
+    "Por favor introduzca un correo electrónico válido";
 const String kContrasenaNullError = "Por favor, introduzca la contraseña";
 const String kContrasenaCortaError = "La contraseña es demasiado corta";
 const String kContrasenaNoCoincideError = "Las contraseñas no coinciden";
@@ -63,17 +65,22 @@ const String kPlataformaNullError = "Seleccione la plataforma";
 const String kMembresiaNullError = "Seleccione la membresia";
 const String kPantallasNullError = "Seleccione la cantidad de pantallas";
 
-MaskTextInputFormatter formatter_hnd = MaskTextInputFormatter(mask:  "+504 ####-####");
-MaskTextInputFormatter formatter_esp = MaskTextInputFormatter(mask:  "+34 ###-###-###");
-MaskTextInputFormatter formatter_ing = MaskTextInputFormatter(mask:  "+44 ####-####-###");
-MaskTextInputFormatter formatter_mex = MaskTextInputFormatter(mask:  "+52 ###-###-####");
-MaskTextInputFormatter formatter_col = MaskTextInputFormatter(mask:  "+57 ####-###");
-MaskTextInputFormatter formatter_lempiras = MaskTextInputFormatter(mask:  "#####");
-
+MaskTextInputFormatter formatter_hnd =
+    MaskTextInputFormatter(mask: "+504 ####-####");
+MaskTextInputFormatter formatter_esp =
+    MaskTextInputFormatter(mask: "+34 ###-###-###");
+MaskTextInputFormatter formatter_ing =
+    MaskTextInputFormatter(mask: "+44 ####-####-###");
+MaskTextInputFormatter formatter_mex =
+    MaskTextInputFormatter(mask: "+52 ###-###-####");
+MaskTextInputFormatter formatter_col =
+    MaskTextInputFormatter(mask: "+57 ####-###");
+MaskTextInputFormatter formatter_lempiras =
+    MaskTextInputFormatter(mask: "#####");
 
 final otpInputDecoration = InputDecoration(
   contentPadding:
-  EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),
+      EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15)),
   border: outlineInputBorder(),
   focusedBorder: outlineInputBorder(),
   enabledBorder: outlineInputBorder(),

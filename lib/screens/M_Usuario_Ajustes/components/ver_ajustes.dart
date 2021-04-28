@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences_settings/shared_preferences_settings.dart';
+import 'package:stream_pro/config/dark_theme_provider.dart';
 import 'package:stream_pro/config/guardado_preferences.dart';
 
 class Ajustes extends StatefulWidget {
@@ -15,12 +17,15 @@ class _MyStatefulWidgetState extends State<Ajustes> {
 
   @override
   Widget build(BuildContext context) {
+    final themeChange = Provider.of<DarkThemeProvider>(context);
     return SettingsContainer(
       children: [
-        SwitchSettingsTile(
-          settingKey: 'darkModw',
-          title: 'Modo Noche',
-        ),
+        SwitchListTile(
+            title: new Text('Modo Noche'),
+            value: themeChange.darkTheme,
+            onChanged: (bool value) {
+              themeChange.darkTheme = value;
+            }),
         SwitchSettingsTile(
           settingKey: 'notificaciones',
           title: 'Notificaciones',

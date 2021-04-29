@@ -50,10 +50,11 @@ class RenovacionesProveedores extends StatelessWidget {
                   break;
                 default:
                   return Builder(builder: (context) {
-                    List<Widget> proveedores = [];
+                    List<SpecialOfferCard> proveedores = [];
                     if (snapshot.data.size > 0) {
                       for (int i = 0; i < snapshot.data.size; i++) {
                         StorageManager.readData("notificaciones").then((value) {
+
                           if (value.toString() == "true" &&
                               int.parse(snapshot.data.docs[i]
                                       .data()["cuentas"]
@@ -105,8 +106,7 @@ class RenovacionesProveedores extends StatelessWidget {
                       ));
                     }
 
-                    proveedores
-                        .add(SizedBox(width: getProportionateScreenWidth(20)));
+
                     return Row(
                       children: proveedores,
                     );

@@ -19,8 +19,18 @@ class Body extends StatelessWidget {
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 // 4%
                 FormularioNuevoProveedor.update
-                    ? Text("Actualizar Proveedor", style: headingStyle)
-                    : Text("Nuevo Proveedor", style: headingStyle),
+                    ? Text("Actualizar Proveedor", style: TextStyle(
+                  fontSize: getProportionateScreenWidth(28),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).hintColor,
+                  height: 1.5,
+                ))
+                    : Text("Nuevo Proveedor", style: TextStyle(
+                  fontSize: getProportionateScreenWidth(28),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).hintColor,
+                  height: 1.5,
+                )),
 
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 FormularioNuevoProveedor(),

@@ -23,8 +23,17 @@ class Body extends StatelessWidget {
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04), // 4%
                 FormularioNuevaCuenta.update ?
-                Text("Actualizar Cuenta", style: headingStyle) :
-                Text("Nueva Cuenta", style: headingStyle),
+                Text("Actualizar Cuenta", style: TextStyle(
+                  fontSize: getProportionateScreenWidth(28),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).hintColor,
+                  height: 1.5,
+                )) :
+                Text("Nueva Cuenta", style: TextStyle(
+                  fontSize: getProportionateScreenWidth(28),
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).hintColor,
+                  height: 1.5,)),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),
                 FormularioNuevaCuenta(lista),
                 SizedBox(height: SizeConfig.screenHeight * 0.08),

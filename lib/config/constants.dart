@@ -23,7 +23,7 @@ const DarkPrimaryColor = Color(0xFF263238);
 const DarkFondoExternoColor = Color(0xFF1C1C1C);
 const DarkFondoInterno = Color(0xFF212121);
 const DarkBorde = Color(0xFF2C2C2C);
-const DarkTextColor = Color(0xFFCFCFCF);
+const DarkTextColor = Colors.black45;
 
 const kAnimationDuration = Duration(milliseconds: 100);
 

@@ -9,7 +9,7 @@ class PantallaCalculadoraTM extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Calculadora Tigo Money"),
-        backgroundColor: Color(0xFF01579B),
+        backgroundColor: Theme.of(context).hoverColor,
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 10,
         textTheme: TextTheme(

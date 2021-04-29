@@ -23,7 +23,7 @@ class CustomButtomNavBar extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
 
-        color: Colors.white,
+        color: Theme.of(context).highlightColor,
         boxShadow: [
           BoxShadow(
             offset: Offset(0, -5),

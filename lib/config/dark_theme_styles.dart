@@ -6,14 +6,14 @@ import 'package:stream_pro/config/constants.dart';
 class Styles {
   static ThemeData themeData(bool isDarkTheme, BuildContext context) {
     return ThemeData(
-      primarySwatch: Colors.red,
+      primarySwatch: Colors.teal,
       primaryColor: isDarkTheme ? DarkPrimaryColor : kPrimaryColor,
       backgroundColor: isDarkTheme ? Colors.black : Color(0xffF1F5FB),
       indicatorColor: isDarkTheme ? Color(0xff0E1D36) : Color(0xffCBDCF8),
-      buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5FB),
+      buttonColor: isDarkTheme ? Color(0xff3B3B3B) : Color(0xffF1F5ff),
       hintColor: isDarkTheme ? Colors.white : DarkTextColor,
-      highlightColor: isDarkTheme ? Color(0xff372901) : Color(0xffFCE192),
-      hoverColor: isDarkTheme ? Color(0xff3A3A3B) : Color(0xff4285F4),
+      highlightColor: isDarkTheme ?  Colors.white12 : Colors.white,
+      hoverColor: isDarkTheme ? Colors.blueGrey : Color(0xFF01579B) ,
       focusColor: isDarkTheme ? Color(0xff0B2512) : Color(0xffA8DAB5),
       disabledColor: Colors.grey,
       textSelectionColor: isDarkTheme ? Colors.white : Colors.black,

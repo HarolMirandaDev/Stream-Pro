@@ -10,29 +10,15 @@ import 'components/cuerpo_inicio.dart';
 
 class PantallaInicio extends StatelessWidget {
   static String routeName = "/inicio";
-  static Color barra_color = Color(0xFF01579B);
 
   @override
   Widget build(BuildContext context) {
-    Settings().onBoolChanged(
-      settingKey: 'darkModw',
-      defaultValue: false,
-      childBuilder: (BuildContext context, bool value) {
-        if (value) {
-          barra_color = Color(0xFF263238);
-        } else {
-          barra_color = Color(0xFF01579B);
-        }
-
-        return Container();
-      },
-    );
 
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text("  Stream Pro"),
-        backgroundColor: barra_color,
+        backgroundColor: Theme.of(context).hoverColor,
         iconTheme: IconThemeData(color: Colors.white),
         textTheme: TextTheme(
           headline6: TextStyle(color: Colors.white, fontSize: 20),

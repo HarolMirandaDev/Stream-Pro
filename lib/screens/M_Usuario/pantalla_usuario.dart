@@ -10,7 +10,7 @@ class PantallaUsuario extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Usuario"),
-        backgroundColor: Color(0xFF01579B),
+        backgroundColor: Theme.of(context).hoverColor,
         iconTheme: IconThemeData(color: Colors.white),
         elevation: 10,
         textTheme: TextTheme(

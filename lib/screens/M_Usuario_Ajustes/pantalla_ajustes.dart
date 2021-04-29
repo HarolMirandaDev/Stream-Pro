@@ -8,7 +8,7 @@ class PantallaAjustes extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: Text("Ajustes"),
-        backgroundColor: Color(0xFF01579B),
+        backgroundColor: Theme.of(context).hoverColor,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.white),
         textTheme: TextTheme(
